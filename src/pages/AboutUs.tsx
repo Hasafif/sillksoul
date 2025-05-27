@@ -33,7 +33,10 @@ const AboutUs = () => {
       <TestimonialsSection />
       <Footer />
 
-      {/* Side Panels */}
+      {/* 
+      
+      
+      Side Panels */}
       <SidePanel isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       <SearchPanel isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
