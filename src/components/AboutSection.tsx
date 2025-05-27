@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "../hooks/useTranslation";
 
+
 const AboutSection = () => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
