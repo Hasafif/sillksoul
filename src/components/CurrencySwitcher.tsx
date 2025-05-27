@@ -1,5 +1,7 @@
 import { useCurrency } from "../contexts/CurrencyProvider";
 import { DollarSign, Coins } from 'lucide-react';
+
+
 export const FloatingCurrencySwitch = () => {
   const { currency, switchCurrency } = useCurrency();
 
