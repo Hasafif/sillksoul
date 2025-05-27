@@ -10,6 +10,8 @@ import { useTranslation } from "..//hooks/useTranslation";
 import { useLanguage } from "../contexts/LanguageContext";
 
 
+
+
 const AboutUs = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
