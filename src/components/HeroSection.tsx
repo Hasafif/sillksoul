@@ -8,6 +8,8 @@ interface HeroSectionProps {
   onSearchToggle: () => void;
 }
 
+
+
 const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
   const { t } = useTranslation();
   const { language, isRTL } = useLanguage();
