@@ -195,7 +195,7 @@ const Cart = () => {
                 </Link>
                 
                 <Link
-                  to="/collections"
+                  to="/"
                   className="w-full border border-gray-300 text-gray-700 py-3 px-6 hover:bg-gray-50 transition-colors text-center block"
                 >
                   {t('cartcontinueShopping')}

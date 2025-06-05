@@ -8,7 +8,7 @@ const WhatsAppIcon = ({ size = 24, className = "" }) => (
 );
 
 const FloatingWhatsApp = ({ 
-  phoneNumber = "1234567890", 
+  phoneNumber = "+971991913661", 
   message = "Hello! I'm interested in your services.",
   position = "bottom-right" 
 }) => {
@@ -18,12 +18,13 @@ const FloatingWhatsApp = ({
   const formatPhoneNumber = (phone) => {
     const cleaned = phone.replace(/\D/g, '');
     // Add country code if not present (assuming US/international format)
-    return cleaned.startsWith('971') ? cleaned : `971${cleaned}`;
+    return cleaned.startsWith('+971') ? cleaned : `+971${cleaned}`;
   };
 
   const handleWhatsAppClick = () => {
-    const formattedPhone = formatPhoneNumber(phoneNumber);
+    const formattedPhone = formatPhoneNumber('+971991913661');
     const encodedMessage = encodeURIComponent(message);
+    console.log(phoneNumber)
     const whatsappUrl = `https://wa.me/${formattedPhone}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
