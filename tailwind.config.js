@@ -4,7 +4,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'english': ['Helvetica Neue LT W05'],
+        'arabic': ['Noto Sans Arabic'],
+      }
+    },
   },
   plugins: [],
 }

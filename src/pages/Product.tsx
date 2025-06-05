@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
-import Footer from "../components/Footer";
+import Footer from "../components/CustomFooter";
+import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { ShoppingCart, Heart, Share2, Truck, RotateCcw } from "lucide-react";
@@ -215,8 +216,9 @@ const Product = () => {
             <div className="space-y-3">
               <button
                 onClick={handleAddToCart}
-                className={`w-full bg-gray-900 text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}
-              >
+                className={`btn2 btn2--primary ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'} flex items-center justify-center w-full text-white py-3 px-6 hover:bg-gray-600`}
+          
+             >
                 <ShoppingCart className="w-5 h-5" />
                 <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
               </button>
@@ -295,7 +297,7 @@ const Product = () => {
           </div>
         )}
       </section>
-
+       <Benefits/>
       <Footer />
 
       {/* Side Panels */}

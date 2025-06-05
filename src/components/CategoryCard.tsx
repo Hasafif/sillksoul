@@ -48,7 +48,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
       `}>
         <h3 className={`
           text-lg font-semibold text-gray-800 mb-2 truncate
-          ${isRTL ? 'font-arabic' : 'font-latin'}
+          ${isRTL ? 'font-arabic' : 'font-english'}
         `}>
           {categoryName}
         </h3>
@@ -57,7 +57,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
           inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200
           ${isRTL ? 'flex-row-reverse' : 'flex-row'}
         `}>
-          <span className="text-sm font-medium">
+          <span className={`text-sm font-medium  ${isRTL ? 'font-arabic' : 'font-english'}`}>
             {t("details")}
           </span>
           {/* Arrow icon with RTL support */}

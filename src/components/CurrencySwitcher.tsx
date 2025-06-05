@@ -10,13 +10,10 @@ export const FloatingCurrencySwitch = () => {
       <button
         onClick={switchCurrency}
         className={`
-          flex items-center gap-2 px-4 py-3 rounded-full shadow-lg 
+          flex items-center gap-2 px-4 py-3 rounded-full text-white shadow-lg 
           transform transition-all duration-300 hover:scale-105 hover:shadow-xl
-          ${currency === 'USD' 
-            ? 'bg-green-500 hover:bg-green-600 text-white' 
-            : 'bg-blue-500 hover:bg-blue-600 text-white'
-          }
         `}
+        style={{backgroundColor:"#2d2d2d"}}
       >
         {currency === 'USD' ? (
           <>

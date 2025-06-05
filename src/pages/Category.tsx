@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
-import Footer from "../components/Footer";
+import Footer from "../components/CustomFooter";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { categories } from "../data/product";
 import ProductCard from "../components/ProductCard";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
+import Benefits from "../components/benifits";
 
 const Category = () => {
   const { id } = useParams();
@@ -83,11 +84,11 @@ const Category = () => {
       {/* Category Products Section */}
       <section className="py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className={`text-center mb-12 ${isRTL ? 'text-right' : 'text-left'} md:text-center`}>
+          <div className={`mb-12 ${isRTL ? 'font-arabic text-right' : 'font-english text-left'}`}>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">{category_name}</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            {/*<p className="text-lg text-gray-600">
               {t("category1description")}
-            </p>
+            </p>*/}
           </div>
 
           {/* Filters and Sorting */}
@@ -100,7 +101,7 @@ const Category = () => {
                   placeholder={isRTL ? "الحد الأدنى" : "Min"}
                   value={priceRange.min}
                   onChange={(e) => setPriceRange(prev => ({ ...prev, min: Number(e.target.value) }))}
-                  className={`w-20 px-2 py-2 border border-gray-300 rounded-lg ${isRTL ? 'text-right' : 'text-left'}`}
+                  className={`w-20 px-2 py-2 border border-gray-300 rounded-lg ${isRTL ? 'font-arabic text-right' : 'font-english text-left'}`}
                 />
                 <span>-</span>
                 <input
@@ -108,7 +109,7 @@ const Category = () => {
                   placeholder={isRTL ? "الحد الأقصى" : "Max"}
                   value={priceRange.max}
                   onChange={(e) => setPriceRange(prev => ({ ...prev, max: Number(e.target.value) }))}
-                  className={`w-20 px-2 py-2 border border-gray-300 rounded-lg ${isRTL ? 'text-right' : 'text-left'}`}
+                  className={`w-20 px-2 py-2 border border-gray-300 rounded-lg ${isRTL ? 'font-arabic text-right' : 'font-english text-left'}`}
                 />
               </div>
             </div>
@@ -117,7 +118,7 @@ const Category = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className={`px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${isRTL ? 'text-right' : 'text-left'}`}
+              className={`px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${isRTL ? 'font-arabic text-right' : 'font-english text-left'}`}
             >
               <option value="name">{t("sortoption1")}</option>
               <option value="price-low">{t("sortoption2")}</option>
@@ -134,13 +135,13 @@ const Category = () => {
           </div>
 
           {filteredProducts.length === 0 && (
-            <div className={`text-center py-12 ${isRTL ? 'text-right' : 'text-left'} md:text-center`}>
+            <div className={`text-center py-12 ${isRTL ? 'font-arabic text-right' : 'font-english text-left'} md:text-center`}>
               <p className="text-gray-500 text-lg">{t("filter1")}</p>
             </div>
           )}
         </div>
       </section>
-      
+      <Benefits/>
       <Footer />
 
       {/* Side Panels */}

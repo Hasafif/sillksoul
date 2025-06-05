@@ -1,4 +1,5 @@
 
+import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
 import { Link } from "react-router-dom";
 
@@ -6,13 +7,15 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const { t } = useTranslation();
+    const { language, isRTL } = useLanguage();
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 py-2">
         <div className="flex justify-center">
           {<Link 
             to="/exclusive" 
-            className="relative text-md text-red-600 hover:text-red-700 transition-colors group"
+            className={`relative text-md text-red-600 hover:text-red-700 transition-colors group  
+              ${isRTL ? 'font-arabic' : 'font-english'}`}
          style={{color:"#aa1c1c1"}}
          >
             {t('welcomeTitle')}

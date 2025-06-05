@@ -1,4 +1,4 @@
-import { X, Home, ShoppingBag, Phone, Star} from "lucide-react";
+import { X, Home, ShoppingBag, Phone, Star,FileText} from "lucide-react";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -39,7 +39,7 @@ const collectionOptions = [
       }`}>
         <div className="p-6">
           {/* Header */}
-          <div className="flex justify-between items-center mb-8">
+          <div className={`flex justify-between items-center mb-8 ${isRTL ? 'font-arabic' : 'font-english'}`}>
             <h2 className="text-2xl font-bold text-gray-900">{t('menu')}</h2>
             <button
               onClick={onClose}
@@ -50,19 +50,19 @@ const collectionOptions = [
           </div>
 
           {/* Language Switcher */}
-          <div className="mb-6 pb-4 border-b border-gray-200">
+          <div className="mb-4 pb-4 border-b border-gray-200">
             <LanguageSwitcher variant="buttons" />
           </div>
 
           {/* Navigation Links */}
-          <nav className={`space-y-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <nav className={`space-y-2 ${isRTL ? 'text-right' : 'text-left'}`}>
             <Link
               to="/"
               onClick={onClose}
               className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
             >
               <Home className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800 font-medium">{t('home')}</span>
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('home')}</span>
             </Link>
             
         <div 
@@ -77,7 +77,7 @@ const collectionOptions = [
       >
         <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
           <ShoppingBag className="w-5 h-5 text-gray-600" />
-          <span className="text-gray-800 font-medium">{t('readytowear')}</span>
+          <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('readytowear')}</span>
         </div>
      
       </Link>
@@ -89,10 +89,10 @@ const collectionOptions = [
             <Link
               key={index}
               to={option.path}
-              onClick={onClose}
+              //onClick={onClose}
               className={`block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors ${
                 isRTL ? 'text-right' : 'text-left'
-              }`}
+              } ${isRTL ? 'font-arabic' : 'font-english'}` }
             >
               {option.label}
             </Link>
@@ -106,15 +106,15 @@ const collectionOptions = [
               className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
             >
               <Star className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800 font-medium">{t('hautecouture')}</span>
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('hautecouture')}</span>
             </Link>
               <Link
               to="/aboutus"
               onClick={onClose}
               className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
             >
-              <Star className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800 font-medium">{t('aboutTitle')}</span>
+              <FileText className="w-5 h-5 text-gray-600"/>
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('aboutTitle')}</span>
             </Link>
             <Link
               to="/contact"
@@ -122,20 +122,20 @@ const collectionOptions = [
               className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
             >
               <Phone className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800 font-medium">{t('contact')}</span>
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('contact')}</span>
             </Link>
           </nav>
 
           {/* Featured Section */}
-          <div className="mt-12 p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-900 mb-2">{t('featuredSection')}</h3>
-            <p className="text-sm text-gray-600 mb-4">
+          <div className={`mt-2 p-4 bg-gray-50 rounded-lg ${isRTL ? 'font-arabic' : 'font-english'}`}>
+            <h3 className="font-semibold text-gray-900 mb-1">{t('featuredSection')}</h3>
+            <p className="text-sm text-gray-600 mb-2">
               {t('featuredText')}
             </p>
             <Link
               to="/"
               onClick={onClose}
-              className="text-sm font-medium text-blue-600 hover:text-blue-800"
+              className="text-sm font-medium text-gray-600 hover:text-gray-800"
             >
               {t('shopNow')} →
             </Link>

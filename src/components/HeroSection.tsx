@@ -2,7 +2,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
 import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import img1 from '../../public/Silk Soul Logo Font.svg'
 interface HeroSectionProps {
   onMenuToggle: () => void;
   onSearchToggle: () => void;
@@ -23,7 +23,8 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       });
     }
   };
-
+// Simple navigation function
+const navigateTo = () => window.location.href = '/category/1';
   return (
     <section className="relative h-screen overflow-hidden">
       {/* Background Video */}
@@ -47,7 +48,7 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       </div>
 
       {/* Top Navigation Bar - RTL-aware positioning */}
-      <div className="absolute top-10 left-0 right-0 z-30 p-4 md:p-6">
+      <div className="grid grid-cols absolute top-10 left-0 right-0 z-30 p-4 md:p-6">
         <div className={`
           flex items-center justify-between
           ${isRTL ? 'flex-row-reverse' : 'flex-row'}
@@ -60,15 +61,32 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
           >
             <Menu className="w-6 h-6 md:w-7 md:h-7 text-white" />
           </button>
-
-          {/* Logo - centered */}
-          <div className="flex-1 flex justify-center">
-            <img 
+     
+          {/* Logo - centered 
+          
+          
+           <div className="flex-1 flex">
+            {/*<img 
               className="image__img" 
               src="/l.png" 
               alt=""
             />
+            <img 
+              className="w-full h-20" 
+              src={img1} 
+              alt=""
+            />
           </div>
+          */}
+           <div className="flex-1 flex">
+
+              <img 
+              className="w-full h-20" 
+              src={img1} 
+              alt=""
+            />
+           </div>
+         
 
           {/* Search and Cart - positioned based on RTL */}
           <div className={`
@@ -101,26 +119,29 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       `}>
         <h1 className={`
           text-4xl md:text-6xl font-bold mb-6
-          ${isRTL ? 'font-arabic leading-tight' : 'leading-tight'}
-        `}>
+          ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}
+        `}
+       // style={{fontFamily:'Amazon Ember Arabic'}}
+        >
           {t('heroTitle')}
+          {/*Amazon Ember Bold*/}
+         
         </h1>
         
         <p className={`
           text-lg md:text-xl mb-8 max-w-2xl mx-auto
-          ${isRTL ? 'font-arabic leading-relaxed' : 'leading-relaxed'}
+          ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}
         `}>
           {t('heroSubtitle')}
         </p>
         
         {/* Shop Now Button - RTL-aware styling */}
         <button
-          onClick={scrollToProducts}
-          className={`
-            bg-white text-black px-8 py-4 md:px-12 md:py-5 text-lg md:text-xl 
-            font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 
+          onClick={navigateTo}
+          className={`${isRTL ? 'promo__btn__arabic':'promo__btn'}
+            font-bold hover:bg-gtransition-all duration-300 
             transform hover:scale-105 shadow-lg hover:shadow-xl
-            ${isRTL ? 'font-arabic' : ''}
+            ${isRTL ? 'font-arabic' : 'font-english'}
           `}
           dir={isRTL ? 'rtl' : 'ltr'}
         >

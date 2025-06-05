@@ -7,8 +7,8 @@ interface LanguageSwitcherProps {
 }
 
 const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwitcherProps) => {
-  const { language, setLanguage } = useLanguage();
-
+  const { language, isRTL,setLanguage } = useLanguage();
+  // const { isRTL } = useLanguage();
   const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'ar', name: 'العربية', flag: '🇸🇦' }
@@ -25,9 +25,9 @@ const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwit
               onClick={() => setLanguage(lang.code as 'en' | 'ar')}
               className={`px-2 py-1 text-xs rounded transition-colors ${
                 language === lang.code
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-gray-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              }  ${isRTL ? 'font-arabic' : 'font-english'}`}
             >
               {lang.flag} {lang.name}
             </button>

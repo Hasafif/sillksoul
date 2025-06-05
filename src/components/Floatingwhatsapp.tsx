@@ -18,13 +18,13 @@ const FloatingWhatsApp = ({
   const formatPhoneNumber = (phone) => {
     const cleaned = phone.replace(/\D/g, '');
     // Add country code if not present (assuming US/international format)
-    return cleaned.startsWith('1') ? cleaned : `1${cleaned}`;
+    return cleaned.startsWith('971') ? cleaned : `971${cleaned}`;
   };
 
   const handleWhatsAppClick = () => {
     const formattedPhone = formatPhoneNumber(phoneNumber);
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${formattedPhone}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -41,8 +41,8 @@ const FloatingWhatsApp = ({
       <div className={`fixed ${positionClasses[position]} z-50`}>
         <div className="relative">
           {/* Chat bubble tooltip */}
-          {isOpen && (
-            <div className="absolute bottom-16 right-0 mb-2 p-3 bg-white rounded-lg shadow-lg border max-w-xs animate-in slide-in-from-bottom-2">
+          {/*isOpen && (
+            <div className="absolute bottom-16 right-0 mb-2 p-3 bg-white rounded-lg shadow-lg border max-w-xs animate-in slide-in-from-bottom-2 font-english">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <WhatsAppIcon size={40} className="text-green-500" />
@@ -66,16 +66,27 @@ const FloatingWhatsApp = ({
                 Start Chat
               </button>
             </div>
-          )}
+          )*/}
 
           {/* WhatsApp button */}
-          <button
+          {/*<button
             onClick={() => setIsOpen(!isOpen)}
             className="p-4 bg-transparent rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 group"
             aria-label="Contact us on WhatsApp"
+          >*/}
+          <button
+          //onClick={() => setIsOpen(!isOpen)}
+          onClick={handleWhatsAppClick}
+         // className="shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+            aria-label="Contact us on WhatsApp"
           >
-            <WhatsAppIcon size={40} className="group-hover:animate-pulse" />
-            
+            {/*<WhatsAppIcon size={40} className="group-hover:animate-pulse" />*/}
+            <div id="my_custom_svg">
+    <img width="auto" height="50px" 
+    src="//us.eliesaab.com/cdn/shop/t/23/assets/off-messenger-launch.svg?v=10890240430773773471744640231" 
+    alt="Intercom Offline Launcher"
+    />
+  </div>
             {/* Pulse animation rings 
             <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-20"></div>
             <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-20 animation-delay-200"></div>

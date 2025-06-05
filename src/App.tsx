@@ -19,42 +19,43 @@ import AboutUs from "./pages/AboutUs";
 import FloatingWhatsApp from '../src/components/Floatingwhatsapp';
 import { CurrencyProvider } from '../src/contexts/CurrencyProvider';
 import { FloatingCurrencySwitch } from "./components/CurrencySwitcher";
+
 const queryClient = new QueryClient();
 
 const App = () => (
+  
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-<CurrencyProvider>
-      <LanguageProvider>
-        <CartProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/collections" element={<Collections />} />
-              <Route path="/exclusive" element={<Exclusive />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/hautecouture" element={<HauteCoture />} />
-              <Route path="/product/:id" element={<Product />} />
-              <Route path="/category/:id" element={<Category />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/aboutus" element={<AboutUs />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </CartProvider>
-           <FloatingWhatsApp 
-        phoneNumber="YOUR_WHATSAPP_NUMBER" 
-        message="Custom message here"
-        position="bottom-right"
-      />
-      <FloatingCurrencySwitch/>
-      </LanguageProvider>
-      </CurrencyProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+      <TooltipProvider>
+        <CurrencyProvider>
+          <LanguageProvider>
+            <CartProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/collections" element={<Collections />} />
+                  <Route path="/exclusive" element={<Exclusive />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/hautecouture" element={<HauteCoture />} />
+                  <Route path="/product/:id" element={<Product />} />
+                  <Route path="/category/:id" element={<Category />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/aboutus" element={<AboutUs />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </CartProvider>
+            <FloatingWhatsApp
+              phoneNumber="YOUR_WHATSAPP_NUMBER"
+              message="Custom message here"
+              position="bottom-right" />
+            <FloatingCurrencySwitch />
+          </LanguageProvider>
+        </CurrencyProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
 );
 
 export default App;

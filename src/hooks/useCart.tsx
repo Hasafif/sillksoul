@@ -74,6 +74,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     toast({
       title: t('cartitemRemoved'),
       description: t('cartitemRemovedDesc'),
+      className: "destructive"
     });
   };
 

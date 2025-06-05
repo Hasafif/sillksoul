@@ -5,8 +5,10 @@ import { X } from "lucide-react"
 
 import { cn } from "../../lib/utils"
 
+
 const ToastProvider = ToastPrimitives.Provider
 
+const fontClass = "font-english";
 const ToastViewport = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Viewport>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>
@@ -14,8 +16,9 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
-      className
+     // "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
+"toast fixed top-4 right-4 z-[100] text-white flex max-h-screen w-full flex-col max-w-[420px] gap-2",
+     className
     )}
     {...props}
   />
@@ -92,7 +95,7 @@ const ToastTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Title
     ref={ref}
-    className={cn("text-sm font-semibold", className)}
+    className={cn(`text-md font-semibold ${fontClass}`, className)}
     {...props}
   />
 ))
@@ -104,7 +107,7 @@ const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Description
     ref={ref}
-    className={cn("text-sm opacity-90", className)}
+    className={cn(`text-sm ${fontClass} opacity-90`, className)}
     {...props}
   />
 ))

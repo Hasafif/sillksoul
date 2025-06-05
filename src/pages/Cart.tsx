@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
@@ -21,7 +21,7 @@ const Cart = () => {
   const shipping = getTotalPrice() > 200 ? 0 : 15;
   const tax = getTotalPrice() * 0.08;
   const total = getTotalPrice() + shipping + tax;
-
+  const fontClass = isRTL ? "font-arabic" : "font-english";
   // Helper function to get localized item name
   const getItemName = (item) => {
     return language === 'ar' ? (item.nameAr || item.name) : item.name;
@@ -42,7 +42,7 @@ const Cart = () => {
         />
         
         <section className="py-16 px-4 md:px-8">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className={`max-w-3xl mx-auto text-center ${fontClass}`}>
             <ShoppingBag className="w-16 h-16 text-gray-300 mx-auto mb-6" />
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               {t('cartempty')}
@@ -76,7 +76,7 @@ const Cart = () => {
       
       <section className="py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+          <h2 className={`text-3xl font-bold text-gray-900 mb-8  ${fontClass}`}>
             {t('carttitle')} ({getTotalItems()} {t('cartitems')})
           </h2>
           
@@ -86,7 +86,7 @@ const Cart = () => {
               {items.map((item) => (
                 <div 
                   key={`${item.id}-${item.selectedSize}-${item.selectedColor}`} 
-                  className={`flex items-start ${isRTL ? 'space-x-reverse' : ''} space-x-4 p-6 bg-gray-50 rounded-lg`}
+                  className={`flex items-start  ${fontClass} ${isRTL ? 'space-x-reverse' : ''} space-x-4 p-6 bg-gray-50 rounded-lg`}
                 >
                   <img
                     src={item.image}
@@ -146,7 +146,7 @@ const Cart = () => {
             </div>
 
             {/* Order Summary */}
-            <div className="bg-gray-50 p-6 rounded-lg h-fit">
+            <div className={`bg-gray-50 p-6 rounded-lg h-fit  ${fontClass}`}>
               <h3 className="text-xl font-semibold text-gray-900 mb-6">
                 {t('cartorderSummary')}
               </h3>
@@ -189,14 +189,14 @@ const Cart = () => {
               <div className="mt-6 space-y-3">
                 <Link
                   to="/checkout"
-                  className="w-full bg-gray-900 text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors text-center block"
+                  className="btn2 btn2--primary w-full text-white py-3 px-6 hover:bg-gray-600 transition-colors text-center block"
                 >
                   {t('cartproceedToCheckout')}
                 </Link>
                 
                 <Link
                   to="/collections"
-                  className="w-full border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors text-center block"
+                  className="w-full border border-gray-300 text-gray-700 py-3 px-6 hover:bg-gray-50 transition-colors text-center block"
                 >
                   {t('cartcontinueShopping')}
                 </Link>
@@ -204,7 +204,7 @@ const Cart = () => {
 
                 {getTotalPrice() < 200 && (
                 <p className="text-sm text-gray-600 mt-4 text-center">
-                  Add ${(200 - getTotalPrice()).toFixed(2)} more for free shipping!
+                  {t('Add')} ${(200 - getTotalPrice()).toFixed(2)} {t('moreforfreeshipping')}
                 </p>
               )}
                
