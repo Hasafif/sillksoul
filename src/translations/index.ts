@@ -270,7 +270,11 @@ export const translations = {
            Tax:"Tax",
            Total:"Total",
            Add:"Add",
-           moreforfreeshipping:"more for free shipping!"
+           moreforfreeshipping:"more for free shipping!",
+           //swiper
+           readytowearhyphened:"ready-to-wear",
+           colname:"SPRING/SUMMER 2025",
+           SHOPTHECOLLECTION:"SHOP THE COLLECTION"
       },
     ar: {
       // Navigation
@@ -540,7 +544,11 @@ Shipping:"شحن",
 Tax:"ضريبة",
 Total:"المجموع",
 Add:"أضف",
-moreforfreeshipping:"المزيد للشحن المجاني!"
+moreforfreeshipping:"المزيد للشحن المجاني!",
+//swiper
+readytowearhyphened:"ملابس جاهزة",
+colname:"ربيع/صيف 2025",
+SHOPTHECOLLECTION:"تسوق المجموعة"
 
     }
   };
