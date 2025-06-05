@@ -11,6 +11,7 @@ import { products } from "../data/product";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useCurrency } from "../contexts/CurrencyProvider";
+import { toast } from "../hooks/use-toast";
 
 const Product = () => {
   const { id } = useParams();
@@ -48,11 +49,11 @@ const Product = () => {
 
   const handleAddToCart = () => {
     if (product.sizes.length > 0 && !selectedSize) {
-      alert(language === 'en' ? "Please select a size" : "يرجى اختيار المقاس");
+      toast({title:language === 'en' ? "Size" : "المقاس",description:language === 'en' ? "Please select a size" : "يرجى اختيار المقاس"})
       return;
     }
     if (product.colors.length > 0 && !selectedColor) {
-      alert(language === 'en' ? "Please select a color" : "يرجى اختيار اللون");
+      toast({title:language === 'en' ? "Color" : "اللون",description:language === 'en' ? "Please select a color" : "يرجى اختيار اللون"})
       return;
     }
     addToCart(product, quantity, selectedSize, selectedColor);
