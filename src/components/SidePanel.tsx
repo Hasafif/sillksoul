@@ -84,7 +84,9 @@ const collectionOptions = [
 
       {/* Dropdown Menu */}
       {isDropdownOpen && (
-        <div className={`absolute top-full ${isRTL ? 'right-0' : 'left-0'} mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-2`}>
+        <div 
+        onMouseLeave={() => setIsDropdownOpen(false)}
+        className={`absolute top-full ${isRTL ? 'right-0' : 'left-0'} mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-2`}>
           {collectionOptions.map((option, index) => (
             <Link
               key={index}

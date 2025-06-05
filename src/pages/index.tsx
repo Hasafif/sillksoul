@@ -10,6 +10,7 @@ import SearchPanel from "../components/SearchPanel";
 import { products } from "../data/product";
 import { useTranslation } from "..//hooks/useTranslation";
 import { useLanguage } from "../contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,7 +70,7 @@ const Index = () => {
                     
 
                         
-                            <a href="/category/1" className="columns__item--img">
+                            <Link to="/category/1" className="columns__item--img">
                                 
 
 
@@ -85,7 +86,7 @@ data-srcset="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?
 
 
 
-                            </a>
+                            </Link>
                         
                         
                     
@@ -99,9 +100,9 @@ data-srcset="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?
                     
                     
                         
-                            <a className="btn btn--primary hover:bg-gray-600" href="/category/1">
+                            <Link className="btn btn--primary hover:bg-gray-600" to="/category/1">
                                 <span className={`${isRTL?'btn__name__arabic':'btn__name'}`}>{t('shopNow')}</span>
-                            </a>
+                            </Link>
                         
                     
                 </div>
@@ -135,7 +136,7 @@ data-srcset="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?
           >
             {featuredProducts.map((product) => (
               <div key={product.id} className="collection-section__item">
-                <a href={`/product/${product.id}`} className="collection-section__item--img">
+                <Link to={`/product/${product.id}`} className="collection-section__item--img">
                   <img 
                     className="lazyautosizes lazyloaded" 
                     src={product.image} 
@@ -152,7 +153,7 @@ data-srcset="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?
                       {isRTL ? product.name_arabic : product.name_english}
                     </h2>
                   </div>
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -171,7 +172,7 @@ data-srcset="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?
                     
 
                         
-                            <a href="/hautecouture" className="columns__item--img">
+                            <Link to="/hautecouture" className="columns__item--img">
                                 
 
 
@@ -193,7 +194,7 @@ data-srcSet="//us.eliesaab.com/cdn/shop/files/HC-FW-24-24-CLP-OPTION-3_180x.jpg?
 
 
 
-                            </a>
+                            </Link>
                         
                         
                     
@@ -212,9 +213,9 @@ data-srcSet="//us.eliesaab.com/cdn/shop/files/HC-FW-24-24-CLP-OPTION-3_180x.jpg?
                     
                     
                         
-                            <a className="btn btn--primary hover:bg-gray-600" href="/hautecouture">
+                            <Link className="btn btn--primary hover:bg-gray-600" to="/hautecouture">
                                 <span className={`${isRTL?'btn__name__arabic':'btn__name'}`}>{t('customDesignRequest')}</span>
-                            </a>
+                            </Link>
                         
                     
                 </div>

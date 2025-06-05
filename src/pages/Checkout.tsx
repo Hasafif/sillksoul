@@ -325,7 +325,7 @@ const Checkout = () => {
                     className="w-16 h-16 object-cover rounded-md"
                   />
                   <div className="flex-1 min-w-0">
-                    <h4 className={`font-medium text-gray-900 ${fontClass}`}>{isRTL?item.name_english:item.name_arabic}</h4>
+                    <h4 className={`font-medium text-gray-900 ${fontClass}`}>{isRTL?item.name_arabic:item.name_english}</h4>
                     <p className={`text-sm text-gray-600 ${fontClass}`}>{t('Qty')} {item.quantity}</p>
                     {item.selectedSize && (
                       <p className={`text-sm text-gray-600 ${fontClass}`}>{t('Size')} {item.selectedSize}</p>

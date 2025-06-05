@@ -2,6 +2,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
 import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import img1 from '../../public/Silk Soul Logo Font.svg'
 interface HeroSectionProps {
   onMenuToggle: () => void;
@@ -13,7 +14,7 @@ interface HeroSectionProps {
 const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
   const { t } = useTranslation();
   const { language, isRTL } = useLanguage();
-  
+  const navigate = useNavigate();
   const scrollToProducts = () => {
     const productsSection = document.getElementById('products-section');
     if (productsSection) {
@@ -24,8 +25,8 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
     }
   };
 // Simple navigation function
-const navigateTo = () => window.location.href = '/category/1';
-const navigateTohome = () => window.location.href = '/';
+const navigateTo = () =>   navigate('/category/1');;
+const navigateTohome = () =>navigate('/');;
   return (
     <section className="relative h-screen overflow-hidden">
       {/* Background Video */}
