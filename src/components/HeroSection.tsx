@@ -25,6 +25,7 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
   };
 // Simple navigation function
 const navigateTo = () => window.location.href = '/category/1';
+const navigateTohome = () => window.location.href = '/';
   return (
     <section className="relative h-screen overflow-hidden">
       {/* Background Video */}
@@ -78,7 +79,7 @@ const navigateTo = () => window.location.href = '/category/1';
             />
           </div>
           */}
-           <div className="flex-1 flex">
+           <div className="flex-1 flex" onClick={navigateTohome}>
 
               <img 
               className="w-full h-20" 

@@ -76,8 +76,8 @@ const Index = () => {
 
   
 <img className="lazyloaded" 
-src="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_10x.jpg?v=1747314292" 
-//src="/p62.jpeg"
+//src="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_10x.jpg?v=1747314292" 
+src="/ES_PF25_MB_2720x1400_GB_10x.jpg?v=1747314292"
 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" data-aspectratio="1.9428571428571428" data-sizes="auto" alt="" style={{objectPosition:"41% 52% "}} 
 data-srcset="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?v=1747314292 180w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_360x.jpg?v=1747314292 360w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_540x.jpg?v=1747314292 540w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_720x.jpg?v=1747314292 720w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_900x.jpg?v=1747314292 900w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_1080x.jpg?v=1747314292 1080w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_1296x.jpg?v=1747314292 1296w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_1512x.jpg?v=1747314292 1512w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_1728x.jpg?v=1747314292 1728w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_2048x.jpg?v=1747314292 2048w" sizes="899px" srcSet="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?v=1747314292 180w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_360x.jpg?v=1747314292 360w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_540x.jpg?v=1747314292 540w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_720x.jpg?v=1747314292 720w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_900x.jpg?v=1747314292 900w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_1080x.jpg?v=1747314292 1080w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_1296x.jpg?v=1747314292 1296w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_1512x.jpg?v=1747314292 1512w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_1728x.jpg?v=1747314292 1728w, //us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_2048x.jpg?v=1747314292 2048w"
 />
@@ -178,7 +178,8 @@ data-srcset="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?
 
   
 <img className="lazyloaded" 
-src="//us.eliesaab.com/cdn/shop/files/HC-FW-24-24-CLP-OPTION-3_10x.jpg?v=1744826476" 
+//src="//us.eliesaab.com/cdn/shop/files/HC-FW-24-24-CLP-OPTION-3_10x.jpg?v=1744826476" 
+src="/HC-FW-24-24-CLP-OPTION-3_10x.jpg?v=1744826476"
 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" 
 data-aspectratio="2.627497062279671" 
 data-sizes="auto" 

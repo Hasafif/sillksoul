@@ -83,7 +83,8 @@ const FloatingWhatsApp = ({
             {/*<WhatsAppIcon size={40} className="group-hover:animate-pulse" />*/}
             <div id="my_custom_svg">
     <img width="auto" height="50px" 
-    src="//us.eliesaab.com/cdn/shop/t/23/assets/off-messenger-launch.svg?v=10890240430773773471744640231" 
+    //src="//us.eliesaab.com/cdn/shop/t/23/assets/off-messenger-launch.svg?v=10890240430773773471744640231" 
+    src="/off-messenger-launch.svg"
     alt="Intercom Offline Launcher"
     />
   </div>
