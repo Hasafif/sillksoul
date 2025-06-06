@@ -47,7 +47,7 @@
 }
 @font-face {
   font-family: 'URW DIN ARABIC';
-  src: url('./assets/fonts/urw-din-regular/urw-din-arabic.ttf') format('ttf');
+  src: url('./assets/fonts/urw-din-regular/urw-din-arabic.ttf') format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -93,13 +93,6 @@
   font-family: 'URW DIN';
   src: url('./assets/fonts/urw-din-regular/urw-din-regular.woff2') format('woff2'),
   url('./assets/fonts/urw-din-regular/urw-din-regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'URW DIN ARABIC';
-  src: url('./assets/fonts/urw-din-regular/urw-din-arabic.ttf') format('ttf');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -293,7 +286,7 @@ html, body, h1, h2, h3, h4, h5, h6, p, em, strong, abbr, acronym, blockquote, q,
 }
 .columns__item--title--arabic {
     margin-bottom: 10px;
-    font-family: Noto sans Arabic;
+    font-family: URW DIN ARABIC;
     font-weight: 700;
     font-size: 3rem;
     line-height: 4rem;
@@ -339,7 +332,7 @@ font-family: Helvetica Neue LT W05;
 .columns__item--description--arabic {
     max-width: 440px;
     margin-bottom: 15px;
-font-family: Noto sans Arabic;
+font-family: URW DIN ARABIC;
     font-weight: 500;
     font-size: 1.5rem;
     line-height: 2rem;
@@ -397,7 +390,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-     font-family: 'Cairo';
+     font-family: 'URW DIN ARABIC';
     font-weight: 500;
     font-size: 1rem;
     line-height: 40px;
@@ -508,7 +501,7 @@ div {
     text-align: center;
 }
  .columns__item--content--arabic h4.primary,.columns__item--content--arabic h4 {
-    font-family: 'Cairo';
+    font-family: 'URW DIN ARABIC';
     font-size: 2rem;
     line-height: 1rem;
     font-weight: 500;
@@ -550,7 +543,7 @@ div {
     color:#2d2d2d;
 }
 .columns__item--content--arabic h3.primary,.columns__item--content--arabic h3 {
-     font-family: 'Cairo';
+     font-family: 'URW DIN ARABIC';
     font-size: 1rem;
     line-height: 1.375rem;
     font-weight: 700;
@@ -568,7 +561,7 @@ font-family: Helvetica Neue LT W05;
 
 }
 .collection-section__item--head--arabic h2,.collection-section__item--head--arabic h2.primary {
- font-family: 'Cairo';
+ font-family: 'URW DIN ARABIC';
     font-size: 1.375rem;
     line-height: 1.75rem;
     font-weight: 500;
@@ -586,7 +579,7 @@ font-family: Helvetica Neue LT W05;
 
 }
 .benefits__block__arabic h3, .benefits__block__arabic h3.primary {
-     font-family: 'Cairo';
+     font-family: 'URW DIN ARABIC';
     font-size: 1rem;
     line-height: 1.375rem;
     font-weight: 500;
@@ -677,7 +670,7 @@ a {
     width: 100%;
     height: 100%;
     padding: 10px;
-   font-family: 'Cairo';
+   font-family: 'URW DIN ARABIC';
     text-align: center;
     color: #f8f8f7;
     transition: .3s ease;
@@ -841,7 +834,7 @@ html, body, h1, h2, h3, h4, h5, h6, p, em, strong, abbr, acronym, blockquote, q,
     position: absolute;
     top: calc(100% + 9px);
     left: 0;
-   font-family: Noto sans Arabic;
+   font-family: URW DIN ARABIC;
     font-weight: 400;
     font-size: .6875rem;
     line-height: .875rem;
@@ -1222,7 +1215,7 @@ section {
 }
 .collection-products__title__arabic{
     margin-bottom: 14px;
-    font-family: Cairo;
+    font-family:URW DIN ARABIC;
     font-weight: 500;
     font-size: 1.5rem;
     line-height: 1.375rem;
@@ -1246,7 +1239,7 @@ section {
 }
 .collection-products__subtitle__arabic {
     margin-bottom: 48px;
-    font-family: Cairo;
+    font-family: URW DIN ARABIC;
     font-weight: 500;
     font-size: 1.875rem;
     line-height: 2rem;
@@ -1273,7 +1266,7 @@ section {
     unicode-bidi: isolate;
 }
 .collection-products__subtitle__arabic h3, h3.primary {
-    font-family: Cairo;
+    font-family: URW DIN ARABIC;
     font-size: 1.5rem;
     line-height: 1.375rem;
     font-weight: 500;

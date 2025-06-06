@@ -17,7 +17,7 @@ const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwit
   if (variant === 'buttons') {
     return (
       <div className={`flex items-center space-x-2 ${className}`}>
-        <Globe className="w-4 h-4 text-gray-600" />
+        {/*<Globe className="w-4 h-4 text-gray-600" />*/}
         <div className="flex space-x-1">
           {languages.map((lang) => (
             <button

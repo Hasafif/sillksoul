@@ -7,7 +7,7 @@ export default {
     extend: {
       fontFamily: {
         'english': ['Helvetica Neue LT W05'],
-        'arabic': ['Noto Sans Arabic'],
+        'arabic': ['URW DIN ARABIC'],
       }
     },
   },

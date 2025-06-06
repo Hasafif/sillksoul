@@ -4,17 +4,17 @@ import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import img1 from '../../public/Silk Soul Logo Font.svg'
+
 interface HeroSectionProps {
   onMenuToggle: () => void;
   onSearchToggle: () => void;
 }
 
-
-
 const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
   const { t } = useTranslation();
   const { language, isRTL } = useLanguage();
   const navigate = useNavigate();
+  
   const scrollToProducts = () => {
     const productsSection = document.getElementById('products-section');
     if (productsSection) {
@@ -24,9 +24,11 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       });
     }
   };
-// Simple navigation function
-const navigateTo = () =>   navigate('/category/1');;
-const navigateTohome = () =>navigate('/');;
+
+  // Simple navigation function
+  const navigateTo = () => navigate('/category/1');
+  const navigateToHome = () => navigate('/');
+
   return (
     <section className="relative h-screen overflow-hidden">
       {/* Background Video */}
@@ -50,7 +52,7 @@ const navigateTohome = () =>navigate('/');;
       </div>
 
       {/* Top Navigation Bar - RTL-aware positioning */}
-      <div className="grid grid-cols absolute top-10 left-0 right-0 z-30 p-4 md:p-6">
+      <div className="absolute top-10 left-0 right-0 z-20 px-4 md:p-6">
         <div className={`
           flex items-center justify-between
           ${isRTL ? 'flex-row-reverse' : 'flex-row'}
@@ -63,32 +65,9 @@ const navigateTohome = () =>navigate('/');;
           >
             <Menu className="w-6 h-6 md:w-7 md:h-7 text-white" />
           </button>
-     
-          {/* Logo - centered 
-          
-          
-           <div className="flex-1 flex">
-            {/*<img 
-              className="image__img" 
-              src="/l.png" 
-              alt=""
-            />
-            <img 
-              className="w-full h-20" 
-              src={img1} 
-              alt=""
-            />
-          </div>
-          */}
-           <div className="flex-1 flex" onClick={navigateTohome}>
 
-              <img 
-              className="w-full h-20" 
-              src={img1} 
-              alt=""
-            />
-           </div>
-         
+          {/* Empty spacer to balance the layout */}
+          <div className="w-12 h-12 md:w-14 md:h-14"></div>
 
           {/* Search and Cart - positioned based on RTL */}
           <div className={`
@@ -114,20 +93,32 @@ const navigateTohome = () =>navigate('/');;
         </div>
       </div>
 
+      {/* Centered Logo - positioned same as Shop Now button */}
+      <div className="absolute top-10 left-0 right-0 z-30 px-4 md:p-6 pointer-events-none">
+        <div className="flex justify-center items-center">
+          <div 
+            className="h-16 md:h-20 w-auto cursor-pointer hover:scale-105 transition-transform duration-300 pointer-events-auto"
+            onClick={navigateToHome}
+          >
+            <img 
+              className="h-16 md:h-20 w-auto object-contain" 
+              src={img1} 
+              alt="Silk Soul Logo"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Hero Content - RTL-aware text alignment and typography */}
       <div className={`
-        absolute bottom-40 left-0 right-0 z-20 text-center text-white px-4
+        absolute bottom-40 left-0 right-0 z-20 items-center text-white px-4
         ${isRTL ? 'text-right' : 'text-left'} sm:text-center
       `}>
         <h1 className={`
           text-4xl md:text-6xl font-bold mb-6
           ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}
-        `}
-       // style={{fontFamily:'Amazon Ember Arabic'}}
-        >
+        `}>
           {t('heroTitle')}
-          {/*Amazon Ember Bold*/}
-         
         </h1>
         
         <p className={`
@@ -137,18 +128,20 @@ const navigateTohome = () =>navigate('/');;
           {t('heroSubtitle')}
         </p>
         
-        {/* Shop Now Button - RTL-aware styling */}
-        <button
-          onClick={navigateTo}
-          className={`${isRTL ? 'promo__btn__arabic':'promo__btn'}
-            font-bold hover:bg-gtransition-all duration-300 
-            transform hover:scale-105 shadow-lg hover:shadow-xl
-            ${isRTL ? 'font-arabic' : 'font-english'}
-          `}
-          dir={isRTL ? 'rtl' : 'ltr'}
-        >
-          {t('shopNow')}
-        </button>
+        {/* Shop Now Button - centered and symmetric with top logo */}
+        <div className="flex justify-center items-center">
+          <button
+            onClick={navigateTo}
+            className={`${isRTL ? 'promo__btn__arabic':'promo__btn'}
+              font-bold hover:bg-gtransition-all duration-300 
+              transform hover:scale-105 shadow-lg hover:shadow-xl
+              ${isRTL ? 'font-arabic' : 'font-english'}
+            `}
+            dir={isRTL ? 'rtl' : 'ltr'}
+          >
+            {t('shopNow')}
+          </button>
+        </div>
       </div>
     </section>
   );
