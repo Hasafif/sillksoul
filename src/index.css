@@ -873,6 +873,15 @@ a {
     bottom: -5px;
     padding: 12px;
 }
+.newsletter__btn__arabic{
+    position: absolute;
+    max-height: 48px;
+    max-width: 48px;
+    left: 0;
+    bottom: -5px;
+    padding: 12px;
+    direction: rtl;
+}
 button {
     padding: 0;
     background: none;
@@ -1088,6 +1097,23 @@ img {
     display: flex;
     flex: 1 0 0;
     justify-content: flex-start;
+}
+@media screen and (max-width: 1080px) {
+
+    .bottom-menu {
+       display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.75rem;
+
+    }
+}
+@media screen and (max-width: 420px) {
+
+    .bottom-menu {
+       display: None;
+
+    }
 }
 /*
 .bottom-menu a {

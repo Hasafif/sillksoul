@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 // Swiper core and required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
-import { images} from "../data/images";
+import { images} from "../data/images2";
 // Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -177,7 +177,7 @@ const swiperConfig = {
     >
       {images.map((image) => (
         <SwiperSlide key={image.id}>
-          <Link to={'/category/1'} 
+          <Link to={'/category/1'}
              className="collection-products__item swipe-scroll-item">
             <img className="lazyautosizes lazyloaded" 
                  src={image.src} 

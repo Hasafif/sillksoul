@@ -16,14 +16,14 @@ const Footer = () => {
   };
 
   return (
-<footer className={`${isRTL?'footer__arabic':'footer'} ${isRTL ? 'font-arabic' : 'font-english'}`}>
+<footer className={`${isRTL?'footer__arabic':'footer'} ${isRTL ? 'font-arabic' : 'font-english'}`} dir={isRTL ? 'rtl' : 'ltr'}>
     <div className="wrapper">
         <div className="footer__top">
         
                 <div className="newsletter">     
                     <div className="subtitle">{t('newsletter')}</div>  
                    
-                    <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" className="contact-form">
+                    <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" className={`contact-form`} dir={isRTL ? 'rtl' : 'ltr'}>
                     <input type="hidden" name="form_type" value="customer"/><input type="hidden" name="utf8" value="✓"/>
                     <label className="form-el">
                         <input type="hidden" name="contact[tags]" value="newsletter"/>
@@ -35,12 +35,23 @@ const Footer = () => {
                             {t('emailSignup')}
                         </span>
                 
-                        <button className="newsletter__btn" type="submit" name="commit" id="Subscribe" aria-label="Footer Subscribe button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="9.77409" y1="6.30373" x2="15.7741" y2="12.3037" stroke="#2D2D2D"></line>
-        <path d="M9.84271 17.4985L15.3706 11.9699" stroke="#2D2D2D"></path>
+                     <button className={`${isRTL?'newsletter__btn__arabic':'newsletter__btn'}`} type="submit" name="commit" id="Subscribe" aria-label="Footer Subscribe button">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {isRTL ? (
+            // Left arrow for RTL
+            <>
+                <line x1="14.2259" y1="6.30373" x2="8.2259" y2="12.3037" stroke="#2D2D2D"></line>
+                <path d="M14.1573 17.4985L8.6294 11.9699" stroke="#2D2D2D"></path>
+            </>
+        ) : (
+            // Right arrow for LTR
+            <>
+                <line x1="9.77409" y1="6.30373" x2="15.7741" y2="12.3037" stroke="#2D2D2D"></line>
+                <path d="M9.84271 17.4985L15.3706 11.9699" stroke="#2D2D2D"></path>
+            </>
+        )}
     </svg>
-                        </button>
+</button>
                     <span className={`${isRTL?'form-el--validate--arabic':'form-el--validate'} form-el--error`}>
                         {t('emailValidate')}
                     </span>

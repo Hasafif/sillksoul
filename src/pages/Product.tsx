@@ -127,7 +127,7 @@ const Product = () => {
                   {[...Array(5)].map((_, i) => (
                     <span
                       key={i}
-                      className={`text-sm ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                      className={`text-sm ${i < Math.floor(product.rating) ? 'text-gray-600' : 'text-gray-300'}`}
                     >
                       ★
                     </span>

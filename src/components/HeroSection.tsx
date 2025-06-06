@@ -52,7 +52,7 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       </div>
 
       {/* Top Navigation Bar - RTL-aware positioning */}
-      <div className="absolute top-10 left-0 right-0 z-20 px-4 md:p-6">
+      <div className="absolute top-10 left-0 right-0 z-20 p-4 md:p-6">
         <div className={`
           flex items-center justify-between
           ${isRTL ? 'flex-row-reverse' : 'flex-row'}
@@ -94,7 +94,7 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       </div>
 
       {/* Centered Logo - positioned same as Shop Now button */}
-      <div className="absolute top-10 left-0 right-0 z-30 px-4 md:p-6 pointer-events-none">
+      <div className="absolute top-10 left-0 right-0 z-30 p-4 md:p-6 pointer-events-none">
         <div className="flex justify-center items-center">
           <div 
             className="h-16 md:h-20 w-auto cursor-pointer hover:scale-105 transition-transform duration-300 pointer-events-auto"
@@ -111,11 +111,11 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
 
       {/* Hero Content - RTL-aware text alignment and typography */}
       <div className={`
-        absolute bottom-40 left-0 right-0 z-20 items-center text-white px-4
+        absolute bottom-40 left-0 right-0 z-20 items-center text-white px-4 
         ${isRTL ? 'text-right' : 'text-left'} sm:text-center
       `}>
         <h1 className={`
-          text-4xl md:text-6xl font-bold mb-6
+          text-4xl sm:text-10xl md:text-6xl font-bold mb-6
           ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}
         `}>
           {t('heroTitle')}

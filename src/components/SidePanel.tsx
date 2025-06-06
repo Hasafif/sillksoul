@@ -131,13 +131,13 @@ const collectionOptions = [
           {/* Featured Section */}
           <div className={`mt-2 p-4 bg-gray-50 rounded-lg ${isRTL ? 'font-arabic' : 'font-english'}`}>
             <h3 className="font-semibold text-gray-900 mb-1">{t('featuredSection')}</h3>
-            <p className="text-sm text-gray-600 mb-2">
+            <p className={`text-sm text-gray-600 mb-2 ${isRTL ? 'font-arabic' : 'font-english'}`}>
               {t('featuredText')}
             </p>
             <Link
               to="/"
               onClick={onClose}
-              className="text-sm font-medium text-gray-600 hover:text-gray-800"
+              className={`text-sm font-medium text-gray-600 hover:text-gray-800 ${isRTL ? 'font-arabic' : 'font-english'}`}
             >
               {t('shopNow')} →
             </Link>
