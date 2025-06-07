@@ -779,6 +779,8 @@ body .shopify-policy__container, .wrapper, .shopify-app-block {
 .newsletter .subtitle {
     margin-bottom: 24px;
     font-weight: 700;
+    line-height: 16px;
+    color: #2d2d2d;
 }
 form {
     display: block;
@@ -812,11 +814,15 @@ html, body, h1, h2, h3, h4, h5, h6, p, em, strong, abbr, acronym, blockquote, q,
     opacity: 1;
     visibility: visible;
     color: #4d4d4d;
+    line-height: 14px;
+    font-weight: 400;
 }
 .form-el--validate--arabic.form-el--description, #shopify-section-search-template-boost-pfs-filter .form-el--validate.form-el--description {
     opacity: 1;
     visibility: visible;
     color: #4d4d4d;
+    line-height: 14px;
+    font-weight: 400;
 }
 .form-el--validate, #shopify-section-search-template-boost-pfs-filter .form-el--validate {
     position: absolute;
@@ -987,17 +993,19 @@ input[type=button], input[type=submit], button {
 }
 .footer-menu__title {
     font-family: Helvetica Neue LT W05;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 40px;
     pointer-events: none;
-    line-height: 2;
+    line-height:16px;
+    color:#2d2d2d;
 }
 .footer-menu__title__arabic {
-    font-family: 'Cairo';
-    font-weight: 700;
+    font-family: 'URW DIN ARABIC';
+    font-weight: 500;
     margin-bottom: 40px;
     pointer-events: none;
-    line-height: 2;
+    line-height: 16px;
+    color: #2d2d2d;
 }
 @media screen and (max-width: 1024px) {
 .footer-menu__title {
@@ -1005,12 +1013,16 @@ input[type=button], input[type=submit], button {
     font-size: .875rem;
     pointer-events: all;
     cursor: pointer;
+    line-height: 16px;
+    color: #2d2d2d;
 }
 .footer-menu__title__arabic {
     margin-bottom: 0;
     font-size: .875rem;
     pointer-events: all;
     cursor: pointer;
+    line-height: 16px;
+    color: #2d2d2d;
 }
 }
 .footer a:hover {
@@ -1050,7 +1062,8 @@ ul {
     justify-content: flex-start;
     margin-bottom: 10px;
     text-transform: initial;
-    line-height: 2;
+    line-height: 24px;
+    font-weight: 500;
 }
 .footer-menu__linklist li svg {
     max-width: 18px;
