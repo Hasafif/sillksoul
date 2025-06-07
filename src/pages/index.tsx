@@ -144,7 +144,7 @@ const swiperConfig = {
   <div className="collection-products__list blazy-scroll prev-arrow-show" data-items="48">
     
     <div className="swiper-button-prev">
-      <svg className="relative left-1/4 items-center justify-center" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className={`relative ${isRTL ? 'right-1/4':'left-1/4'} items-center justify-center`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line y1="-0.5" x2="17.0867" y2="-0.5" transform="matrix(0.718365 0.695667 -0.718365 0.695667 5.99988 1)" stroke="#2D2D2D"></line>
         <line y1="-0.5" x2="17.0867" y2="-0.5" transform="matrix(0.718365 -0.695667 0.718365 0.695667 6.72546 24)" stroke="#2D2D2D"></line>
       </svg>
@@ -193,7 +193,7 @@ const swiperConfig = {
     </Swiper>
 
     <div className="swiper-button-next">
-      <svg className="relative left-1/4 items-center justify-center" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className={`relative ${isRTL ? 'right-1/4':'left-1/4'} items-center justify-center`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line y1="-0.5" x2="17.0867" y2="-0.5" transform="matrix(0.718365 0.695667 -0.718365 0.695667 5.99988 1)" stroke="#2D2D2D"></line>
         <line y1="-0.5" x2="17.0867" y2="-0.5" transform="matrix(0.718365 -0.695667 0.718365 0.695667 6.72546 24)" stroke="#2D2D2D"></line>
       </svg>
