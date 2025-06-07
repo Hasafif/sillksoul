@@ -1021,6 +1021,7 @@ input[type=button], input[type=submit], button {
 }
 .footer__main .accordion__content {
     display: block;
+    color: #2d2d2d;
 }
 .accordion__content {
     display: none;
@@ -1292,7 +1293,8 @@ section {
     text-align: center;
 }
 .collection-products__subtitle  h3 {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     font-size: 0.8em;
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -1523,7 +1525,7 @@ a {
     align-items: center;
     justify-content: center;
     /*color: var(--swiper-navigation-color, var(--swiper-theme-color));*/
-    color:transparent;
+    /*color:transparent;*/
 }
 @media screen and (max-width: 992px) {
 .collection-products__inner {

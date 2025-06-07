@@ -55,11 +55,11 @@ const FloatingWhatsApp = ({
             aria-label="Contact us on WhatsApp"
           >
             <div id="my_custom_svg">
-              {/*isRTL ? (
+              {isRTL ? (
             // Left arrow for RTL
             <>
-                 <img width="500px" height="50px" 
-                src="/off-messenger-launch-arabic.svg"
+                 <img width="auto" height="50px" 
+                src="/messenger-arabic.png"
                 alt="Intercom Offline Launcher"
               /> 
             </>
@@ -71,12 +71,12 @@ const FloatingWhatsApp = ({
                 alt="Intercom Offline Launcher"
               /> 
             </>
-        )*/}
+        )}
         
-                 <img width="auto" height="50px" 
+                {/* <img width="auto" height="50px" 
                 src="/off-messenger-launch.svg"
                 alt="Intercom Offline Launcher"
-              /> 
+              />*/}
             </div>
           </button>
         </div>

@@ -10,8 +10,8 @@ const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwit
   const { language, isRTL,setLanguage } = useLanguage();
   // const { isRTL } = useLanguage();
   const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+    { code: 'en', name: 'English'},
+    { code: 'ar', name: 'العربية' }
   ];
 
   if (variant === 'buttons') {
@@ -19,7 +19,7 @@ const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwit
       <div className={`flex items-center space-x-2 ${className}`}>
         {/*<Globe className="w-4 h-4 text-gray-600" />*/}
         <div className="flex space-x-1">
-          {languages.map((lang) => (
+          {/*languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => setLanguage(lang.code as 'en' | 'ar')}
@@ -29,9 +29,31 @@ const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwit
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }  ${isRTL ? 'font-arabic' : 'font-english'} ${isRTL ? 'rtl' : 'ltr'}`}
             >
-              {lang.flag} {lang.name}
+              {lang.name}
             </button>
-          ))}
+          ))*/}
+              <button
+              key={'en'}
+              onClick={() => setLanguage('en')}
+              className={`px-2 py-1 text-xs rounded transition-colors ${
+                language === 'en'
+                  ? 'bg-gray-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }  ${isRTL ? 'font-english' : 'font-english'} ${isRTL ? 'rtl' : 'ltr'}`}
+            >
+              {languages[0].name}
+            </button>
+               <button
+              key={'ar'}
+              onClick={() => setLanguage('ar')}
+              className={`px-2 py-1 text-xs rounded transition-colors ${
+                language === 'ar'
+                  ? 'bg-gray-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }  ${isRTL ? 'font-arabic' : 'font-arabic'} ${isRTL ? 'rtl' : 'ltr'}`}
+            >
+              {languages[1].name}
+            </button>
         </div>
       </div>
     );
@@ -46,7 +68,7 @@ const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwit
       >
         {languages.map((lang) => (
           <option key={lang.code} value={lang.code}>
-            {lang.flag} {lang.name}
+            {lang.name}
           </option>
         ))}
       </select>
