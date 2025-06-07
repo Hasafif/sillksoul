@@ -68,6 +68,8 @@ const Footer = () => {
                   
       
 			<div className="footer-menu__column accordion__item">
+
+                
 			<div className={`${isRTL ? 'footer-menu__title__arabic':'footer-menu__title'} accordion__trigger`}>
 				{t('customerCare')}
 			</div>

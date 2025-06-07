@@ -25,7 +25,7 @@ export const FloatingCurrencySwitch = () => {
             ) : (
               <Coins className="w-5 h-5" />
             )}
-            <RefreshCw className="w-3 h-3 absolute -top-1 -right-1 opacity-60" />
+            
           </div>
         </button>
 

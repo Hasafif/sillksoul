@@ -575,7 +575,7 @@ font-family: Helvetica Neue LT W05;
     font-size: 1rem;
     line-height: 1.375rem;
     letter-spacing: 0.15em;
-    font-weight: 500;
+    font-weight: bold;
     text-transform: uppercase;
     text-align: center;
 
@@ -584,7 +584,7 @@ font-family: Helvetica Neue LT W05;
      font-family: 'URW DIN ARABIC';
     font-size: 1rem;
     line-height: 1.375rem;
-    font-weight: 500;
+    font-weight: bolder;
     text-align: center;
 
 }
@@ -741,6 +741,7 @@ div {
 .benefits__descr {
     max-width: 250px;
     text-align: center;
+    font-weight: 500;
 }
 
 .p--medium {
@@ -786,7 +787,7 @@ body .shopify-policy__container, .wrapper, .shopify-app-block {
 }
 .newsletter .subtitle {
     margin-bottom: 24px;
-    font-weight: 700;
+    font-weight: bolder;
     line-height: 16px;
     color: #2d2d2d;
 }
@@ -823,21 +824,21 @@ html, body, h1, h2, h3, h4, h5, h6, p, em, strong, abbr, acronym, blockquote, q,
     visibility: visible;
     color: #4d4d4d;
     line-height: 14px;
-    font-weight: 400;
+    font-weight: bold;
 }
 .form-el--validate--arabic.form-el--description, #shopify-section-search-template-boost-pfs-filter .form-el--validate.form-el--description {
     opacity: 1;
     visibility: visible;
     color: #4d4d4d;
     line-height: 14px;
-    font-weight: 400;
+    font-weight: bold;
 }
 .form-el--validate, #shopify-section-search-template-boost-pfs-filter .form-el--validate {
     position: absolute;
     top: calc(100% + 9px);
     left: 0;
    font-family: Helvetica Neue LT W05;
-    font-weight: 400;
+    font-weight: bold;
     font-size: .6875rem;
     line-height: .875rem;
     letter-spacing: .03em;
@@ -851,7 +852,7 @@ html, body, h1, h2, h3, h4, h5, h6, p, em, strong, abbr, acronym, blockquote, q,
     top: calc(100% + 9px);
     left: 0;
    font-family: URW DIN ARABIC;
-    font-weight: 400;
+    font-weight: bold;
     font-size: .6875rem;
     line-height: .875rem;
     color: #a22027;
@@ -986,7 +987,7 @@ input[type=button], input[type=submit], button {
 @media screen and (max-width: 1024px) {
 .footer-menu {
     flex-direction: column;
-    gap: 10px;
+    gap: 50px;
 }}
 .footer-menu {
     width: 100%;
@@ -1002,7 +1003,7 @@ input[type=button], input[type=submit], button {
 }
 .footer-menu__title {
     font-family: Helvetica Neue LT W05;
-    font-weight: 700;
+    font-weight: bolder;
     margin-bottom: 40px;
     pointer-events: none;
     line-height:16px;
@@ -1010,7 +1011,7 @@ input[type=button], input[type=submit], button {
 }
 .footer-menu__title__arabic {
     font-family: 'URW DIN ARABIC';
-    font-weight: 700;
+    font-weight: bolder;
     margin-bottom: 40px;
     pointer-events: none;
     line-height: 16px;
@@ -1020,6 +1021,7 @@ input[type=button], input[type=submit], button {
 .footer-menu__title {
     margin-bottom: 0;
     font-size: .875rem;
+    font-weight: bolder;
     pointer-events: all;
     cursor: pointer;
     line-height: 16px;
@@ -1028,6 +1030,7 @@ input[type=button], input[type=submit], button {
 .footer-menu__title__arabic {
     margin-bottom: 0;
     font-size: .875rem;
+    font-weight: bolder;
     pointer-events: all;
     cursor: pointer;
     line-height: 16px;
@@ -1073,7 +1076,7 @@ ul {
     margin-bottom: 10px;
     text-transform: initial;
     line-height: 24px;
-    font-weight: 600;
+    font-weight: bold;
 }
 @media screen  and (max-width:1080px) {
     .footer-menu__linklist li {
