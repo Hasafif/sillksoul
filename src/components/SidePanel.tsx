@@ -69,10 +69,16 @@ const collectionOptions = [
       className="relative"
       onMouseEnter={() => setIsDropdownOpen(true)}
       onMouseLeave={() => setIsDropdownOpen(false)}
+      // onClick={() => (setIsDropdownOpen(!isDropdownOpen))}
+  onTouchStart={(e) => {
+    e.preventDefault();
+    setIsDropdownOpen(!isDropdownOpen);
+  }}
+    
     >
       <Link
         to="/"
-        onClick={onClose}
+        //onClick={onClose}
         className={`flex items-center justify-between ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors w-full`}
       >
         <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
@@ -85,12 +91,16 @@ const collectionOptions = [
       {/* Dropdown Menu */}
       {isDropdownOpen && (
         <div 
-        onMouseLeave={() => setIsDropdownOpen(false)}
+        onMouseLeave={() => setIsDropdownOpen(false)
+
+        }
+         
         className={`absolute top-full ${isRTL ? 'right-0' : 'left-0'} mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-2`}>
           {collectionOptions.map((option, index) => (
             <Link
               key={index}
               to={option.path}
+
               //onClick={onClose}
               className={`block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors ${
                 isRTL ? 'text-right' : 'text-left'

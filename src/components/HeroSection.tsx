@@ -60,14 +60,14 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
           {/* Menu Button - positioned based on RTL */}
           <button
             onClick={onMenuToggle}
-            className="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110"
+            className="w-12 h-12 md:w-14 md:h-14 max-[720px]:w-8 max-[720px]:h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110"
             aria-label={t('menu')}
           >
-            <Menu className="w-6 h-6 md:w-7 md:h-7 text-white" />
+            <Menu className="w-6 h-6 md:w-7 md:h-7 max-[720px]:w-4 max-[720px]:w-4 text-white" />
           </button>
 
           {/* Empty spacer to balance the layout */}
-          <div className="w-12 h-12 md:w-14 md:h-14"></div>
+          <div className="w-12 h-12 md:w-14 md:h-14 max-[720px]:w-8"></div>
 
           {/* Search and Cart - positioned based on RTL */}
           <div className={`
@@ -76,18 +76,18 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
           `}>
             <button
               onClick={onSearchToggle}
-              className="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110"
+              className="w-12 h-12 md:w-14 md:h-14 max-[720px]:w-8 max-[720px]:h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110"
               aria-label={t('search')}
             >
-              <Search className="w-6 h-6 md:w-7 md:h-7 text-white" />
+              <Search className="w-6 h-6 md:w-7 md:h-7 max-[720px]:w-4 max-[720px]:h-4 text-white" />
             </button>
 
             <Link
               to="/cart"
-              className="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110"
+              className="w-12 h-12 md:w-14 md:h-14 max-[720px]:w-8 max-[720px]:h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110"
               aria-label={t('cart')}
             >
-              <ShoppingCart className="w-6 h-6 md:w-7 md:h-7 text-white" />
+              <ShoppingCart className="w-6 h-6 md:w-7 md:h-7 max-[720px]:w-4 max-[720px]:h-4 text-white" />
             </Link>
           </div>
         </div>
@@ -97,11 +97,11 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       <div className="absolute top-10 left-0 right-0 z-30 p-4 md:p-6 pointer-events-none">
         <div className="flex justify-center items-center">
           <div 
-            className="h-16 md:h-20 w-auto cursor-pointer hover:scale-105 transition-transform duration-300 pointer-events-auto"
+            className="h-20 w-auto cursor-pointer hover:scale-105 transition-transform duration-300 pointer-events-auto max-[720px]:h-20 max-[720px]:w-20"
             onClick={navigateToHome}
           >
             <img 
-              className="h-16 md:h-20 w-auto object-contain" 
+              className="h-20 w-auto object-contain max-[720px]:w-500" 
               src={img1} 
               alt="Silk Soul Logo"
             />
@@ -111,8 +111,7 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
 
       {/* Hero Content - RTL-aware text alignment and typography */}
       <div className={`
-        absolute bottom-40 left-0 right-0 z-20 items-center text-white px-4 
-        ${isRTL ? 'text-right' : 'text-left'} sm:text-center
+        absolute bottom-40 left-0 right-0 z-20 items-center text-white px-4 text-center
       `}>
         <h1 className={`
           text-4xl sm:text-10xl md:text-6xl font-bold mb-6
