@@ -1281,6 +1281,27 @@ section {
     text-transform: uppercase;
     text-align: center;
 }
+@media (max-width: 480px) {
+.collection-products__subtitle h3, h3.primary {
+    font-family: Helvetica Neue LT W05;
+    font-size: 0.8rem;
+    line-height: 3rem;
+    letter-spacing: .15em;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+}
+.collection-products__subtitle  h3 {
+    display: block;
+    font-size: 0.8em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+}
 .collection-products__subtitle  h3 {
     display: block;
     font-size: 1.17em;

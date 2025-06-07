@@ -94,14 +94,14 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       </div>
 
       {/* Centered Logo - positioned same as Shop Now button */}
-      <div className="absolute top-10 left-0 right-0 z-30 p-4 md:p-6 pointer-events-none">
+      <div className="absolute top-10 left-0 right-0 z-30 p-4 md:p-6 max-[720px]:p-2 pointer-events-none">
         <div className="flex justify-center items-center">
           <div 
             className="h-20 w-auto cursor-pointer hover:scale-105 transition-transform duration-300 pointer-events-auto max-[720px]:h-20 max-[720px]:w-20"
             onClick={navigateToHome}
           >
             <img 
-              className="h-20 w-auto object-contain max-[720px]:w-500" 
+              className="h-20 w-auto object-contain max-[720px]:w-20" 
               src={img1} 
               alt="Silk Soul Logo"
             />
@@ -110,9 +110,10 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       </div>
 
       {/* Hero Content - RTL-aware text alignment and typography */}
-      <div className={`
-        absolute bottom-40 left-0 right-0 z-20 items-center text-white px-4 text-center
-      `}>
+    <div className={`
+  absolute bottom-40 left-0 right-0 z-20 items-center text-white px-4 text-center
+  max-[1080px]:top-1/2 max-[1080px]:bottom-auto max-[1080px]:-translate-y-1/2 max-[1080px]:flex max-[1080px]:flex-col max-[1080px]:justify-center
+`}>
         <h1 className={`
           text-4xl sm:text-10xl md:text-6xl font-bold mb-6
           ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}
