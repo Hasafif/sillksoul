@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
-import AboutSection from "../components/AboutSection";
-import TestimonialsSection from "../components/TestimonialsSection";
 import Footer from "../components/CustomFooter";
 import Benifits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
@@ -30,6 +28,20 @@ const Index = () => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
    const swiperRef = useRef(null);
+     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const imageSrc = screenWidth < 1080 ? "/Mobile-last-section.jpg" : "/Horizonal.jpg";
   // Get first 4 products
   const featuredProducts = products.slice(0, 4);
 
@@ -331,7 +343,7 @@ srcSet="//us.eliesaab.com/cdn/shop/files/ES_PF25_MB_2720x1400_US1_180x.jpg?v=174
 
                   <img className="lazyloaded"
                     //src="//us.eliesaab.com/cdn/shop/files/HC-FW-24-24-CLP-OPTION-3_10x.jpg?v=1744826476" 
-                    src="/Horizonal.jpg"
+                    src={imageSrc}
                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                     data-aspectratio="2.627497062279671"
                     data-sizes="auto"

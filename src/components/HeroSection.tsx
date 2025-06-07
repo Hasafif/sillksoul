@@ -4,7 +4,25 @@ import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import img1 from '../../public/Silk Soul Logo Font.svg'
+// Swiper core and required modules
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
+const videos = [
+  {id:1,
+  src:"https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4",
 
+  },
+  {id:2,
+  src:"https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4",
+
+  }
+]
+// Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
+import { useEffect, useRef } from "react";
 interface HeroSectionProps {
   onMenuToggle: () => void;
   onSearchToggle: () => void;
@@ -28,12 +46,104 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
   // Simple navigation function
   const navigateTo = () => navigate('/category/1');
   const navigateToHome = () => navigate('/');
+   const swiperRef = useRef(null);
 
+   const swiperConfig = {
+       modules: [Navigation, Pagination, Autoplay],
+       spaceBetween: 300,
+       centeredSlides: true,
+       autoplay: {
+         delay: 1500, // 1.5 seconds between slides
+         disableOnInteraction: false, // Continue autoplay after user interaction
+         pauseOnMouseEnter: true, // Pause on hover
+       },
+       pagination: {
+        clickable: true,
+         dynamicBullets: true,
+      },
+         // RTL support
+       dir: isRTL ? 'rtl' : 'ltr',
+       // Proper RTL handling
+       rtl: isRTL,
+         // Observer to watch for changes
+       observer: true,
+       observeParents: true,
+       watchSlidesProgress: true,
+       watchSlidesVisibility: true,
+       // Force update on language change
+       updateOnWindowResize: true,
+       navigation: {
+         nextEl: '.swiper-button-next',
+         prevEl: '.swiper-button-prev',
+       },
+       loop: true, // Infinite loop
+       speed: 800, // Transition speed in ms
+       slidesPerView: 1,
+       breakpoints: {
+         640: {
+           slidesPerView: 1,
+           spaceBetween: 20,
+         },
+         768: {
+           slidesPerView: 1,
+           spaceBetween: 30,
+         },
+         1024: {
+           slidesPerView: 1,
+           spaceBetween: 40,
+         },
+       },
+     };
   return (
     <section className="relative h-screen overflow-hidden">
       {/* Background Video */}
       <div className="absolute inset-0">
-        <video 
+         {/*<Swiper
+            key={`swiper-${language}-${isRTL}`} 
+              ref={swiperRef}
+              {...swiperConfig}
+              slidesPerView={1}
+              slidesPerGroup={1}
+              spaceBetween={20}
+              navigation={{
+                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next',
+              }}
+              breakpoints={{
+                320: {
+                  slidesPerView: 1,
+                  slidesPerGroup: 1,
+                  spaceBetween: 8,
+                },
+                768: {
+                  slidesPerView: 1,
+                  slidesPerGroup: 1,
+                  spaceBetween: 16,
+                },
+              }}
+              className=""
+            >
+              {videos.map((video) => (
+                <SwiperSlide key={video.id}>
+            <video 
+          className="w-full h-full object-cover" 
+          src={video.src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            width: 'auto',
+            height: 'auto',
+            minWidth: '100%',
+            minHeight: '150%',
+            transform: 'scale(1.2)'
+          }}
+        />
+                </SwiperSlide>
+              ))}
+            </Swiper>*/}
+       <video 
           className="w-full h-full object-cover" 
           src="https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4"
           autoPlay

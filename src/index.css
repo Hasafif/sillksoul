@@ -711,7 +711,15 @@ div {
     justify-content: space-around;
     align-items: flex-start;
 }
+@media screen and (max-width:993px) {
+    .benefits__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
 
+}
 .benefits__block {
     display: flex;
     flex-direction: column;
@@ -978,6 +986,7 @@ input[type=button], input[type=submit], button {
 @media screen and (max-width: 1024px) {
 .footer-menu {
     flex-direction: column;
+    gap: 10px;
 }}
 .footer-menu {
     width: 100%;
@@ -993,7 +1002,7 @@ input[type=button], input[type=submit], button {
 }
 .footer-menu__title {
     font-family: Helvetica Neue LT W05;
-    font-weight: 500;
+    font-weight: 700;
     margin-bottom: 40px;
     pointer-events: none;
     line-height:16px;
@@ -1001,7 +1010,7 @@ input[type=button], input[type=submit], button {
 }
 .footer-menu__title__arabic {
     font-family: 'URW DIN ARABIC';
-    font-weight: 500;
+    font-weight: 700;
     margin-bottom: 40px;
     pointer-events: none;
     line-height: 16px;
@@ -1026,7 +1035,8 @@ input[type=button], input[type=submit], button {
 }
 }
 .footer a:hover {
-     color: gray; /* 30% darker */
+   /*filter: brightness(0.3); /* 30% darker */
+   color: grey;
 }
 .accordion__trigger {
     position: relative;
@@ -1063,7 +1073,12 @@ ul {
     margin-bottom: 10px;
     text-transform: initial;
     line-height: 24px;
-    font-weight: 500;
+    font-weight: 600;
+}
+@media screen  and (max-width:1080px) {
+    .footer-menu__linklist li {
+    display: none;
+}
 }
 .footer-menu__linklist li svg {
     max-width: 18px;
@@ -1117,20 +1132,11 @@ img {
 @media screen and (max-width: 1080px) {
 
     .bottom-menu {
-       display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 0.75rem;
+       display: none;
 
     }
 }
-@media screen and (max-width: 420px) {
 
-    .bottom-menu {
-       display: None;
-
-    }
-}
 /*
 .bottom-menu a {
      font-family: Helvetica Neue LT W05;
