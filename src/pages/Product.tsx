@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
-import Footer from "../components/Footer";
+import Footer from "../components/CustomFooter";
+import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { ShoppingCart, Heart, Share2, Truck, RotateCcw } from "lucide-react";
@@ -10,6 +11,7 @@ import { products } from "../data/product";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useCurrency } from "../contexts/CurrencyProvider";
+import { toast } from "../hooks/use-toast";
 
 const Product = () => {
   const { id } = useParams();
@@ -47,11 +49,11 @@ const Product = () => {
 
   const handleAddToCart = () => {
     if (product.sizes.length > 0 && !selectedSize) {
-      alert(language === 'en' ? "Please select a size" : "يرجى اختيار المقاس");
+      toast({title:language === 'en' ? "Size" : "المقاس",description:language === 'en' ? "Please select a size" : "يرجى اختيار المقاس"})
       return;
     }
     if (product.colors.length > 0 && !selectedColor) {
-      alert(language === 'en' ? "Please select a color" : "يرجى اختيار اللون");
+      toast({title:language === 'en' ? "Color" : "اللون",description:language === 'en' ? "Please select a color" : "يرجى اختيار اللون"})
       return;
     }
     addToCart(product, quantity, selectedSize, selectedColor);
@@ -125,7 +127,7 @@ const Product = () => {
                   {[...Array(5)].map((_, i) => (
                     <span
                       key={i}
-                      className={`text-sm ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                      className={`text-sm ${i < Math.floor(product.rating) ? 'text-gray-600' : 'text-gray-300'}`}
                     >
                       ★
                     </span>
@@ -215,8 +217,9 @@ const Product = () => {
             <div className="space-y-3">
               <button
                 onClick={handleAddToCart}
-                className={`w-full bg-gray-900 text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}
-              >
+                className={`btn2 btn2--primary ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'} flex items-center justify-center w-full text-white py-3 px-6 hover:bg-gray-600`}
+          
+             >
                 <ShoppingCart className="w-5 h-5" />
                 <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
               </button>
@@ -295,7 +298,7 @@ const Product = () => {
           </div>
         )}
       </section>
-
+       <Benefits/>
       <Footer />
 
       {/* Side Panels */}

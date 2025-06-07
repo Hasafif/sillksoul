@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Palette, Ruler, Shirt } from "lucide-react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
-import Footer from "../components/Footer";
+import Footer from "../components/CustomFooter";
+import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { useTranslation } from "../hooks/useTranslation";
@@ -127,15 +128,15 @@ const HauteCoture = () => {
       
 
 
-      <section className={`py-16 px-4 md:px-8 ${isRTL ? 'text-right font-arabic' : 'text-left'}`}>
+      <section className={`py-16 px-4 md:px-8 ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               {t("customDesigntitle")}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            {/*<p className="text-lg text-gray-600 max-w-2xl mx-auto">
               {t("customDesignsubtitle")}
-            </p>
+            </p>*/}
           </div>
 
           <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 ${isRTL ? 'lg:grid-flow-col-dense' : ''}`}>
@@ -360,9 +361,9 @@ const HauteCoture = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gray-900 text-white py-3 px-6 rounded-lg 
-                    hover:bg-gray-800 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 
-                    transition-all duration-200 font-medium"
+                  className="btn2 btn2--primary text-white py-3 px-6 w-full hover:bg-gray-600  
+                    font-medium"
+                   // style={{background:"#2d2d2d"}}
                 >
                   {t("formsubmitButton")}
                 </button>
@@ -488,7 +489,7 @@ const HauteCoture = () => {
           </div>
         </div>
       </section>
-
+       <Benefits/>
       <Footer />
 
       {/* Side Panels */}

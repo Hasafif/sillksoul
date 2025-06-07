@@ -64,7 +64,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {/* Product Name */}
         <h3 className={`
           mb-1 font-semibold text-gray-900 transition-colors group-hover:text-blue-600
-          ${isRTL ? 'font-arabic' : ''}
+          ${isRTL ? 'font-arabic' : 'font-english'}
         `}>
           {productName}
         </h3>
@@ -72,7 +72,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {/* Category */}
         <p className={`
           mb-2 text-sm text-gray-500
-          ${isRTL ? 'font-arabic' : ''}
+          ${isRTL ? 'font-arabic' : 'font-english'}
         `}>
           {productCategory}
         </p>
@@ -90,7 +90,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {/* Details Link with Arrow */}
           <span className={`
             text-sm text-blue-600 transition-colors group-hover:text-blue-800
-            ${isRTL ? 'font-arabic' : ''}
+            ${isRTL ? 'font-arabic' : 'font-english'}
           `}>
             {isRTL ? `← ${t('details')}` : `${t('details')} →`}
           </span>

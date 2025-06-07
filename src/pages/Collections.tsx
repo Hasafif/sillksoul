@@ -2,7 +2,8 @@ import { useState } from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import ProductCarousel from "../components/ProductCarousel";
-import Footer from "../components/Footer";
+import Footer from "../components/CustomFooter";
+import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { products } from "../data/product";
@@ -61,7 +62,7 @@ const Collections = () => {
           <ProductCarousel products={springCollection} />
         </div>
       </section>
-
+      <Benefits/>
       <Footer />
 
       {/* Side Panels */}

@@ -2,7 +2,8 @@ import { useState } from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import ProductCard from "../components/ProductCard";
-import Footer from "../components/Footer";
+import Footer from "../components/CustomFooter";
+import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { products } from "../data/product";
@@ -62,22 +63,22 @@ const Exclusive = () => {
       />
       
       {/* Exclusive Products Section */}
-      <section className="py-16 px-4 md:px-8" id="products-section">
+      <section className="py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className={`text-center mb-12 ${isRTL ? 'text-right' : 'text-left'} sm:text-center`}>
+          <div className={`mb-12 ${isRTL ? 'text-right' : 'text-left'}`}>
             <h2 className={`
               text-4xl font-bold text-gray-900 mb-4
-              ${isRTL ? 'font-arabic' : ''}
+              ${isRTL ? 'font-arabic' : 'font-english'}
             `}>
               {t("exclusiveDesigns")}
             </h2>
-            <p className={`
+            {/*<p className={`
               text-lg text-gray-600 max-w-2xl mx-auto
-              ${isRTL ? 'font-arabic leading-relaxed' : 'leading-relaxed'}
+              ${isRTL ? 'font-arabic leading-relaxed' : 'font-english leading-relaxed'}
             `}>
               {t("exclusiveDescription")}
-            </p>
+            </p>*/}
           </div>
 
           {/* Filters and Sorting */}
@@ -123,7 +124,7 @@ const Exclusive = () => {
                   onChange={(e) => setPriceRange(prev => ({ ...prev, min: Number(e.target.value) }))}
                   className={`
                     w-20 px-2 py-2 border border-gray-300 rounded-lg
-                    ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                    ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                   `}
                   dir={isRTL ? 'rtl' : 'ltr'}
                 />
@@ -135,7 +136,7 @@ const Exclusive = () => {
                   onChange={(e) => setPriceRange(prev => ({ ...prev, max: Number(e.target.value) }))}
                   className={`
                     w-20 px-2 py-2 border border-gray-300 rounded-lg
-                    ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                    ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                   `}
                   dir={isRTL ? 'rtl' : 'ltr'}
                 />
@@ -149,7 +150,7 @@ const Exclusive = () => {
               className={`
                 px-4 py-2 border border-gray-300 rounded-lg 
                 focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
               `}
               dir={isRTL ? 'rtl' : 'ltr'}
             >
@@ -175,7 +176,7 @@ const Exclusive = () => {
             `}>
               <p className={`
                 text-gray-500 text-lg
-                ${isRTL ? 'font-arabic' : ''}
+                ${isRTL ? 'font-arabic' : 'font-english'}
               `}>
                 {t("filter1")}
               </p>
@@ -183,7 +184,7 @@ const Exclusive = () => {
           )}
         </div>
       </section>
-
+        <Benefits/>
       <Footer />
 
       {/* Side Panels */}
