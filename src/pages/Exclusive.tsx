@@ -56,14 +56,14 @@ const Exclusive = () => {
 
   return (
     <div className={`min-h-screen bg-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
-      <Header />
+      {/*<Header />
       <HeroSection 
         onMenuToggle={() => setIsMenuOpen(true)}
         onSearchToggle={() => setIsSearchOpen(true)}
-      />
+      />*/}
       
       {/* Exclusive Products Section */}
-      <section className="py-16 px-4 md:px-8">
+      <section className="py-4 px-4 md:px-8 mb-12">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className={`mb-12 ${isRTL ? 'text-right' : 'text-left'}`}>
@@ -103,7 +103,7 @@ const Exclusive = () => {
                 dir={isRTL ? 'rtl' : 'ltr'}
               >
                 <option value="all">
-                  {language === 'en' ? 'All Categories' : 'جميع الفئات'}
+                  {language === 'en' ? 'All Collections' : 'جميع المجموعات'}
                 </option>
                 {categories.map((category, index) => (
                   <option key={index} value={language === 'en' ? category.name_english.toLowerCase() : category.name_arabic.toLowerCase()}>

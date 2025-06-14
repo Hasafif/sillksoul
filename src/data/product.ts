@@ -13,7 +13,7 @@ export const products: Product[] = [
     description_english: "A flowing summer dress perfect for warm days",
     description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
     sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Blue", "White", "Pink"],
+    colors: ["Blue"],
     inStock: true,
     rating: 4.8,
     reviews: 124
@@ -31,7 +31,7 @@ export const products: Product[] = [
     description_english: "Breathable linen shirt for casual occasions",
     description_arabic: "قميص كتان قابل للتنفس للمناسبات غير الرسمية",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["White", "Beige", "Light Blue"],
+    colors: ["White"],
     inStock: true,
     rating: 4.6,
     reviews: 89
@@ -49,7 +49,7 @@ export const products: Product[] = [
     description_english: "Luxurious wool coat for cold weather",
     description_arabic: "معطف صوف فاخر للطقس البارد",
     sizes: ["XS", "S", "M", "L"],
-    colors: ["Black", "Camel", "Navy"],
+    colors: ["Black"],
     inStock: true,
     rating: 4.9,
     reviews: 76
@@ -67,7 +67,7 @@ export const products: Product[] = [
     description_english: "Soft cashmere sweater for ultimate comfort",
     description_arabic: "سترة من الكشمير الناعم لتوفير أقصى درجات الراحة",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Cream", "Gray", "Burgundy"],
+    colors: ["Cream"],
     inStock: true,
     rating: 4.7,
     reviews: 156
@@ -85,7 +85,7 @@ export const products: Product[] = [
     description_english: "Delicate floral blouse for spring occasions",
     description_arabic: "بلوزة زهرية رقيقة لمناسبات الربيع",
     sizes: ["XS", "S", "M", "L"],
-    colors: ["Floral Pink", "Floral Blue", "White"],
+    colors: ["Floral Pink"],
     inStock: true,
     rating: 4.5,
     reviews: 92
@@ -103,7 +103,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Mint"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -121,7 +121,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Lavender"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -139,7 +139,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Peach"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -157,7 +157,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Mint"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -175,7 +175,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Peach"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -193,7 +193,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Lavender"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -211,7 +211,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Peach"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -229,7 +229,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Mint"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -247,7 +247,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Peach"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -265,7 +265,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Lavender"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -283,7 +283,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Peach"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -301,7 +301,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Mint"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -319,7 +319,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Lavender"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -337,7 +337,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Peach"],
     inStock: true,
     rating: 4.4,
     reviews: 67
@@ -355,7 +355,7 @@ export const products: Product[] = [
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Mint", "Lavender", "Peach"],
+    colors: ["Mint"],
     inStock: true,
     rating: 4.4,
     reviews: 67

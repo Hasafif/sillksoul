@@ -19,7 +19,7 @@ const Product = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { language, isRTL } = useLanguage();
@@ -48,10 +48,14 @@ const Product = () => {
   const productImages = [product.image, product.hoverImage];
 
   const handleAddToCart = () => {
+
+   // setSelectedColor(product.colors[0])
+     // console.log(selectedColor)
     if (product.sizes.length > 0 && !selectedSize) {
       toast({title:language === 'en' ? "Size" : "المقاس",description:language === 'en' ? "Please select a size" : "يرجى اختيار المقاس"})
       return;
     }
+      
     if (product.colors.length > 0 && !selectedColor) {
       toast({title:language === 'en' ? "Color" : "اللون",description:language === 'en' ? "Please select a color" : "يرجى اختيار اللون"})
       return;
@@ -65,11 +69,11 @@ const Product = () => {
 
   return (
     <div className={`min-h-screen bg-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
-      <Header />
+      {/*<Header />
       <HeroSection 
         onMenuToggle={() => setIsMenuOpen(true)}
         onSearchToggle={() => setIsSearchOpen(true)}
-      />
+      />*/}
       
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 py-6">
@@ -78,7 +82,7 @@ const Product = () => {
             {language === 'en' ? 'Home' : 'الصفحة الرئيسية'}
           </Link>
           <span className={`${isRTL ? 'mx-2' : 'mx-2'}`}>/</span>
-          <Link to="/collections" className="hover:text-gray-900">
+          <Link to="/category/1" className="hover:text-gray-900">
             {language === 'en' ? 'Ready-to-Wear' : 'ملابس جاهزة'}
           </Link>
           <span className={`${isRTL ? 'mx-2' : 'mx-2'}`}>/</span>
@@ -177,11 +181,12 @@ const Product = () => {
                   {product.colors.map((color) => (
                     <button
                       key={color}
-                      onClick={() => setSelectedColor(color)}
+                      //onClick={() => setSelectedColor(color)}
                       className={`px-4 py-2 border rounded-md text-sm font-medium ${
-                        selectedColor === color
-                          ? 'border-gray-900 bg-gray-900 text-white'
-                          : 'border-gray-300 text-gray-700 hover:border-gray-400'
+                       // selectedColor === color
+                          //? 
+                          'border-gray-900 bg-gray-900 text-white'
+                         // : 'border-gray-300 text-gray-700 hover:border-gray-400'
                       }`}
                     >
                       {color}

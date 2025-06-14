@@ -1003,38 +1003,38 @@ input[type=button], input[type=submit], button {
 }
 .footer-menu__title {
     font-family: Helvetica Neue LT W05;
-    font-weight: bolder;
+    font-weight: 700;
     margin-bottom: 40px;
     pointer-events: none;
     line-height:16px;
-    color:#2d2d2d;
+    color:#100F0D;
 }
 .footer-menu__title__arabic {
     font-family: 'URW DIN ARABIC';
-    font-weight: bolder;
+    font-weight: 700;
     margin-bottom: 40px;
     pointer-events: none;
     line-height: 16px;
-    color: #2d2d2d;
+    color: #100F0D;
 }
 @media screen and (max-width: 1024px) {
 .footer-menu__title {
     margin-bottom: 0;
     font-size: .875rem;
-    font-weight: bolder;
+    font-weight: 700;
     pointer-events: all;
     cursor: pointer;
     line-height: 16px;
-    color: #2d2d2d;
+    color: #100F0D;
 }
 .footer-menu__title__arabic {
     margin-bottom: 0;
     font-size: .875rem;
-    font-weight: bolder;
+    font-weight: 700;
     pointer-events: all;
     cursor: pointer;
     line-height: 16px;
-    color: #2d2d2d;
+    color: #100F0D;
 }
 }
 .footer a:hover {
@@ -1076,7 +1076,8 @@ ul {
     margin-bottom: 10px;
     text-transform: initial;
     line-height: 24px;
-    font-weight: bold;
+    font-weight: 500;
+    color: #777777;
 }
 @media screen  and (max-width:1080px) {
     .footer-menu__linklist li {
