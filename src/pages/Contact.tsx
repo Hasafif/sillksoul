@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
-import Footer from "../components/Footer";
+import Footer from "../components/CustomFooter";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
+import Benefits from "../components/benifits";
 
 
 const Contact = () => {
@@ -64,16 +65,16 @@ const Contact = () => {
           <div className={`text-center mb-12 ${isRTL ? 'text-right' : 'text-left'} sm:text-center`}>
             <h2 className={`
               text-4xl font-bold text-gray-900 mb-4
-              ${isRTL ? 'font-arabic' : ''}
+              ${isRTL ? 'font-arabic' : 'font-english'}
             `}>
               {t('contactTitle')}
             </h2>
-            <p className={`
+            {/*<p className={`
               text-lg text-gray-600 max-w-2xl mx-auto
-              ${isRTL ? 'font-arabic leading-relaxed' : 'leading-relaxed'}
+              ${isRTL ? 'font-arabic leading-relaxed' : 'font-english leading-relaxed'}
             `}>
               {t('contactSubtitle')}
-            </p>
+            </p>*/}
           </div>
 
           <div className={`
@@ -87,7 +88,7 @@ const Contact = () => {
             `}>
               <h3 className={`
                 text-2xl font-bold text-gray-900 mb-6
-                ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
               `}>
                 {t('contactFormTitle')}
               </h3>
@@ -99,7 +100,7 @@ const Contact = () => {
                     htmlFor="fullName" 
                     className={`
                       block text-sm font-medium text-gray-700 mb-2
-                      ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                      ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                     `}
                   >
                     {t('fullName')} *
@@ -115,7 +116,7 @@ const Contact = () => {
                     className={`
                       w-full px-4 py-3 border border-gray-300 rounded-lg 
                       focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                      ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                      ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                     `}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   />
@@ -127,7 +128,7 @@ const Contact = () => {
                     htmlFor="email" 
                     className={`
                       block text-sm font-medium text-gray-700 mb-2
-                      ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                      ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                     `}
                   >
                     {t('email')} *
@@ -155,7 +156,7 @@ const Contact = () => {
                     htmlFor="phone" 
                     className={`
                       block text-sm font-medium text-gray-700 mb-2
-                      ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                      ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                     `}
                   >
                     {t('phone')}
@@ -182,7 +183,7 @@ const Contact = () => {
                     htmlFor="subject" 
                     className={`
                       block text-sm font-medium text-gray-700 mb-2
-                      ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                      ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                     `}
                   >
                     {t('subject')}
@@ -195,7 +196,7 @@ const Contact = () => {
                     className={`
                       w-full px-4 py-3 border border-gray-300 rounded-lg 
                       focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                      ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                      ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                     `}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
@@ -213,7 +214,7 @@ const Contact = () => {
                     htmlFor="message" 
                     className={`
                       block text-sm font-medium text-gray-700 mb-2
-                      ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                      ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                     `}
                   >
                     {t('message')} *
@@ -229,7 +230,7 @@ const Contact = () => {
                     className={`
                       w-full px-4 py-3 border border-gray-300 rounded-lg 
                       focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                      ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                      ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                     `}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   />
@@ -252,7 +253,7 @@ const Contact = () => {
                     htmlFor="orderInquiry" 
                     className={`
                       text-sm text-gray-700
-                      ${isRTL ? 'mr-2 font-arabic' : 'ml-2'}
+                      ${isRTL ? 'mr-2 font-arabic' : 'ml-2 font-english'}
                     `}
                   >
                     {t('existingOrderInquiry')}
@@ -263,9 +264,9 @@ const Contact = () => {
                 <button
                   type="submit"
                   className={`
-                    w-full bg-gray-900 text-white py-3 px-6 rounded-lg 
-                    hover:bg-gray-800 transition-colors font-medium
-                    ${isRTL ? 'font-arabic' : ''}
+                    btn2 btn2--primary w-full text-white py-3 px-6 
+                    hover:bg-gray-600 transition-colors font-medium
+                    ${isRTL ? 'font-arabic' : 'font-english'}
                   `}
                 >
                   {t('sendMessage')}
@@ -281,7 +282,7 @@ const Contact = () => {
               <div>
                 <h3 className={`
                   text-2xl font-bold text-gray-900 mb-6
-                  ${isRTL ? 'text-right font-arabic' : 'text-left'}
+                  ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
                 `}>
                   {t('contactInformation')}
                 </h3>
@@ -290,19 +291,19 @@ const Contact = () => {
                   {/* Address */}
                   <div className={`
                     flex items-start gap-4
-                    ${isRTL ? 'flex-row-reverse text-right' : 'flex-row text-left'}
+                    ${isRTL ? 'flex-row text-right' : 'flex-row text-left'}
                   `}>
                     <MapPin className="w-6 h-6 text-gray-600 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className={`
                         font-semibold text-gray-900
-                        ${isRTL ? 'font-arabic' : ''}
+                        ${isRTL ? 'font-arabic' : 'font-english'}
                       `}>
                         {t('visitStore')}
                       </h4>
                       <p className={`
                         text-gray-600
-                        ${isRTL ? 'font-arabic leading-relaxed' : ''}
+                        ${isRTL ? 'font-arabic leading-relaxed' : 'font-english'}
                       `}>
                         {t('storeAddress')}
                       </p>
@@ -312,13 +313,13 @@ const Contact = () => {
                   {/* Phone */}
                   <div className={`
                     flex items-start gap-4
-                    ${isRTL ? 'flex-row-reverse text-right' : 'flex-row text-left'}
+                    ${isRTL ? 'flex-row text-right' : 'flex-row text-left'}
                   `}>
                     <Phone className="w-6 h-6 text-gray-600 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className={`
                         font-semibold text-gray-900
-                        ${isRTL ? 'font-arabic' : ''}
+                        ${isRTL ? 'font-arabic' : 'font-english'}
                       `}>
                         {t('callUs')}
                       </h4>
@@ -327,7 +328,7 @@ const Contact = () => {
                       </p>
                       <p className={`
                         text-sm text-gray-500
-                        ${isRTL ? 'font-arabic' : ''}
+                        ${isRTL ? 'font-arabic' : 'font-english'}
                       `}>
                         {t('phoneHours')}
                       </p>
@@ -337,13 +338,13 @@ const Contact = () => {
                   {/* Email */}
                   <div className={`
                     flex items-start gap-4
-                    ${isRTL ? 'flex-row-reverse text-right' : 'flex-row text-left'}
+                    ${isRTL ? 'flex-row text-right' : 'flex-row text-left'}
                   `}>
                     <Mail className="w-6 h-6 text-gray-600 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className={`
                         font-semibold text-gray-900
-                        ${isRTL ? 'font-arabic' : ''}
+                        ${isRTL ? 'font-arabic' : 'font-english'}
                       `}>
                         {t('emailUs')}
                       </h4>
@@ -352,7 +353,7 @@ const Contact = () => {
                       </p>
                       <p className={`
                         text-sm text-gray-500
-                        ${isRTL ? 'font-arabic' : ''}
+                        ${isRTL ? 'font-arabic' : 'font-english'}
                       `}>
                         {t('emailResponse')}
                       </p>
@@ -362,19 +363,19 @@ const Contact = () => {
                   {/* Store Hours */}
                   <div className={`
                     flex items-start gap-4
-                    ${isRTL ? 'flex-row-reverse text-right' : 'flex-row text-left'}
+                    ${isRTL ? 'flex-row text-right' : 'flex-row text-left'}
                   `}>
                     <Clock className="w-6 h-6 text-gray-600 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className={`
                         font-semibold text-gray-900
-                        ${isRTL ? 'font-arabic' : ''}
+                        ${isRTL ? 'font-arabic' : 'font-english'}
                       `}>
                         {t('storeHours')}
                       </h4>
                       <div className={`
                         text-gray-600 text-sm space-y-1
-                        ${isRTL ? 'font-arabic' : ''}
+                        ${isRTL ? 'font-arabic' : 'font-english'}
                       `}>
                         <p>{t('mondayFriday')}</p>
                         <p>{t('saturday')}</p>
@@ -388,7 +389,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
+      <Benefits/>
       <Footer />
 
       {/* Side Panels */}

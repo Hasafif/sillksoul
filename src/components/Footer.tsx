@@ -20,7 +20,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div>
+          <div className={isRTL ? 'font-arabic' : 'font-english'}>
             <h3 className="text-xl font-bold mb-4">{t('exclusiveDesigns')}</h3>
             <p className="text-gray-400 mb-4">
               {t('aboutDescription')}
