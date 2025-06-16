@@ -7,16 +7,7 @@ import img1 from '../../public/Silk Soul Logo Font.svg'
 // Swiper core and required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
-const videos = [
-  {id:1,
-  src:"https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4",
 
-  },
-  {id:2,
-  src:"https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4",
-
-  }
-]
 // Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -228,14 +219,16 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
           text-4xl sm:text-10xl md:text-6xl font-bold mb-6
           ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}
         `}>
-          {t('heroTitle')}
+          {/*t('heroTitle')*/}
+          {t('hautecouture')}
         </h1>
         
         <p className={`
           text-lg md:text-xl mb-8 max-w-2xl mx-auto
           ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}
         `}>
-          {t('heroSubtitle')}
+          {/*t('heroSubtitle')*/}
+          {t('hautecoutureDescription')}
         </p>
         
         {/* Shop Now Button - centered and symmetric with top logo */}

@@ -274,7 +274,9 @@ export const translations = {
            //swiper
            readytowearhyphened:"ready-to-wear",
            colname:"SPRING/SUMMER 2025",
-           SHOPTHECOLLECTION:"SHOP THE COLLECTION"
+           SHOPTHECOLLECTION:"SHOP THE COLLECTION",
+           //cat
+           SummerEscapade:"Summer Escapade"
       },
     ar: {
       // Navigation
@@ -548,7 +550,9 @@ moreforfreeshipping:"المزيد للشحن المجاني!",
 //swiper
 readytowearhyphened:"ملابس جاهزة",
 colname:"ربيع/صيف 2025",
-SHOPTHECOLLECTION:"تسوق المجموعة"
+SHOPTHECOLLECTION:"تسوق المجموعة",
+//cat
+SummerEscapade:"الفسحة الصيفية" 
 
     }
   };
