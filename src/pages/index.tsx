@@ -414,8 +414,8 @@ className="sliderImgText"
       <img
                     src={imageData.src}
                     alt={isRTL?imageData.alt_arabic:imageData.alt_english}
-                    data-srcset={imageData.datasrcset}
-                    srcSet={imageData.srcset}
+                   // data-srcset={imageData.datasrcset}
+                   // srcSet={imageData.srcset}
                     className="lazyautosizes ls-is-cached lazyloaded"
                     width="1536" height="1884" data-sizes="auto" 
                     fetchPriority="auto"
