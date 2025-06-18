@@ -29,7 +29,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     <Link
       to={`/product/${product.id}`}
       className={`
-        group relative block overflow-hidden rounded-lg
+        group relative block overflow-hidden
         transition-all duration-300 hover:shadow-xl
         ${isRTL ? 'text-right' : 'text-left'}
       `}
@@ -37,7 +37,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Full Image Container with Overlays */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
+      <div className="relative aspect-[5/8] overflow-hidden bg-gray-100">
         <img
           src={isHovered ? product.hoverImage : product.image}
           alt={productName}
