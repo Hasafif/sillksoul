@@ -420,6 +420,10 @@ div {
 .collection-section__list {
     padding-right: 40px;
 }}
+@media screen and (max-width: 768px) {
+.collection-section__list {
+    padding-right: 32px;
+}}
 .collection-section__list {
   display: flex;
   justify-content: flex-start;
