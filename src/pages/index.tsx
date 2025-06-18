@@ -302,7 +302,10 @@ const swiperConfig = {
       {images.map((image) => (
         <SwiperSlide key={image.id}>
           <Link to={'/category/1'}
-             className="collection-products__item swipe-scroll-item">
+             className="collection-products__item swipe-scroll-item"
+                          draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
+             >
             <img className="lazyautosizes lazyloaded" 
                  src={image.src} 
                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
@@ -310,7 +313,10 @@ const swiperConfig = {
                  data-sizes="auto" 
                  alt={image.alt} 
                  style={{ objectPosition: "% % " }} 
-                 srcSet={image.srcSet}/>
+                 srcSet={image.srcSet}
+                              draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
+                 />
           </Link>
         </SwiperSlide>
       ))}
@@ -360,7 +366,10 @@ const swiperConfig = {
           >
             {featuredProducts.map((product) => (
               <div key={product.id} className="collection-section__item">
-                <Link to={`/product/${product.id}`} className="collection-section__item--img">
+                <Link to={`/product/${product.id}`} className="collection-section__item--img"
+                             draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
+                >
                   <img
                    className="lazyautosizes lazyloaded"
                     src={product.image}
@@ -370,6 +379,8 @@ const swiperConfig = {
                     alt={isRTL ? product.name_arabic : product.name_english}
                     style={{ objectPosition: "50% 50% " }}
                     sizes="408px"
+                                 draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
                   />
                   <div className={`${isRTL ? 'collection-section__item--head--arabic' : 'collection-section__item--head'} `}>
                     {/*<h4 className="collection-section__item--subheading"> {isRTL ? product.category_arabic : product.category_english}</h4>*/}
@@ -406,7 +417,10 @@ const swiperConfig = {
                 `}
  
               >
-                 <Link to={imageData.href}>
+                 <Link to={imageData.href} 
+                              draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
+                 >
          <div 
 className="sliderImgText"
 >
@@ -421,6 +435,8 @@ className="sliderImgText"
                     fetchPriority="auto"
                     style={{objectPosition:"50% 50%"}} data-ac-alt-type="image" sizes="254px" 
                   loading="lazy"
+                               draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
                   />
   </div>
                        <div className={`${isRTL?'collection-text-arabic':'collection-text'} testing`}>{isRTL?imageData.alt_arabic:imageData.alt_english}</div>
@@ -469,6 +485,8 @@ className="sliderImgText"
                   <Link
                     to={imageData.href}
                     className="block"
+                                 draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
                   >
                     <div className="relative overflow-hidden rounded-lg shadow-lg">
                       <div className="relative" style={{paddingBottom: "160%"}}>
@@ -477,6 +495,8 @@ className="sliderImgText"
                           alt={isRTL?imageData.alt_arabic:imageData.alt_english}
                           className="absolute inset-0 w-full h-full object-cover"
                           loading="lazy"
+                                       draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
                         />
                       </div>
                        <div className={`${isRTL?'collection-text-arabic':'collection-text'} testing`}>{isRTL?imageData.alt_arabic:imageData.alt_english}</div>

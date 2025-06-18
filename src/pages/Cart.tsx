@@ -97,6 +97,8 @@ const Cart = () => {
                         src={item.image}
                         alt={getItemName(item)}
                         className="w-20 h-20 object-cover rounded-md"
+                        draggable={false}
+                        onContextMenu={(e) => e.preventDefault()}
                       />
                       <button
                         onClick={() => removeFromCart(item.id)}

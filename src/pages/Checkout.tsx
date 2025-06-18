@@ -323,6 +323,8 @@ const Checkout = () => {
                     src={item.image}
                   //  alt={item.name}
                     className="w-16 h-16 object-cover rounded-md"
+                                 draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
                   />
                   <div className="flex-1 min-w-0">
                     <h4 className={`font-medium text-gray-900 ${fontClass}`}>{isRTL?item.name_arabic:item.name_english}</h4>

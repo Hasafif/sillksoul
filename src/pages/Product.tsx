@@ -100,6 +100,8 @@ const Product = () => {
                 src={productImages[currentImageIndex]}
                 alt={productName}
                 className="w-full h-full object-cover"
+                draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
               />
             </div>
             <div className={`flex ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
@@ -115,6 +117,8 @@ const Product = () => {
                     src={image}
                     alt={`${productName} ${index + 1}`}
                     className="w-full h-full object-cover"
+                                 draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
                   />
                 </button>
               ))}

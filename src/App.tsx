@@ -9,7 +9,7 @@ import Index from "../src/pages/index";
 import Collections from "./pages/Collections";
 import Exclusive from "./pages/Exclusive";
 import Contact from "./pages/Contact";
-import Product from "./pages/Product";
+import Product from "./pages/Product2";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
