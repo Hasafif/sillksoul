@@ -6,6 +6,7 @@ export interface Product {
     image: string;
     hoverImage: string;
      hoverImage2: string;
+     images:string[];
     category_english: string;
     category_arabic: string;
     collection: string;

@@ -95,7 +95,7 @@ const Category = () => {
           <div className={`flex flex-wrap ${isRTL ? 'justify-between' : 'justify-between'} items-center mb-8 gap-4`}>
             <div className={`flex flex-wrap gap-4 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}>
               {/* Price Range */}
-              <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+              {/*<div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                 <input
                   type="number"
                   placeholder={isRTL ? "الحد الأدنى" : "Min"}
@@ -111,14 +111,14 @@ const Category = () => {
                   onChange={(e) => setPriceRange(prev => ({ ...prev, max: Number(e.target.value) }))}
                   className={`w-20 px-2 py-2 border border-gray-300 rounded-lg ${isRTL ? 'font-arabic text-right' : 'font-english text-left'}`}
                 />
-              </div>
+              </div>*/}
             </div>
 
             {/* Sorting */}
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className={`px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${isRTL ? 'font-arabic text-right' : 'font-english text-left'}`}
+              className={`px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${isRTL ? 'font-arabic text-right' : 'font-english text-left'}`}
             >
               {/*<option value="name">{t("sortoption1")}</option>*/}
               <option value="price-low">{t("sortoption2")}</option>

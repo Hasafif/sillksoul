@@ -13,6 +13,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useCurrency } from "../contexts/CurrencyProvider";
 import { toast } from "../hooks/use-toast";
 import MultiSlider from "../components/multislider";
+import { useTranslation } from "../hooks/useTranslation";
 const Product = () => {
   const { id } = useParams();
   const product = products.find(p => p.id === id);
@@ -26,6 +27,7 @@ const Product = () => {
   const [availability,setavailability] = useState(false);
   const { addToCart } = useCart();
    const { formatPrice } = useCurrency();
+   const {t} = useTranslation()
    const [isMobile, setIsMobile] = useState(false);
      const [isTablet, setIsTablet] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -45,7 +47,7 @@ const Product = () => {
        const checkScreenSize = () => {
          const width = window.innerWidth;
          setIsMobile(width < 768);
-         setIsTablet(width >= 768 && width < 1080);
+         setIsTablet(width >= 768 && width < 1200);
        };
    
        checkScreenSize();
@@ -81,7 +83,7 @@ else {
   const productCategory = language === 'en' ? product.category_english : product.category_arabic;
   const productDescription = language === 'en' ? product.description_english : product.description_arabic;
 
-  const productImages = [product.image, product.hoverImage,product.hoverImage2];
+  const productImages = product.images;
 
   const handleAddToCart = () => {
 
@@ -144,13 +146,13 @@ else {
 
       {/* Product Details */}
       <section className="max-w-7xl max-auto px-4 pb-16">
-       {!isTablet && (<div className={`${isMobile?'flex flex-col items-center':'flex flex-row justify-between'}`}>
+       {!isTablet && (<div className={`${isMobile?'flex flex-col items-center gap-5':'flex flex-row justify-between'}`}>
           {/* Product Images */}
            {/* Multi-Slider Component - Left Side */}
           <div className={`relative w-20`}
           style={{display:isMobile?'none':'flex'}}
           >
-            <div className="relative flex flex-col gap-2 top-20 left-20">
+            <div className="relative flex flex-col gap-3 top-20 left-20">
       {/* Vertical Thumbnail Slider */}
       
         {/* Thumbnails Container */}
@@ -168,28 +170,24 @@ else {
           </button>
 
           {productImages.map((image, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentImageIndex(index)}
-              className={`relative w-20 h-132 rounded-lg overflow-hidden transition-all duration-300 ${
-                currentImageIndex === index 
-                  ? 'ring-1 ring-gray-400 ring-offset-2 scale-105' 
-                  : 'ring-1 ring-gray-200 hover:ring-gray-400'
-              }`
-            }
-             /* style={{
-    '--color-body': '#d1d1d0',
-    '--bg-body': '#fff',
-    position: 'relative',
-    ...((currentIndex===index) && {
-      boxShadow: 'inset 0 0 0 1px var(--color-body), inset 0 0 0 1px var(--bg-body)'
-    })
-  } as React.CSSProperties}*/
-            >
+             <button
+    key={index}
+    onClick={() => setCurrentImageIndex(index)}
+   // className={`relative w-20 h-132 rounded-lg overflow-hidden transition-all duration-300`}
+   className="thumbnail_img"
+   style={{
+      '--color-body': '#d1d1d0', // Blue color for active frame
+      '--bg-body': '#fbfbfb',
+     position: 'relative',
+      ...(currentImageIndex === index && {
+        boxShadow: 'inset 0 0 0 1px var(--color-body),inset 0 0 0 1px var(--bg-body,#fff)'
+      })
+    } as React.CSSProperties}
+  >
               <img
                 src={image}
                 alt={`Product view ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-lg"
                 draggable={false}
                 onContextMenu={(e) => e.preventDefault()}
               />
@@ -267,7 +265,7 @@ else {
         
 
           {/* Product Information */}
-          <div className={`w-96 flex-shrink-0 space-y-6 ${isRTL ? 'lg:order-1 text-right' : 'lg:order-2 text-left'}`}>
+          <div className={`flex-shrink-0 space-y-6 ${isRTL ? 'lg:order-1 text-right' : 'lg:order-2 text-left'}`}>
             <div className="product-title-container text-center">
               <h1 className="product-title h6" style={{textTransform:"capitalize"}}>{productName}</h1>
             <div className="product-price-container">
@@ -275,7 +273,7 @@ else {
                 </div>
             </div>
             {/* Color Selection */}
-            <div className="color-selector">
+            <div className="color-selector w-1/5">
              <div className={`form__label ${isRTL ? 'font-arabic':'font-english'}`}>
          {language === 'en' ? 'Color' : 'اللون'}
         <span className="form__label__value">{product.colors[0]}</span>
@@ -291,11 +289,12 @@ else {
   />
   <label 
     style={{
-     '--lineColor': `${product.colors[0]}`,
+    '--lineColor': `#100f0d`,
+//'--lineWidth': `30px`
     } as React.CSSProperties}
    
-   //className="animation-underline"
    className="animation-underline"
+  // className="animation-underline"
    
   >
     <span className="color_variant" 
@@ -309,7 +308,7 @@ else {
         {language === 'en' ? 'Size' : 'المقاس'}
         {/* Size Warning Message */}
       {selectedSizeIndex !== null && !product.available[selectedSizeIndex] && (
-        <span className={`relative left-5 text-red-500 text-sm font-medium flex items-center gap-1 ${isRTL?'font-arabic':'font-english'}`}>
+        <span className={`relative text-red-500 text-sm font-medium flex items-center gap-1 ${isRTL?'font-arabic':'font-english'}`}>
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
           </svg>
@@ -368,12 +367,12 @@ else {
                 </button>*/}
               </div>
             </div>
-            <div className="product__accordion accordion">
+              <div className={`product__accordion accordion ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`} dir={isRTL?'rtl':'ltr'}>
              
     <details>
-        <summary className={`${isRTL?'font-arabic':'font-english'}`}>
-                                    Description
-                <span className={`${isRTL?'font-arabic':'font-english'}`}>
+        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
+                                    {t('Description')}
+                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
                   <svg className="w-4 h-4 transform transition-transform group-open:rotate-90" viewBox="0 0 10 6" width="14">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
                   </svg>
@@ -405,9 +404,9 @@ else {
           <div className="product__accordion accordion">
              
     <details>
-        <summary className={`${isRTL?'font-arabic':'font-english'}`}>
-                                   Delivery &amp; Returns
-                <span className={`${isRTL?'font-arabic':'font-english'}`}>
+        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
+                                  {t('DeliveryReturns')}
+                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
                   <svg viewBox="0 0 10 6" width="14">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
                   </svg>
@@ -440,9 +439,9 @@ else {
              <div className="product__accordion accordion">
              
     <details>
-        <summary className={`${isRTL?'font-arabic':'font-english'}`}>
-                                   Product Care
-                <span className={`${isRTL?'font-arabic':'font-english'}`}>
+        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
+                                   {t('ProductCare')}
+                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
                   <svg viewBox="0 0 10 6" width="14">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
                   </svg>
@@ -499,17 +498,20 @@ else {
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
-              className={`relative w-20 h-132 rounded-lg overflow-hidden transition-all duration-300 ${
-                currentImageIndex === index 
-                  ? 'ring-1 ring-gray-400 ring-offset-2 scale-105' 
-                  : 'ring-1 ring-gray-200 hover:ring-gray-400'
-              }`
-            }
+             className="thumbnail_img"
+   style={{
+      '--color-body': '#d1d1d0', // Blue color for active frame
+      '--bg-body': '#fbfbfb',
+     position: 'relative',
+      ...(currentImageIndex === index && {
+        boxShadow: 'inset 0 0 0 1px var(--color-body),inset 0 0 0 1px var(--bg-body,#fff)'
+      })
+    } as React.CSSProperties}
             >
               <img
                 src={image}
                 alt={`Product view ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-lg"
                 draggable={false}
                 onContextMenu={(e) => e.preventDefault()}
               />
@@ -682,12 +684,12 @@ else {
                 </button>*/}
               </div>
             </div>
-            <div className="product__accordion accordion">
+            <div className={`product__accordion accordion ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`} dir={isRTL?'rtl':'ltr'}>
              
     <details>
-        <summary className={`${isRTL?'font-arabic':'font-english'}`}>
-                                    Description
-                <span className={`${isRTL?'font-arabic':'font-english'}`}>
+        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
+                                    {t('Description')}
+                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
                   <svg className="w-4 h-4 transform transition-transform group-open:rotate-90" viewBox="0 0 10 6" width="14">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
                   </svg>
@@ -719,9 +721,9 @@ else {
           <div className="product__accordion accordion">
              
     <details>
-        <summary className={`${isRTL?'font-arabic':'font-english'}`}>
-                                   Delivery &amp; Returns
-                <span className={`${isRTL?'font-arabic':'font-english'}`}>
+        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
+                                  {t('DeliveryReturns')}
+                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
                   <svg viewBox="0 0 10 6" width="14">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
                   </svg>
@@ -754,9 +756,9 @@ else {
              <div className="product__accordion accordion">
              
     <details>
-        <summary className={`${isRTL?'font-arabic':'font-english'}`}>
-                                   Product Care
-                <span className={`${isRTL?'font-arabic':'font-english'}`}>
+        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
+                                   {t('ProductCare')}
+                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
                   <svg viewBox="0 0 10 6" width="14">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
                   </svg>
@@ -805,7 +807,7 @@ else {
                     to={`/product/${relatedProduct.id}`}
                     className="group"
                   >
-                    <div className="aspect-[3/4] rounded-lg overflow-hidden mb-4">
+                    <div className="aspect-[3/4] overflow-hidden mb-4">
                       <img
                         src={relatedProduct.image}
                         alt={relatedProductName}

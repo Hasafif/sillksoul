@@ -96,7 +96,7 @@ const Exclusive = () => {
                 value={filterBy}
                 onChange={(e) => setFilterBy(e.target.value)}
                 className={`
-                  px-4 py-2 border border-gray-300 rounded-lg 
+                  px-4 py-2 border border-gray-300 
                   focus:ring-2 focus:ring-blue-500 focus:border-transparent
                   ${isRTL ? 'text-right font-arabic' : 'text-left'}
                 `}
@@ -113,7 +113,7 @@ const Exclusive = () => {
               </select>
 
               {/* Price Range */}
-              <div className={`
+              {/*<div className={`
                 flex items-center gap-2
                 ${isRTL ? 'flex-row-reverse' : 'flex-row'}
               `}>
@@ -140,7 +140,7 @@ const Exclusive = () => {
                   `}
                   dir={isRTL ? 'rtl' : 'ltr'}
                 />
-              </div>
+              </div>*/}
             </div>
 
             {/* Sorting */}
@@ -148,13 +148,13 @@ const Exclusive = () => {
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
               className={`
-                px-4 py-2 border border-gray-300 rounded-lg 
+                px-4 py-2 border border-gray-300
                 focus:ring-2 focus:ring-blue-500 focus:border-transparent
                 ${isRTL ? 'text-right font-arabic' : 'text-left font-english'}
               `}
               dir={isRTL ? 'rtl' : 'ltr'}
             >
-              <option value="name">{t("sortoption1")}</option>
+             
               <option value="price-low">{t("sortoption2")}</option>
               <option value="price-high">{t("sortoption3")}</option>
               <option value="rating">{t("sortoption4")}</option>
@@ -162,7 +162,7 @@ const Exclusive = () => {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 x2l:grid-cols-5 gap-1">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

@@ -276,7 +276,12 @@ export const translations = {
            colname:"SPRING/SUMMER 2025",
            SHOPTHECOLLECTION:"SHOP THE COLLECTION",
            //cat
-           SummerEscapade:"Summer Escapade"
+           SummerEscapade:"Summer Escapade",
+           //Description
+           Description:"Description",
+            DeliveryReturns:"Delivery &amp; Returns",
+            ProductCare:"Product Care"
+
       },
     ar: {
       // Navigation
@@ -552,7 +557,11 @@ readytowearhyphened:"ملابس جاهزة",
 colname:"ربيع/صيف 2025",
 SHOPTHECOLLECTION:"تسوق المجموعة",
 //cat
-SummerEscapade:"الفسحة الصيفية" 
+SummerEscapade:"الفسحة الصيفية",
+//Description
+Description:"وصف",
+DeliveryReturns:"التوصيل والإرجاع",
+ProductCare:"العناية بالمنتج"
 
     }
   };
