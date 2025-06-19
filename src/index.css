@@ -792,7 +792,12 @@ div {
     justify-content: flex-start;
     align-items: center;
 }
-
+.benefits__block__arabic {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
 .benefits__icon {
     max-height: 40px;
     max-width: 40px;
@@ -1789,7 +1794,6 @@ blockquote, dd, div, dl, dt, figure, form, h1, h2, h3, h4, h5, h6, li, ol, p, pr
     height: 0;
     position: relative;
     overflow: hidden;
-    border-radius: 3px;
     display: block;
     padding-bottom: var(--padding-bottom);
 }

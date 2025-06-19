@@ -488,7 +488,7 @@ className="sliderImgText"
                                  draggable={false}
              onContextMenu={(e) => e.preventDefault()}
                   >
-                    <div className="relative overflow-hidden rounded-lg shadow-lg">
+                    <div className="relative overflow-hidden">
                       <div className="relative cover_img" style={{paddingBottom: "160%"}}>
                         <img
                           src={imageData.src}
