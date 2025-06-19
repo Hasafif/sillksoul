@@ -112,8 +112,8 @@ export const images = [
     ,
   {
     id: 15,
-    src: "/p163.jpeg",
-    srcSet:"/p163.jpeg",
+    src: "/p162.jpeg",
+    srcSet:"/p162.jpeg",
     alt: "Embroidered Organza Midi Skirt",
     href: "/product/16"
   }
