@@ -5,12 +5,16 @@ export interface Product {
     price: number;
     image: string;
     hoverImage: string;
+     hoverImage2: string;
+     images:string[];
     category_english: string;
     category_arabic: string;
     collection: string;
    description_english: string;
    description_arabic: string;
     sizes: string[];
+    sizes2:string[];
+    available:boolean[];
     colors: string[];
     inStock: boolean;
     rating: number;

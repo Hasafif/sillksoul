@@ -3,8 +3,14 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: sans-serif;
+  font-weight: 100;
 }
 
+body, * {
+  font-family: var(--primary-font);
+  font-weight: var(--font-weight);
+}
 .logo {
   height: 6em;
   padding: 1.5em;

@@ -11,7 +11,7 @@ interface SearchPanelProps {
 
 const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { language } = useLanguage();
+  const { language,isRTL } = useLanguage();
 
   const filteredProducts = products.filter(product => {
     // Get the appropriate product name based on language
@@ -47,7 +47,7 @@ const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
         <div className="p-6 h-full flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">
+            <h2 className={`text-xl font-semibold text-gray-900 ${isRTL ? 'font-arabic' : 'font-english'}`}>
               {language === 'en' ? 'Search' : 'بحث'}
             </h2>
             <button
@@ -96,7 +96,7 @@ const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
                         alt={productName}
                         className="w-16 h-16 object-cover rounded-md"
                       />
-                      <div>
+                      <div className={`${isRTL ? 'font-arabic' : 'font-english'}`}>
                         <h3 className="font-medium text-gray-900">{productName}</h3>
                         <p className="text-sm text-gray-600">{categoryName}</p>
                         <p className="text-sm font-semibold text-gray-900">${product.price}</p>
@@ -105,7 +105,7 @@ const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
                   );
                 })
               ) : (
-                <div className="text-center py-8">
+                <div className={`text-center py-8 ${isRTL ? 'font-arabic' : 'font-english'}`}>
                   <p className="text-gray-500">
                     {language === 'en' ? 'No products found' : 'لم يتم العثور على منتجات'}
                   </p>
@@ -116,7 +116,7 @@ const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
                 <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
                   <Search className="w-8 h-8 text-gray-400" />
                 </div>
-                <p className="text-gray-500">
+                <p className={`text-gray-500 ${isRTL ? 'font-arabic' : 'font-english'}`}>
                   {language === 'en' ? 'Start typing to search products' : 'ابدأ الكتابة للبحث عن المنتجات'}
                 </p>
               </div>

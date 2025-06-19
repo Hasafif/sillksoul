@@ -58,7 +58,7 @@ import { useTranslation } from "../hooks/useTranslation";
 
   
   const TestimonialsSection = () => {
-    const {language} = useLanguage()
+    const {language,isRTL} = useLanguage()
     const {t} = useTranslation()
     let testimonials;
     if (language=="en") {
@@ -70,7 +70,7 @@ import { useTranslation } from "../hooks/useTranslation";
     return (
       <section className="py-20 px-4 md:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className={`text-center mb-12 ${isRTL ? 'font-arabic' : 'font-english'}`}>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">{t("testimonialsTitle")}</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               {t("testimonialsDescription")}
@@ -79,7 +79,7 @@ import { useTranslation } from "../hooks/useTranslation";
   
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-white p-6 rounded-lg shadow-sm">
+              <div key={testimonial.id} className={`bg-white p-6 rounded-lg shadow-sm ${isRTL ? 'font-arabic' : 'font-english'}`}>
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <span key={i} className="text-yellow-400">★</span>

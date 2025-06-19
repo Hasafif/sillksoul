@@ -7,31 +7,53 @@ interface LanguageSwitcherProps {
 }
 
 const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwitcherProps) => {
-  const { language, setLanguage } = useLanguage();
-
+  const { language, isRTL,setLanguage } = useLanguage();
+  // const { isRTL } = useLanguage();
   const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+    { code: 'en', name: 'English'},
+    { code: 'ar', name: 'العربية' }
   ];
 
   if (variant === 'buttons') {
     return (
       <div className={`flex items-center space-x-2 ${className}`}>
-        <Globe className="w-4 h-4 text-gray-600" />
+        {/*<Globe className="w-4 h-4 text-gray-600" />*/}
         <div className="flex space-x-1">
-          {languages.map((lang) => (
+          {/*languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => setLanguage(lang.code as 'en' | 'ar')}
               className={`px-2 py-1 text-xs rounded transition-colors ${
                 language === lang.code
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-gray-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              }  ${isRTL ? 'font-arabic' : 'font-english'} ${isRTL ? 'rtl' : 'ltr'}`}
             >
-              {lang.flag} {lang.name}
+              {lang.name}
             </button>
-          ))}
+          ))*/}
+              <button
+              key={'en'}
+              onClick={() => setLanguage('en')}
+              className={`px-2 py-1 text-xs rounded transition-colors ${
+                language === 'en'
+                  ? 'bg-gray-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }  ${isRTL ? 'font-english' : 'font-english'} ${isRTL ? 'rtl' : 'ltr'}`}
+            >
+              {languages[0].name}
+            </button>
+               <button
+              key={'ar'}
+              onClick={() => setLanguage('ar')}
+              className={`px-2 py-1 text-xs rounded transition-colors ${
+                language === 'ar'
+                  ? 'bg-gray-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }  ${isRTL ? 'font-arabic' : 'font-arabic'} ${isRTL ? 'rtl' : 'ltr'}`}
+            >
+              {languages[1].name}
+            </button>
         </div>
       </div>
     );
@@ -42,11 +64,11 @@ const LanguageSwitcher = ({ variant = 'dropdown', className = '' }: LanguageSwit
       <select
         value={language}
         onChange={(e) => setLanguage(e.target.value as 'en' | 'ar')}
-        className="appearance-none bg-white border border-gray-300 rounded px-3 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className={`appearance-none bg-white border border-gray-300 rounded px-3 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${isRTL ? 'font-arabic' : 'font-english'} ${isRTL ? 'rtl' : 'ltr'}`}
       >
         {languages.map((lang) => (
           <option key={lang.code} value={lang.code}>
-            {lang.flag} {lang.name}
+            {lang.name}
           </option>
         ))}
       </select>
