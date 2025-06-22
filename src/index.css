@@ -1730,7 +1730,7 @@ blockquote, dd, div, dl, dt, figure, form, h1, h2, h3, h4, h5, h6, li, ol, p, pr
 }}
 @media only screen and (max-width: 768px) {
 .row .columns {
-    padding: 0 1px;
+    padding: 0px;
 }}
 
 .setPadding {

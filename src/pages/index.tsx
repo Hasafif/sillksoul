@@ -454,7 +454,7 @@ const swiperConfig = {
           </div>
         </div>
       </div>
-<div className=" py-6 mb-10">
+<div className="py-6 mb-10">
   <div className="row">
     <div className={`columns ${isRTL?'column-title-arabic':'column-title'} ${isMobile ? 'text-center' : ''}`}>
       <h5 className={``}>{t('SummerEscapade')}</h5>
@@ -879,7 +879,8 @@ className="sliderImgText"
     <style>{`
     .mobile-carousel-container {
         width: 100%;
-        height:120%;
+        height:200%;
+        max-height:200%;
         max-width: 200%;
         margin: 0;
         padding: 0;
@@ -888,15 +889,14 @@ className="sliderImgText"
 
       .mobile-image-carousel {
         width: 100%;
-        height:100%;
+        height:200%;
         margin: 0;
         padding: 0;
       }
 
       .mobile-image-carousel .slick-slide {
         padding:0 1.5px;
-        box-sizing: border-box;
-      }
+        
 
       .mobile-image-carousel .slick-slide > div {
         margin: 0;
@@ -919,7 +919,7 @@ className="sliderImgText"
       }
 
       .carousel-image {
-        width: 120%;
+        width: 150%;
         height: 100%;
         display: block;
       }
