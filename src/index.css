@@ -2049,8 +2049,7 @@ blockquote, dd, div, dl, dt, figure, form, h1, h2, h3, h4, h5, h6, li, ol, p, pr
 .product-price-container .price {
     justify-content: center;
     font-size: 17px;
-    display: flex
-;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     text-align: center;
@@ -2452,3 +2451,118 @@ width: 100%;
 .thumbnail_img {
     height: 132px;
 }}
+
+/* Swiper Container Modifications */
+.swiper-container {
+    position: relative;
+   width: 50%;
+    margin-left: 0px;
+    margin-right: 0px;
+   
+}
+
+/* Swiper Slide Modifications for 4 images display */
+.swiper-slide.carousel_slide {
+    width: 100% !important; /* Ensure exactly 4 slides visible with spacing */
+   flex-shrink: 0 !important;
+    margin-right: 5px !important;
+    margin-left: 0px !important;
+    padding: 0;
+}
+@media screen and (max-width:768px) {
+    .swiper-slide.carousel_slide {
+    width: 100% !important; /* Ensure exactly 4 slides visible with spacing */
+   flex-shrink: 0 !important;
+    margin-right: 5px !important;
+    margin-left: 0px !important;
+    padding: 0;
+}
+.swiper-container {
+    position: relative;
+   width: 150%;
+    margin-left: 0px;
+    margin-right: 0px;
+   
+}
+.flickity-nav {
+    display: none;
+}
+.flickity-prev {
+    display: none;
+}
+    .flickity-next {
+        display: none;
+    }
+    .flickity-nav:not(.slide-btn) {
+        display: none;
+    }
+}
+@media screen and (min-width:768px)and(max-width:1024px) {
+    .swiper-container {
+    position: relative;
+   width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+   
+}
+}
+/* Responsive adjustments for swiper slides */
+@media (max-width: 1023px) {
+    .swiper-slide.carousel_slide {
+        width: calc(33.333% - 6.67px) !important; /* 3 slides on tablet */
+    }
+}
+
+@media (max-width: 767px) {
+    .swiper-slide.carousel_slide {
+        width: calc(50% - 5px) !important; /* 2 slides on mobile */
+    }
+}
+
+@media (max-width: 479px) {
+    .swiper-slide.carousel_slide {
+        width: calc(100% - 10px) !important; /* 1 slide on small mobile */
+    }
+}
+
+/* Image and content styles (keep existing) */
+.sliderImgText {
+    position: relative;
+}
+/* Navigation Button Styles - Enhanced for better visibility */
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+/* Swiper navigation disabled state */
+.swiper-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Ensure proper spacing and alignment */
+.swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+   
+}
+
+

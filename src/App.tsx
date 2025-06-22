@@ -19,7 +19,7 @@ import AboutUs from "./pages/AboutUs";
 import FloatingWhatsApp from '../src/components/Floatingwhatsapp';
 import { CurrencyProvider } from '../src/contexts/CurrencyProvider';
 import { FloatingCurrencySwitch } from "./components/CurrencySwitcher";
-
+import ScrollToTop from './ScrollToTop';
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -32,6 +32,7 @@ const App = () => (
               <Toaster />
               <Sonner />
               <BrowserRouter>
+                                <ScrollToTop />
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/collections" element={<Collections />} />

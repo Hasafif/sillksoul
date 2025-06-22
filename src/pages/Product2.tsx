@@ -806,6 +806,7 @@ else {
                     key={relatedProduct.id}
                     to={`/product/${relatedProduct.id}`}
                     className="group"
+                    //onClick={() => window.scrollTo(0, 0)}
                   >
                     <div className="aspect-[3/4] overflow-hidden mb-4">
                       <img
