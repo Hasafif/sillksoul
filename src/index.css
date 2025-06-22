@@ -4,7 +4,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 /* Amazon Ember Regular */
 @font-face {
   font-family: 'Amazon Ember';
@@ -1774,7 +1773,7 @@ blockquote, dd, div, dl, dt, figure, form, h1, h2, h3, h4, h5, h6, li, ol, p, pr
 }}
 .small-6, .small-up-2 > .column, .small-up-2 > .columns {
     flex: 0 0 50%;
-    max-width: 50%;
+    max-width: 100%;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1784,11 +1783,7 @@ blockquote, dd, div, dl, dt, figure, form, h1, h2, h3, h4, h5, h6, li, ol, p, pr
 .slick-initialized .slick-slide, .sliderImgText, .tabs-container, .template-page-interiorshome a.button.white.outline, .video-tab-slide {
     position: relative;
 }
-/*
-blockquote, dd, div, dl, dt, figure, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, td, th, ul {
-    margin: 0;
-    padding: 0;
-}*/
+
 
 *, select {
     box-sizing: border-box;
@@ -1933,11 +1928,7 @@ img, legend {
 .flickity-nav, .section-header-left--false .section-header--button {
     justify-content: center;
 }
-/*
-blockquote, dd, div, dl, dt, figure, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, td, th, ul {
-    margin: 0;
-    padding: 0;
-}*/
+
 .flickity-nav.flickity-next:not(.slide-btn) {
     right: -16px;
 }
@@ -2492,7 +2483,7 @@ width: 100%;
 }
 .swiper-container {
     position: relative;
-   width: 200%;
+   width: 150%;
     margin-left: 0px;
     margin-right: 0px;
     overflow: visible;

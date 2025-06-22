@@ -477,7 +477,19 @@ const swiperConfig = {
        ref={swiperRef2}
        {...swiperConfig2}
        dir={isRTL?'rtl':'ltr'}
-     
+      // scrollbar={true}
+      // centeredSlides={true}
+      //pagination={
+         // {
+     //clickable: true,
+     // dynamicBullets: true,
+  // }
+      // }
+ 
+   
+      // RTL support
+   // dir={isRTL ? 'rtl' : 'ltr'}
+    // Proper RTL handling
  
       // Observer to watch for changes
  observer={true}
@@ -539,6 +551,7 @@ const swiperConfig = {
           >
 
                  <Link to={imageData.href} 
+                            //  draggable={false}
              onContextMenu={(e) => e.preventDefault()}
                  >
          <div 
@@ -595,7 +608,8 @@ className="sliderImgText"
           </div>
 
 
-         )}     {/*!isMobile && (
+         )}   
+            {/*!isMobile && (
 
   <div className="relative overflow-visible">
     
@@ -828,7 +842,8 @@ className="sliderImgText"
       {images3.map((imageData, index) => (
         <div 
           key={`${currentIndex}-${index}`}
-          className="carousel-slide-wrapper"
+         //className="carousel-slide-wrapper"
+         className="slide-item small-6 medium-6 large-3 columns carousel_slide"
         >
           <Link 
             to={imageData.href} 
@@ -879,7 +894,7 @@ className="sliderImgText"
       }
 
       .mobile-image-carousel .slick-slide {
-        padding: 0 5px;
+        padding:0 3px;
         box-sizing: border-box;
       }
 
@@ -893,6 +908,8 @@ className="sliderImgText"
         padding: 0;
         margin: 0;
         overflow:visible;
+        max-width:100%;
+       
       }
 
       .carousel-link {
