@@ -831,7 +831,7 @@ className="sliderImgText"
         {
           breakpoint: 480,
           settings: {
-            centerPadding: "2.5px",
+            centerPadding: "50px",
             slidesToShow: 1
           }
         }
@@ -895,7 +895,7 @@ className="sliderImgText"
       }
 
       .mobile-image-carousel .slick-slide {
-        padding:0 3px;
+        padding:0 2.5px;
         
 
       .mobile-image-carousel .slick-slide > div {
