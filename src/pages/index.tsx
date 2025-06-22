@@ -813,7 +813,7 @@ className="sliderImgText"
     <Slider 
       className="mobile-image-carousel"
       centerMode={true}
-      centerPadding="50px"
+      centerPadding="60px"
       slidesToShow={1}
       slidesToScroll={1}
       infinite={true}
@@ -824,14 +824,14 @@ className="sliderImgText"
         {
           breakpoint: 768,
           settings: {
-            centerPadding: "50px",
+            centerPadding: "60px",
             slidesToShow: 1
           }
         },
         {
           breakpoint: 480,
           settings: {
-            centerPadding: "40px",
+            centerPadding: "2.5px",
             slidesToShow: 1
           }
         }
