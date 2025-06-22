@@ -813,7 +813,7 @@ className="sliderImgText"
     <Slider 
       className="mobile-image-carousel"
       centerMode={true}
-      centerPadding="70px"
+      centerPadding="50px"
       slidesToShow={1}
       slidesToScroll={1}
       infinite={true}
@@ -824,14 +824,14 @@ className="sliderImgText"
         {
           breakpoint: 768,
           settings: {
-            centerPadding: "70px",
+            centerPadding: "50px",
             slidesToShow: 1
           }
         },
         {
           breakpoint: 480,
           settings: {
-            centerPadding: "60px",
+            centerPadding: "40px",
             slidesToShow: 1
           }
         }
@@ -895,7 +895,7 @@ className="sliderImgText"
       }
 
       .mobile-image-carousel .slick-slide {
-        padding:0 2px;
+        padding:0 3px;
         
 
       .mobile-image-carousel .slick-slide > div {
