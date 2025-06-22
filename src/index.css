@@ -1718,11 +1718,7 @@ a {
     display: flex;
     flex-flow: row wrap;
 }
-/*
-blockquote, dd, div, dl, dt, figure, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, td, th, ul {
-    margin: 0;
-    padding: 0;
-}*/
+
 
 @media only screen and (min-width: 768px) {
 .row .columns {

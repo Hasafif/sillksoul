@@ -813,7 +813,7 @@ className="sliderImgText"
     <Slider 
       className="mobile-image-carousel"
       centerMode={true}
-      centerPadding="90px"
+      centerPadding="70px"
       slidesToShow={1}
       slidesToScroll={1}
       infinite={true}
@@ -824,7 +824,7 @@ className="sliderImgText"
         {
           breakpoint: 768,
           settings: {
-            centerPadding: "90px",
+            centerPadding: "70px",
             slidesToShow: 1
           }
         },
@@ -879,7 +879,7 @@ className="sliderImgText"
     <style>{`
     .mobile-carousel-container {
         width: 100%;
-        height:200%;
+        height:100%;
         max-height:200%;
         max-width: 200%;
         margin: 0;
@@ -889,13 +889,13 @@ className="sliderImgText"
 
       .mobile-image-carousel {
         width: 100%;
-        height:200%;
+        height:100%;
         margin: 0;
         padding: 0;
       }
 
       .mobile-image-carousel .slick-slide {
-        padding:0 1.5px;
+        padding:0 2px;
         
 
       .mobile-image-carousel .slick-slide > div {
@@ -919,7 +919,7 @@ className="sliderImgText"
       }
 
       .carousel-image {
-        width: 150%;
+        width: 100%;
         height: 100%;
         display: block;
       }
