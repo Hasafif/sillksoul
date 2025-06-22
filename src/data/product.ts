@@ -464,6 +464,51 @@ export const categories: Category[] = [
     description: "A flowing summer dress perfect for warm days",
     products:products
   },
+   {
+    id: "2",
+    name_english: "Shirts",
+    name_arabic: "قمصان",
+    image: "/p13.jpeg",
+    hoverImage: "/p93.jpeg",
+    description: "A flowing summer dress perfect for warm days",
+    products:products
+  },
+   {
+    id: "3",
+    name_english: "Pants",
+    name_arabic: "سراويل",
+    image: "/p13.jpeg",
+    hoverImage: "/p93.jpeg",
+    description: "A flowing summer dress perfect for warm days",
+    products:products
+  },
+   {
+    id: "4",
+    name_english: "Jumpsuits",
+    name_arabic: "بدلات",
+    image: "/p13.jpeg",
+    hoverImage: "/p93.jpeg",
+    description: "A flowing summer dress perfect for warm days",
+    products:products
+  },
+    {
+    id: "5",
+    name_english: "Skirts",
+    name_arabic:"تنانير",
+    image: "/p13.jpeg",
+    hoverImage: "/p93.jpeg",
+    description: "A flowing summer dress perfect for warm days",
+    products:products
+  },
+    {
+    id: "6",
+    name_english: "Bags",
+    name_arabic:"حقائب",
+    image: "/p13.jpeg",
+    hoverImage: "/p93.jpeg",
+    description: "A flowing summer dress perfect for warm days",
+    products:products
+  },
 ];
 
 

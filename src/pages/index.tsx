@@ -22,6 +22,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css/free-mode';
 import 'swiper/css/thumbs';
+import Slider from 'react-slick';
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -42,6 +43,15 @@ const Index = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const carouselRef = useRef(null);
+   // Slider settings
+  const settings = {
+    dots: false, // Show dots for navigation
+    infinite: true, // Enable infinite looping
+    speed: 500, // Transition speed
+    slidesToShow: 1, // Number of slides to show
+    slidesToScroll: 1 // Number of slides to scroll
+
+  };
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
@@ -110,19 +120,25 @@ const Index = () => {
  // For infinite loop, we can navigate through all images
   const totalImages = images3.length;
 
-  const goToNext = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    // Move to next image, loop back to 0 when reaching the end
-    setCurrentIndex((prev) => (prev + 1) % totalImages);
-  };
+// Modified goToNext function for circular behavior
+const goToNext = () => {
+  setIsTransitioning(true);
+  setCurrentIndex(prevIndex => {
+    // Assuming you have a totalImages variable with the number of images
+    const nextIndex = prevIndex + 1;
+    return nextIndex >= totalImages ? 0 : nextIndex; // Wrap to start
+  });
+};
 
-  const goToPrev = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    // Move to previous image, loop to last when at the beginning
-    setCurrentIndex((prev) => (prev - 1 + totalImages) % totalImages);
-  };
+// Modified goToPrev function for circular behavior
+const goToPrev = () => {
+  setIsTransitioning(true);
+  setCurrentIndex(prevIndex => {
+    // Assuming you have a totalImages variable with the number of images
+    const prevIdx = prevIndex - 1;
+    return prevIdx < 0 ? totalImages - 1 : prevIdx; // Wrap to end
+  });
+};
 
   // Get number of visible images based on screen size
   const getVisibleCount = () => {
@@ -190,10 +206,17 @@ const Index = () => {
       const scrollWidth = carouselRef.current.scrollWidth;
       const clientWidth = carouselRef.current.clientWidth;
       const scrollPosition = (currentIndex * clientWidth) % scrollWidth;
+      if (currentIndex!=0) {
       carouselRef.current.scrollTo({
         left: scrollPosition,
         behavior: 'smooth'
+      });}
+      else {
+        carouselRef.current.scrollTo({
+        right: 0,
+        behavior: 'smooth'
       });
+      }
     }
   }, [currentIndex, isMobile]);
 const swiperConfig = {
@@ -439,7 +462,8 @@ const swiperConfig = {
   </div>
       <div className="row">
         <div className="small-12 columns setPadding">
-          <div className="relative overflow-visible">
+         {!isMobile && (
+<div className="relative overflow-visible">
             <div className="relative overflow-hidden">
             
           
@@ -453,23 +477,15 @@ const swiperConfig = {
        ref={swiperRef2}
        {...swiperConfig2}
        dir={isRTL?'rtl':'ltr'}
-      /* pagination={
-          {
-     clickable: true,
-      dynamicBullets: true,
-   }
-       }*/
- 
-   
-      // RTL support
-   // dir={isRTL ? 'rtl' : 'ltr'}
-    // Proper RTL handling
+     
  
       // Observer to watch for changes
  observer={true}
     observeParents={true}
     watchSlidesProgress={true}
+    draggable={true}
     
+   // onDrag={handleMouseDown}
     // Force update on language change
     updateOnWindowResize={true}
    
@@ -481,24 +497,24 @@ const swiperConfig = {
         grabCursor={true}
         breakpoints={{
           // Responsive breakpoints - ensure 4 images visible on larger screens
-          320: {
-            slidesPerView: 4,
-            spaceBetween: 10,
+         320: {
+            slidesPerView: 1,
+            spaceBetween: 15,
             slidesPerGroup: 1,
           },
           480: {
-            slidesPerView: 4,
-            spaceBetween: 1,
+            slidesPerView: 1,
+            spaceBetween: 15,
             slidesPerGroup: 1,
           },
           768: {
-            slidesPerView: 1,
-            spaceBetween: 1 ,
+            slidesPerView: 2,
+            spaceBetween: 15 ,
             slidesPerGroup: 1,
           },
           1024: {
-            slidesPerView: 2,
-            spaceBetween: 10,
+            slidesPerView: 4,
+            spaceBetween: 15,
             slidesPerGroup: 1,
           },
           1200: {
@@ -507,7 +523,8 @@ const swiperConfig = {
             slidesPerGroup: 1,
           },
         }}
-        className={`swiper-container flex flex-row h-1/2 overflow-visible ${(isTablet || isMobile) ? 'w-full':'w-1/2'}`}
+        className={`swiper-container flex flex-row h-1/2 overflow-visible 
+          ${(isMobile) ? 'w-full':'w-1/2'}`}
        
       >
          {images3.map((imageData,index) => (
@@ -516,10 +533,12 @@ const swiperConfig = {
             style={{
 
             }}
+            // onTouchStart={handleMouseDown2}
+           // onTouchMove={handleMouseMove2}
+           // onTouchEnd={handleMouseUp2}
           >
 
                  <Link to={imageData.href} 
-                              draggable={false}
              onContextMenu={(e) => e.preventDefault()}
                  >
          <div 
@@ -536,7 +555,7 @@ className="sliderImgText"
                     fetchPriority="auto"
                     style={{objectPosition:"50% 50%"}} data-ac-alt-type="image" sizes="254px" 
                   loading="lazy"
-                               draggable={false}
+                             //  draggable={false}
              onContextMenu={(e) => e.preventDefault()}
                   />
   </div>
@@ -548,24 +567,11 @@ className="sliderImgText"
         ))}
        
       </Swiper>
-    {/*<div className="swiper-button-next">
-      <svg className={`relative ${isRTL ? 'right-1/4':'left-1/4'} items-center justify-center`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line y1="-0.5" x2="17.0867" y2="-0.5" transform="matrix(0.718365 0.695667 -0.718365 0.695667 5.99988 1)" stroke="#2D2D2D"></line>
-        <line y1="-0.5" x2="17.0867" y2="-0.5" transform="matrix(0.718365 -0.695667 0.718365 0.695667 6.72546 24)" stroke="#2D2D2D"></line>
-      </svg>
-    </div>*/}
-    {/* <div className="swiper-button-next" tabIndex={0}
-    //  onClick={goToNext}
-      >
-    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="50" zoomAndPan="magnify" viewBox="0 0 37.5 37.499999" height="50" preserveAspectRatio="xMidYMid meet" version="1.0">
-      <defs><filter x="0%" y="0%" width="100%" height="100%" id="ab2446aa99"><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" color-interpolation-filters="sRGB"></feColorMatrix></filter><clipPath id="238ac2d71c"><path d="M 18.539062 13.101562 L 25.371094 13.101562 L 25.371094 24 L 18.539062 24 Z M 18.539062 13.101562 " clip-rule="nonzero"></path></clipPath><clipPath id="9e3a4f7727"><path d="M 0.886719 0.886719 L 36.191406 0.886719 L 36.191406 36.191406 L 0.886719 36.191406 Z M 0.886719 0.886719 " clip-rule="nonzero"></path></clipPath><clipPath id="5bf350be17"><path d="M 18.539062 0.886719 C 8.789062 0.886719 0.886719 8.789062 0.886719 18.539062 C 0.886719 28.285156 8.789062 36.191406 18.539062 36.191406 C 28.285156 36.191406 36.191406 28.285156 36.191406 18.539062 C 36.191406 8.789062 28.285156 0.886719 18.539062 0.886719 Z M 18.539062 0.886719 " clip-rule="nonzero"></path></clipPath><clipPath id="6d043ef67f"><path d="M 0.886719 0.886719 L 36.183594 0.886719 L 36.183594 36.183594 L 0.886719 36.183594 Z M 0.886719 0.886719 " clip-rule="nonzero"></path></clipPath><clipPath id="d19f09e06a"><path d="M 18.535156 0.886719 C 8.785156 0.886719 0.886719 8.785156 0.886719 18.535156 C 0.886719 28.28125 8.785156 36.183594 18.535156 36.183594 C 28.28125 36.183594 36.183594 28.28125 36.183594 18.535156 C 36.183594 8.785156 28.28125 0.886719 18.535156 0.886719 Z M 18.535156 0.886719 " clip-rule="nonzero"></path></clipPath><mask id="64e84d30bf"><g filter="url(#ab2446aa99)"><rect x="-3.75" width="45" fill="#000000" y="-3.75" height="44.999999" fill-opacity="0.43"></rect></g></mask><clipPath id="17fcc7dc81"><path d="M 0.632812 0.367188 L 8.449219 0.367188 L 8.449219 8.421875 L 0.632812 8.421875 Z M 0.632812 0.367188 " clip-rule="nonzero"></path></clipPath><clipPath id="7cef2b6c8b"><rect x="0" width="9" y="0" height="9"></rect></clipPath><mask id="b0cc12bf9b"><g filter="url(#ab2446aa99)"><rect x="-3.75" width="45" fill="#000000" y="-3.75" height="44.999999" fill-opacity="0.43"></rect></g></mask><clipPath id="c230fa3501"><path d="M 0.632812 0.527344 L 8.683594 0.527344 L 8.683594 8.578125 L 0.632812 8.578125 Z M 0.632812 0.527344 " clip-rule="nonzero"></path></clipPath><clipPath id="5a5375a9c8"><rect x="0" width="9" y="0" height="9"></rect></clipPath></defs><g clip-path="url(#238ac2d71c)"><path fill="#d5d5d4" d="M 19.363281 23.96875 C 19.1875 23.96875 19.019531 23.902344 18.886719 23.765625 C 18.625 23.507812 18.625 23.078125 18.886719 22.808594 L 23.101562 18.59375 L 18.816406 14.320312 C 18.558594 14.058594 18.558594 13.628906 18.816406 13.359375 C 19.078125 13.101562 19.507812 13.101562 19.777344 13.359375 L 25.011719 18.601562 L 19.84375 23.765625 C 19.710938 23.902344 19.542969 23.96875 19.363281 23.96875 Z M 19.363281 23.96875 " fill-opacity="1" fill-rule="nonzero"></path></g><g clip-path="url(#9e3a4f7727)"><g clip-path="url(#5bf350be17)"><path fill="#ffffff" d="M 0.886719 0.886719 L 36.191406 0.886719 L 36.191406 36.191406 L 0.886719 36.191406 Z M 0.886719 0.886719 " fill-opacity="1" fill-rule="nonzero"></path></g></g><g clip-path="url(#6d043ef67f)"><g clip-path="url(#d19f09e06a)"><path stroke-linecap="butt" transform="matrix(0.683322, 0, 0, 0.683322, 0.885313, 0.885313)" fill="none" stroke-linejoin="miter" d="M 25.829459 0.00205788 C 11.560934 0.00205788 0.00205715 11.560935 0.00205715 25.829459 C 0.00205715 40.092267 11.560934 51.656861 25.829459 51.656861 C 40.092267 51.656861 51.65686 40.092267 51.65686 25.829459 C 51.65686 11.560935 40.092267 0.00205788 25.829459 0.00205788 Z M 25.829459 0.00205788 " stroke="#f0f0f0" stroke-width="2.166274" stroke-opacity="1" stroke-miterlimit="4"></path></g></g><g mask="url(#64e84d30bf)"><g transform="matrix(1, 0, 0, 1, 15, 11)"><g clip-path="url(#7cef2b6c8b)"><g clip-path="url(#17fcc7dc81)"><path stroke-linecap="round" transform="matrix(-0.483182, -0.483182, 0.483182, -0.483182, 7.416179, 8.252292)" fill="none" stroke-linejoin="miter" d="M 0.998947 1.00265 L 12.260558 1.00265 " stroke="#545454" stroke-width="2" stroke-opacity="1" stroke-miterlimit="4"></path></g></g></g></g><g mask="url(#b0cc12bf9b)"><g transform="matrix(1, 0, 0, 1, 15, 17)"><g clip-path="url(#5a5375a9c8)"><g clip-path="url(#c230fa3501)"><path stroke-linecap="round" transform="matrix(-0.483182, 0.483182, -0.483182, -0.483182, 8.572579, 1.58688)" fill="none" stroke-linejoin="miter" d="M 0.999797 1.001748 L 12.653503 0.997706 " stroke="#545454" stroke-width="2" stroke-opacity="1" stroke-miterlimit="4"></path></g></g></g></g>
-    </svg>
-  </div>*/}
   
             </div>
              <div className="flickity-nav flickity-prev" tabIndex={0} 
  onClick={
-  //() => swiperRef2.current?.slidePrev();
+ 
  ()=>{
   swiperRef2.current?.slidePrev();
  } 
@@ -587,7 +593,9 @@ className="sliderImgText"
     </svg>
   </div>
           </div>
-    {/*!isMobile && (
+
+
+         )}     {/*!isMobile && (
 
   <div className="relative overflow-visible">
     
@@ -643,72 +651,322 @@ className="sliderImgText"
        
        </div>
 
-    )*/}      
-{/*isMobile && (
-  <div 
-            ref={carouselRef}
-            className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            onMouseDown={handleMouseDown2}
-            onMouseMove={handleMouseMove2}
-            onMouseUp={handleMouseUp2}
-            onMouseLeave={handleMouseUp2}
-            onTouchStart={handleMouseDown2}
-            onTouchMove={handleMouseMove2}
-            onTouchEnd={handleMouseUp2}
+    )}      
+{/* !isMobile && (
+  <div className="desktop-carousel-container">
+    <Slider 
+     // className="desktop-image-carousel"
+     className={`swiper-container flex flex-row h-full overflow-visible 
+         `}
+     slidesToShow={4}
+      slidesToScroll={4}
+      infinite={true}
+      arrows={true}
+      dots={false}
+      speed={600}
+      autoplay={false}
+      swipeToSlide={false}
+      draggable={false}
+      variableWidth={false}
+      centerMode={false}
+      responsive={[
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            arrows: true,
+            dots: false,
+            variableWidth: false,
+            centerMode: false
+          }
+        }
+      ]}
+      prevArrow={
+        <div className="slick-prev-custom">‹</div>
+      }
+      nextArrow={
+        <div className="slick-next-custom">›</div>
+      }
+    >
+      {images3.map((imageData, index) => (
+        <div 
+          key={`${currentIndex}-${index}`}
+          className="slide-item small-6 medium-6 large-3 columns carousel_slide"
+        >
+          <Link 
+            to={imageData.href} 
+            onContextMenu={(e) => e.preventDefault()}
           >
-<div className="flex gap-2 pb-4" style={{ width: `${images3.length * 100}%` }}>
-              {images3.map((imageData, index) => (
-                <div 
-                  key={index}
-                  className="flex-shrink-0 w-full"
-                  style={{ width: `${100 / images3.length}%` }}
-                >
-                  <Link
-                    to={imageData.href}
-                    className="block"
-                                 draggable={false}
-             onContextMenu={(e) => e.preventDefault()}
-                  >
-                    <div className="relative overflow-hidden">
-                      <div className="relative cover_img" style={{paddingBottom: "160%"}}>
-                        <img
-                          src={imageData.src}
-                          alt={isRTL?imageData.alt_arabic:imageData.alt_english}
-                          className="absolute inset-0 w-full h-full object-cover"
-                          loading="lazy"
-                                       draggable={false}
-             onContextMenu={(e) => e.preventDefault()}
-                        />
-                      </div>
-                       <div className={`${isRTL?'collection-text-arabic':'collection-text'} testing`}>{isRTL?imageData.alt_arabic:imageData.alt_english}</div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
+            <div className="sliderImgText">
+              <div className="cover_img" style={{paddingBottom:"160%"}}>
+                <img
+                  src={imageData.src}
+                  alt={isRTL ? imageData.alt_arabic : imageData.alt_english}
+                  className="lazyautosizes ls-is-cached lazyloaded"
+                  width="1536" 
+                  height="1884" 
+                  data-sizes="auto" 
+                  fetchPriority="auto"
+                  style={{objectPosition:"50% 50%"}} 
+                  data-ac-alt-type="image" 
+                  sizes="254px" 
+                  loading="lazy"
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              </div>
+              <div className={`${isRTL ? 'collection-text-arabic' : 'collection-text'} testing`}>
+                {isRTL ? imageData.alt_arabic : imageData.alt_english}
+              </div>
             </div>
-          </div>
+          </Link>
+        </div>
+      ))}
+    </Slider>
+
+    <style>{`
+    .desktop-carousel-container {
+        width: 100%;
+        height:100%;
+      }
+         .desktop-image-carousel {
+        width: 100%;
+        height:100%;
+        margin: 0;
+        padding: 0;
+      }
+         .carousel-slide-wrapper {
+        outline: none;
+        padding: 0;
+        margin: 0;
+        overflow:visible;
+      }
+     
+      .slick-prev-custom,
+      .slick-next-custom {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border-radius: 50%;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.3s ease;
+      }
+
+      .slick-prev-custom:hover,
+      .slick-next-custom:hover {
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .slick-prev-custom {
+        left: 10px;
+      }
+
+      .slick-next-custom {
+        right: 10px;
+      }
+
+      .slick-prev-custom:before,
+      .slick-next-custom:before {
+        display: none;
+      }
+
+      
+      .slick-slide {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .slick-track {
+        display: flex !important;
+        align-items: stretch;
+      }
+
+      .slick-list {
+        overflow: hidden;
+      }
+    `}</style>
+  </div>
 )*/}
- {/*isMobile && (
-          <div className="flex justify-center mt-4 space-x-2">
-            {images3.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                  index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'
-                }`}
-                aria-label={`Go to image ${index + 1}`}
-              />
-            ))}
-          </div>
-        )*/}
-       
+      { isMobile && (
+  <div className="mobile-carousel-container">
+    <Slider 
+      className="mobile-image-carousel"
+      centerMode={true}
+      centerPadding="90px"
+      slidesToShow={1}
+      slidesToScroll={1}
+      infinite={true}
+     // focusOnSelect={true}
+      //arrows={true}
+      dots={false}
+      responsive={[
+        {
+          breakpoint: 768,
+          settings: {
+            centerPadding: "90px",
+            slidesToShow: 1
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            centerPadding: "60px",
+            slidesToShow: 1
+          }
+        }
+      ]}
+      prevArrow={<div className="slick-prev-custom">‹</div>}
+      nextArrow={<div className="slick-next-custom">›</div>}
+    >
+      {images3.map((imageData, index) => (
+        <div 
+          key={`${currentIndex}-${index}`}
+          className="carousel-slide-wrapper"
+        >
+          <Link 
+            to={imageData.href} 
+            onContextMenu={(e) => e.preventDefault()}
+            className="carousel-link"
+          >
+            <div className="sliderImgText">
+              <div className="cover_img" style={{paddingBottom:"160%"}}>
+                <img
+                  src={imageData.src}
+                  alt={isRTL ? imageData.alt_arabic : imageData.alt_english}
+                  className="lazyautosizes ls-is-cached lazyloaded carousel-image"
+                  width="1536" 
+                  height="1884" 
+                  data-sizes="auto" 
+                  fetchPriority="auto"
+                  style={{objectPosition:"50% 50%"}} 
+                  data-ac-alt-type="image" 
+                  sizes="254px" 
+                  loading="lazy"
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              </div>
+              <div className={`${isRTL ? 'collection-text-arabic' : 'collection-text'} testing`}>
+                {isRTL ? imageData.alt_arabic : imageData.alt_english}
+              </div>
+            </div>
+          </Link>
+        </div>
+      ))}
+    </Slider>
+
+    <style>{`
+    .mobile-carousel-container {
+        width: 100%;
+        height:100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        overflow:visible;
+      }
+
+      .mobile-image-carousel {
+        width: 100%;
+        height:100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .mobile-image-carousel .slick-slide {
+        padding: 0 5px;
+        box-sizing: border-box;
+      }
+
+      .mobile-image-carousel .slick-slide > div {
+        margin: 0;
+        padding: 0;
+      }
+
+      .carousel-slide-wrapper {
+        outline: none;
+        padding: 0;
+        margin: 0;
+        overflow:visible;
+      }
+
+      .carousel-link {
+        display: block;
+        text-decoration: none;
+        outline: none;
+      }
+
+      .carousel-image {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .slick-prev-custom,
+      .slick-next-custom {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border-radius: 50%;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.3s ease;
+      }
+
+      .slick-prev-custom:hover,
+      .slick-next-custom:hover {
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .slick-prev-custom {
+        left: 10px;
+      }
+
+      .slick-next-custom {
+        right: 10px;
+      }
+/*
+      .mobile-image-carousel .slick-center .carousel-slide-wrapper {
+        transform: scale(1);
+        transition: transform 0.3s ease;
+      }
+
+      .mobile-image-carousel .slick-slide:not(.slick-center) .carousel-slide-wrapper {
+        transform: scale(0.9);
+        opacity: 0.7;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }*/
+
+      /* Remove any default spacing */
+      .mobile-image-carousel .slick-track {
+        margin: 0;
+        padding: 0;
+      }
+
+      .mobile-image-carousel .slick-list {
+        margin: 0;
+        padding: 0;
+      }
+    `}</style>
+  </div>
+)}
         </div>
         
       </div>
-    
+     
       </div>
+     
 
 
       <Benifits />
