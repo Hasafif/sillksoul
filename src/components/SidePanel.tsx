@@ -1,9 +1,9 @@
-import { X, Home, ShoppingBag, Phone, Star} from "lucide-react";
+import { X, Home, ShoppingBag, Phone, Star, FileText, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { categories } from "../data/product";
 
 interface SidePanelProps {
@@ -12,17 +12,88 @@ interface SidePanelProps {
 }
 
 const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
-  const { language,isRTL } = useLanguage();
+  const { language, isRTL } = useLanguage();
   const { t } = useTranslation();
-  // Define the dropdown options
-const collectionOptions = [
-  ...(categories || []).map(category => ({
-    label: (language == 'en') ? category.name_english : category.name_arabic,
-    path: `/category/${category.id}`
-  })),
-
-];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Define the dropdown options
+  const collectionOptions = [
+    ...(categories || []).map(category => ({
+      label: (language == 'en') ? category.name_english : category.name_arabic,
+      path: `/category/${category.id}`
+    })),
+  ];
+
+  // Detect if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Handle click outside dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isDropdownOpen]);
+
+  // Clear timeout on component unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Handle mouse enter for desktop
+  const handleMouseEnter = () => {
+    if (!isMobile) {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      setIsDropdownOpen(true);
+    }
+  };
+
+  // Handle mouse leave for desktop
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      timeoutRef.current = setTimeout(() => {
+        setIsDropdownOpen(false);
+      }, 150); // Small delay to prevent flickering
+    }
+  };
+
+  // Handle click for mobile
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    if (isMobile) {
+      e.preventDefault();
+      setIsDropdownOpen(!isDropdownOpen);
+    }
+  };
+
+  // Handle dropdown item click
+  const handleDropdownItemClick = () => {
+    setIsDropdownOpen(false);
+    onClose();
+  };
+
   return (
     <>
       {/* Overlay */}
@@ -39,7 +110,7 @@ const collectionOptions = [
       }`}>
         <div className="p-6">
           {/* Header */}
-          <div className="flex justify-between items-center mb-8">
+          <div className={`flex justify-between items-center mb-8 ${isRTL ? 'font-arabic' : 'font-english'}`}>
             <h2 className="text-2xl font-bold text-gray-900">{t('menu')}</h2>
             <button
               onClick={onClose}
@@ -50,92 +121,99 @@ const collectionOptions = [
           </div>
 
           {/* Language Switcher */}
-          <div className="mb-6 pb-4 border-b border-gray-200">
+          <div className="mb-4 pb-4 border-b border-gray-200">
             <LanguageSwitcher variant="buttons" />
           </div>
 
           {/* Navigation Links */}
-          <nav className={`space-y-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <nav className={`space-y-2 ${isRTL ? 'text-right' : 'text-left'}`}>
             <Link
               to="/"
               onClick={onClose}
               className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
             >
               <Home className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800 font-medium">{t('home')}</span>
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('home')}</span>
             </Link>
             
-        <div 
-      className="relative"
-      onMouseEnter={() => setIsDropdownOpen(true)}
-      onMouseLeave={() => setIsDropdownOpen(false)}
-    >
-      <Link
-        to="/"
-        onClick={onClose}
-        className={`flex items-center justify-between ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors w-full`}
-      >
-        <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-          <ShoppingBag className="w-5 h-5 text-gray-600" />
-          <span className="text-gray-800 font-medium">{t('readytowear')}</span>
-        </div>
-     
-      </Link>
-
-      {/* Dropdown Menu */}
-      {isDropdownOpen && (
-        <div className={`absolute top-full ${isRTL ? 'right-0' : 'left-0'} mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-2`}>
-          {collectionOptions.map((option, index) => (
-            <Link
-              key={index}
-              to={option.path}
-              onClick={onClose}
-              className={`block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors ${
-                isRTL ? 'text-right' : 'text-left'
-              }`}
+            {/* Ready to Wear with Dropdown */}
+            <div 
+              ref={dropdownRef}
+              className="relative"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
-              {option.label}
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
-               <Link
+              <div
+                onClick={handleDropdownClick}
+                className={`flex items-center justify-between ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors w-full cursor-pointer`}
+              >
+                <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
+                  <ShoppingBag className="w-5 h-5 text-gray-600" />
+                  <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('readytowear')}</span>
+                </div>
+              </div>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div 
+                  className={`absolute top-full ${isRTL ? 'right-0' : 'left-0'} mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-2`}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {collectionOptions.map((option, index) => (
+                    <Link
+                      key={index}
+                      to={option.path}
+                      onClick={handleDropdownItemClick}
+                      className={`block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors ${
+                        isRTL ? 'text-right' : 'text-left'
+                      } ${isRTL ? 'font-arabic' : 'font-english'}`}
+                    >
+                      {option.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
               to="/hautecouture"
               onClick={onClose}
               className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
             >
               <Star className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800 font-medium">{t('hautecouture')}</span>
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('hautecouture')}</span>
             </Link>
-              <Link
+
+            <Link
               to="/aboutus"
               onClick={onClose}
               className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
             >
-              <Star className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800 font-medium">{t('aboutTitle')}</span>
+              <FileText className="w-5 h-5 text-gray-600"/>
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('aboutTitle')}</span>
             </Link>
+
             <Link
               to="/contact"
               onClick={onClose}
               className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
             >
               <Phone className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800 font-medium">{t('contact')}</span>
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('contact')}</span>
             </Link>
           </nav>
 
           {/* Featured Section */}
-          <div className="mt-12 p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-900 mb-2">{t('featuredSection')}</h3>
-            <p className="text-sm text-gray-600 mb-4">
+          <div className={`mt-2 p-4 bg-gray-50 rounded-lg ${isRTL ? 'font-arabic' : 'font-english'}`}>
+            <h3 className="font-semibold text-gray-900 mb-1">{t('featuredSection')}</h3>
+            <p className={`text-sm text-gray-600 mb-2 ${isRTL ? 'font-arabic' : 'font-english'}`}>
               {t('featuredText')}
             </p>
             <Link
               to="/"
               onClick={onClose}
-              className="text-sm font-medium text-blue-600 hover:text-blue-800"
+              className={`text-sm font-medium text-gray-600 hover:text-gray-800 ${isRTL ? 'font-arabic' : 'font-english'}`}
             >
               {t('shopNow')} →
             </Link>

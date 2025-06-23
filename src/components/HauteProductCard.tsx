@@ -40,7 +40,7 @@ const HauteProductCard = ({ product }: ProductCardProps) => {
             `}
           >
             <Eye className="w-4 h-4" />
-            <span className={isRTL ? 'font-arabic' : ''}>{t('customDesigntitle')}</span>
+            <span className={isRTL ? 'font-arabic' : 'font-english'}>{t('customDesigntitle')}</span>
           </button>
         </div>
       </Link>

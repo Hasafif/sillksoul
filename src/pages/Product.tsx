@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
-import Footer from "../components/Footer";
+import Footer from "../components/CustomFooter";
+import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { ShoppingCart, Heart, Share2, Truck, RotateCcw } from "lucide-react";
@@ -10,6 +11,7 @@ import { products } from "../data/product";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useCurrency } from "../contexts/CurrencyProvider";
+import { toast } from "../hooks/use-toast";
 
 const Product = () => {
   const { id } = useParams();
@@ -17,7 +19,7 @@ const Product = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { language, isRTL } = useLanguage();
@@ -46,12 +48,16 @@ const Product = () => {
   const productImages = [product.image, product.hoverImage];
 
   const handleAddToCart = () => {
+
+   // setSelectedColor(product.colors[0])
+     // console.log(selectedColor)
     if (product.sizes.length > 0 && !selectedSize) {
-      alert(language === 'en' ? "Please select a size" : "يرجى اختيار المقاس");
+      toast({title:language === 'en' ? "Size" : "المقاس",description:language === 'en' ? "Please select a size" : "يرجى اختيار المقاس"})
       return;
     }
+      
     if (product.colors.length > 0 && !selectedColor) {
-      alert(language === 'en' ? "Please select a color" : "يرجى اختيار اللون");
+      toast({title:language === 'en' ? "Color" : "اللون",description:language === 'en' ? "Please select a color" : "يرجى اختيار اللون"})
       return;
     }
     addToCart(product, quantity, selectedSize, selectedColor);
@@ -63,11 +69,11 @@ const Product = () => {
 
   return (
     <div className={`min-h-screen bg-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
-      <Header />
+      {/*<Header />
       <HeroSection 
         onMenuToggle={() => setIsMenuOpen(true)}
         onSearchToggle={() => setIsSearchOpen(true)}
-      />
+      />*/}
       
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 py-6">
@@ -76,7 +82,7 @@ const Product = () => {
             {language === 'en' ? 'Home' : 'الصفحة الرئيسية'}
           </Link>
           <span className={`${isRTL ? 'mx-2' : 'mx-2'}`}>/</span>
-          <Link to="/collections" className="hover:text-gray-900">
+          <Link to="/category/1" className="hover:text-gray-900">
             {language === 'en' ? 'Ready-to-Wear' : 'ملابس جاهزة'}
           </Link>
           <span className={`${isRTL ? 'mx-2' : 'mx-2'}`}>/</span>
@@ -94,6 +100,8 @@ const Product = () => {
                 src={productImages[currentImageIndex]}
                 alt={productName}
                 className="w-full h-full object-cover"
+                draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
               />
             </div>
             <div className={`flex ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
@@ -109,6 +117,8 @@ const Product = () => {
                     src={image}
                     alt={`${productName} ${index + 1}`}
                     className="w-full h-full object-cover"
+                                 draggable={false}
+             onContextMenu={(e) => e.preventDefault()}
                   />
                 </button>
               ))}
@@ -125,7 +135,7 @@ const Product = () => {
                   {[...Array(5)].map((_, i) => (
                     <span
                       key={i}
-                      className={`text-sm ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                      className={`text-sm ${i < Math.floor(product.rating) ? 'text-gray-600' : 'text-gray-300'}`}
                     >
                       ★
                     </span>
@@ -175,11 +185,12 @@ const Product = () => {
                   {product.colors.map((color) => (
                     <button
                       key={color}
-                      onClick={() => setSelectedColor(color)}
+                      //onClick={() => setSelectedColor(color)}
                       className={`px-4 py-2 border rounded-md text-sm font-medium ${
-                        selectedColor === color
-                          ? 'border-gray-900 bg-gray-900 text-white'
-                          : 'border-gray-300 text-gray-700 hover:border-gray-400'
+                       // selectedColor === color
+                          //? 
+                          'border-gray-900 bg-gray-900 text-white'
+                         // : 'border-gray-300 text-gray-700 hover:border-gray-400'
                       }`}
                     >
                       {color}
@@ -215,8 +226,9 @@ const Product = () => {
             <div className="space-y-3">
               <button
                 onClick={handleAddToCart}
-                className={`w-full bg-gray-900 text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}
-              >
+                className={`btn2 btn2--primary ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'} flex items-center justify-center w-full text-white py-3 px-6 hover:bg-gray-600`}
+          
+             >
                 <ShoppingCart className="w-5 h-5" />
                 <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
               </button>
@@ -295,7 +307,7 @@ const Product = () => {
           </div>
         )}
       </section>
-
+       <Benefits/>
       <Footer />
 
       {/* Side Panels */}
