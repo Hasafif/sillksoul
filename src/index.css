@@ -1494,7 +1494,6 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*color: var(--swiper-navigation-color, var(--swiper-theme-color));*/
     color:transparent
 }
 .collection-products__list .swiper-button-prev svg {
@@ -1722,7 +1721,7 @@ a {
 
 @media only screen and (min-width: 768px) {
 .row .columns {
-    padding: 0 2.5px;
+    padding: 0 15px;
 }}
 @media only screen and (max-width: 768px) {
 .row .columns {
@@ -1873,7 +1872,7 @@ img, legend {
     display: block;
     position: absolute;
     right: 0;
-    bottom: 6px;
+    bottom: 3px;
     width: 100%;
     height: 2px;
     margin: 3px auto 0;
@@ -1907,10 +1906,6 @@ img, legend {
 .flickity-nav:not(.slide-btn) {
     display: flex;
 }
-/*
-#wrapper .click-capture, .back-to-top, .back-to-top path, .button span, .button:before, .cart-drawer .order-note-toggle__content, .cart-drawer .order-note-toggle__content-overlay, .custom-checkbox[type="checkbox"], .custom-checkbox[type="checkbox"]:after, .field label, .flickity-nav, .flickity-nav svg, .flickity-page-dots .dot, .header .logolink .logoimg, .header.transparent--true:before, .header:after, .mobile-toggle span, .quantity .minus svg, .quantity .plus svg, .shopify-payment-button__more-options:after, .side-panel, .text-button:after, .thb-full-menu .sub-menu, .thb-full-menu li.menu-item-has-children > a svg path, .thb-full-menu--link:after, .thb-localization-forms.inside-header .select-arrow svg path, .thb-secondary-area .thb-item-count, .thb-secondary-area-item svg path, .thb-secondary-area-item.thb-secondary-myaccount--icon-false span:after, a, input[type="checkbox"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="password"], input[type="radio"], input[type="search"], input[type="submit"] span, input[type="submit"]:before, input[type="tel"], input[type="text"], input[type="time"], input[type="url"], select, textarea {
-    transition: 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
-}*/
 .flickity-nav {
     position: absolute;
     top: 50%;
@@ -1920,6 +1915,35 @@ img, legend {
     cursor: pointer;
     border-radius: 50%;
     transform: translate3d(0, -50%, 0) !important;
+}
+.slick-arrow {
+    position: absolute;
+    display:flex;
+    justify-content: center;
+    top: 50%;
+    width: 38px;
+    height: 38px;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    transform: translate3d(0, -50%, 0) !important;
+}
+.slick-prev {
+    left: -16px;
+}
+.slick-next {
+     right: -16px;
+}
+[dir='rtl'] .slick-next {
+    right: -16px;
+    left:auto;
+}
+[dir='rtl'] .slick-prev {
+    left: -16px;
+    right: auto;
+}
+.slick-prev:before,.slick-next:before {
+    display: none;
 }
 .flickity-nav, .section-header-left--false .section-header--button {
     justify-content: center;
@@ -2112,10 +2136,6 @@ span.label__value_soldout {
     bottom: 0;
     background-position: center;
     background-size: cover;
- 
-    /*background-color: #fbfbfb;*/
-  /*background-color: green;*/
-   /*background-image: url('//eliesaab.com/cdn/shop/files/absinthe-green.jpg?v=5846434009743214177');*/
 }
 .color-selector input[type=radio]+label span {
     display: block;
@@ -2443,48 +2463,7 @@ width: 100%;
     height: 132px;
 }}
 
-/* Swiper Container Modifications */
-.swiper-container {
-    position: relative;
-   width: 100%;
-    margin-left: 0px;
-    margin-right: 0px;
-   
-}
-@media screen and (min-width:1024px) {
-    .swiper-container {
-    position: relative;
-   width: 50%;
-    margin-left: 0px;
-    margin-right: 0px;
-   
-}
-}
-/* Swiper Slide Modifications for 4 images display */
-.swiper-slide.carousel_slide {
-    width: 100% !important; /* Ensure exactly 4 slides visible with spacing */
-   flex-shrink: 0 !important;
-    margin-right: 5px !important;
-    margin-left: 0px !important;
-    padding: 0;
-}
-@media screen and (max-width:768px) {
-    .swiper-slide.carousel_slide {
-    width: 100% !important; /* Ensure exactly 4 slides visible with spacing */
-   flex-shrink: 0 !important;
-    margin-right: 5px !important;
-    margin-left: 0px !important;
-    padding: 0;
-    overflow: visible;
-}
-.swiper-container {
-    position: relative;
-   width: 150%;
-    margin-left: 0px;
-    margin-right: 0px;
-    overflow: visible;
-   
-}
+@media (max-width:768px) {
 .flickity-nav {
     display: none;
 }
@@ -2496,25 +2475,6 @@ width: 100%;
     }
     .flickity-nav:not(.slide-btn) {
         display: none;
-    }
-}
-
-/* Responsive adjustments for swiper slides */
-@media (max-width: 1023px) {
-    .swiper-slide.carousel_slide {
-        width: calc(33.333% - 6.67px) !important; /* 3 slides on tablet */
-    }
-}
-
-@media (max-width: 767px) {
-    .swiper-slide.carousel_slide {
-        width: calc(25% - 5px) !important; /* 2 slides on mobile */
-    }
-}
-
-@media (max-width: 479px) {
-    .swiper-slide.carousel_slide {
-        width: calc(100% - 10px) !important; /* 1 slide on small mobile */
     }
 }
 
@@ -2541,22 +2501,5 @@ width: 100%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-
-
-
-
-/* Swiper navigation disabled state */
-.swiper-button-disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Ensure proper spacing and alignment */
-.swiper-wrapper {
-    display: flex;
-    align-items: stretch;
-    
-   
-}
 
 
