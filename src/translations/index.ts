@@ -280,7 +280,9 @@ export const translations = {
            //Description
            Description:"Description",
             DeliveryReturns:"Delivery &amp; Returns",
-            ProductCare:"Product Care"
+            ProductCare:"Product Care",
+            // Shop Ready-To-Wear
+            ShopReadyToWear:"Shop Ready-To-Wear"
 
       },
     ar: {
@@ -561,7 +563,9 @@ SummerEscapade:"الفسحة الصيفية",
 //Description
 Description:"وصف",
 DeliveryReturns:"التوصيل والإرجاع",
-ProductCare:"العناية بالمنتج"
+ProductCare:"العناية بالمنتج",
+// Shop Ready-To-Wear
+ShopReadyToWear:"تسوق الملابس الجاهزة"
 
     }
   };

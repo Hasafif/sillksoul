@@ -469,7 +469,7 @@ const swiperConfig = {
 <div className="py-6 mb-10">
   <div className="row">
     <div className={`columns ${isRTL?'column-title-arabic':'column-title'} ${isMobile ? 'text-center' : ''}`}>
-      <h5 className={``}>{t('SummerEscapade')}</h5>
+      <h5 className={``}>{t('ShopReadyToWear')}</h5>
     </div>
   </div>
       <div className="row">
