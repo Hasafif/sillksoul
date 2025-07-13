@@ -18,7 +18,6 @@ const Benefits = () => {
     <div className="wrapper">
         <div className="benefits__inner">
             
-            
                 <div className={`${isRTL?'benefits__block__arabic':'benefits__block'}`}>
                     <div className="benefits__icon">
                         
