@@ -5,7 +5,7 @@ import Footer from "../components/CustomFooter";
 import Benifits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
-import { products } from "../data/product";
+import { loadAllProducts, products } from "../data/product";
 import { useTranslation } from "..//hooks/useTranslation";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Link } from "react-router-dom";
@@ -13,8 +13,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 // Swiper core and required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade, Thumbs, FreeMode } from 'swiper/modules';
-import { images} from "../data/images2";
-import { images3} from "../data/images3";
+import { images, loadImages} from "../data/images2";
+import { images3, loadImages2} from "../data/images3";
 // Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -42,6 +42,68 @@ const Index = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+   const [images, setImages] = useState([]);
+    const [cats_images, setCats_images] = useState<any>(images3);
+    const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+   useEffect(() => {
+      const fetchImages = async () => {
+        setIsLoading(true);
+        setError(null);
+        
+        try {
+          const imageData = await loadImages();
+          setImages(imageData);
+        } catch (err) {
+          setImages(images)
+          console.error('Error loading products:', err);
+          setError(err.message || 'Failed to load products');
+        } finally {
+          setIsLoading(false);
+        }
+      };
+  
+      fetchImages();
+    }, []);
+     useEffect(() => {
+      const fetchImages2 = async () => {
+        setIsLoading(true);
+        setError(null);
+        
+        try {
+          const imageData = await loadImages2();
+          setCats_images(imageData);
+        } catch (err) {
+          setCats_images(images3)
+          console.error('Error loading categories:', err);
+          setError(err.message || 'Failed to load categories');
+        } finally {
+          setIsLoading(false);
+        }
+      };
+  
+      fetchImages2();
+    }, []);
+    useEffect(() => {
+        const fetchProducts = async () => {
+          setIsLoading(true);
+          setError(null);
+          
+          try {
+            const productData = await loadAllProducts();
+            setProducts(productData);
+          } catch (err) {
+            setProducts([])
+            console.error('Error loading products:', err);
+            setError(err.message || 'Failed to load products');
+          } finally {
+            setIsLoading(false);
+          }
+        };
+    
+        fetchProducts();
+      }, []);
   const carouselRef = useRef(null);
    // Slider settings
   const settings = {
@@ -325,7 +387,7 @@ const swiperConfig = {
 
 
 
-            <Link className="btn btn--primary collection-products__link hover:bg-gray-600" to="/category/1">
+            <Link className="btn btn--primary collection-products__link hover:bg-gray-600" to="/exclusive">
               <span className={`${isRTL ? 'btn__name__arabic' : 'btn__name'}`}>{t('SHOPTHECOLLECTION')}</span>
             </Link>
 
@@ -373,7 +435,7 @@ const swiperConfig = {
     >
       {images.map((image) => (
         <SwiperSlide key={image.id}>
-          <Link to={'/category/1'}
+          <Link to={`/category/${image.category}`}
              className="collection-products__item swipe-scroll-item"
                           draggable={false}
              onContextMenu={(e) => e.preventDefault()}
@@ -478,7 +540,7 @@ const swiperConfig = {
             
               <div className="relative overflow-visible"><div className="relative overflow-visible">
                 <Slider {...settings2} className="image-slider">
-                  {images3.map((imageData, index) => (
+                  {cats_images.map((imageData, index) => (
                     <div key={index} className="">
                       <Link
                         to={imageData.href}
@@ -563,7 +625,7 @@ const swiperConfig = {
      // prevArrow={<div className="slick-prev-custom">‹</div>}
      // nextArrow={<div className="slick-next-custom">›</div>}
     >
-      {images3.map((imageData, index) => (
+      {cats_images.map((imageData, index) => (
         <div 
           key={`${currentIndex}-${index}`}
          //className="carousel-slide-wrapper"

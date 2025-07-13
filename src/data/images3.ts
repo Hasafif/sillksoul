@@ -1,3 +1,33 @@
+import { loadCategories } from "./product";
+
+export async function loadImages2() {
+  
+  try {
+   let categories = await loadCategories ();
+    //let products = response.data;
+    let images = [];
+    categories.forEach(cat => {
+      images.push(
+       
+   {
+    id: cat.id,
+   src:cat.image,
+   /// srcSet:"//eliesaab.com/cdn/shop/files/ELIE_SAAB__SUMMER_ESCAPADE_LOOK_23.jpg?v=1747821461&amp;width=407 407w,//eliesaab.com/cdn/shop/files/ELIE_SAAB__SUMMER_ESCAPADE_LOOK_23.jpg?v=1747821461&amp;width=500 500w",
+  //  datasrcset: "//eliesaab.com/cdn/shop/files/ELIE_SAAB__SUMMER_ESCAPADE_LOOK_23.jpg?v=1747821461&amp;width=407 407w,//eliesaab.com/cdn/shop/files/ELIE_SAAB__SUMMER_ESCAPADE_LOOK_23.jpg?v=1747821461&amp;width=500 500w",
+     alt_english: cat.name_english,
+     alt_arabic: cat.name_arabic,
+    href: `/category/${cat.id}`
+  },
+      )
+      
+    });
+    console.log(images)
+    return images; // Optional: return the data for external use
+  } catch (error) {
+    console.error('Error loading products:', error);
+    
+  } 
+}
 export const images3 = [
   {
     id: 1,

@@ -22,4 +22,17 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: "cd ../var/www && ./.scripts/deploy.sh"
+          envs: VITE_BACKENDURL
+          script: |
+            cd /var/www/Silksoul-Admin
+            
+            # Create .env file with repository secrets
+            cat > .env << EOF
+            VITE_BACKENDURL=${{ secrets.VITE_BACKENDURL }}
+            EOF
+            
+            # Set proper permissions for .env file
+            chmod 600 .env
+            
+            # Run deployment script
+            bash ./.scripts/deploy.sh

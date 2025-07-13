@@ -1,4 +1,199 @@
 import type { Category, Product } from "../types/product";
+import axios from "axios";
+export async function loadCategory(categoryID:string) {
+  console.log(categoryID)
+  try {
+    const response = await axios({
+      baseURL: import.meta.env.VITE_BACKENDURL,
+      method: "get",
+      url: "/main/category",
+        params:{
+        categoryID:categoryID
+      }
+    });
+    //let products = response.data;
+    console.log(response.data)
+    let category: Category;
+    category =  {
+    id: response.data._id,
+    name_english: response.data.name_english,
+    name_arabic: response.data.name_arabic,
+    products:response.data.products,
+    
+  };
+   
+    console.log(category)
+    return category; // Optional: return the data for external use
+  } catch (error) {
+    console.error('Error loading products:', error);
+    
+  } 
+}
+export async function loadProduct(productID:string) {
+  
+  try {
+    const response = await axios({
+      baseURL: import.meta.env.VITE_BACKENDURL,
+      method: "get",
+      url: "/main/product",
+        params:{
+        productID:productID
+      }
+    });
+    //let products = response.data;
+    //console.log(response.data)
+    let product: Product;
+    product =  {
+    id: response.data._id,
+    name_english: response.data.name_english,
+    name_arabic: response.data.name_arabic,
+    price: response.data.price,
+    image: response.data.images[0],
+    hoverImage: response.data.images[1],
+    images : response.data.images,
+    category_english: response.data.categoryName_english,
+    category_arabic:response.data.categoryName_arabic,
+    collection: "",
+     category:response.data.category,
+    description_english: response.data.description_english,
+    description_arabic: response.data.description_arabic,
+    sizes: response.data.sizes,
+    available: response.data.quantities.map((q: number) => q > 0),
+    colors: [response.data.color],
+    inStock: (response.data.quantity>0)? true:false,
+    rating: 4.8,
+    reviews: 124
+  };
+   
+    console.log(product)
+    return product; // Optional: return the data for external use
+  } catch (error) {
+    console.error('Error loading products:', error);
+    
+  } 
+}
+export async function loadProducts(categoryID:string) {
+  
+  try {
+    const response = await axios({
+      baseURL: import.meta.env.VITE_BACKENDURL,
+      method: "get",
+      url: "/main/product/category",
+        params:{
+        categoryID:categoryID
+      }
+    });
+    //let products = response.data;
+    let products: Product[] = [];
+    response.data.forEach(prod => {
+      products.push(
+       {
+    id: prod._id,
+    name_english: prod.name_english,
+    name_arabic: prod.name_arabic,
+    price: prod.price,
+    image: prod.images[0],
+    hoverImage: prod.images[1],
+    images : prod.images,
+    category_english: prod.categoryname_english,
+    category_arabic:prod.categoryname_arabic,
+    collection: "",
+    category:prod.category,
+    description_english: prod.description_english,
+    description_arabic: prod.description_arabic,
+    sizes: prod.sizes,
+    available: prod.quantities.map((q: number) => q > 0),
+    colors: [prod.color],
+    inStock: (prod.quantity>0)? true:false,
+    rating: 4.8,
+    reviews: 124
+  }
+      )
+      
+    });
+    console.log(products)
+    return products; // Optional: return the data for external use
+  } catch (error) {
+    console.error('Error loading products:', error);
+    
+  } 
+}
+export async function loadAllProducts() {
+  
+  try {
+    const response = await axios({
+      baseURL: import.meta.env.VITE_BACKENDURL,
+      method: "get",
+      url: "/admin/product/list",
+       
+    });
+    //let products = response.data;
+    let products: Product[] = [];
+    response.data.forEach(prod => {
+      products.push(
+       {
+    id: prod._id,
+    name_english: prod.name_english,
+    name_arabic: prod.name_arabic,
+    price: prod.price,
+    image: prod.images[0],
+    hoverImage: prod.images[1],
+    images : prod.images,
+    category_english: prod.categoryname_english,
+    category_arabic:prod.categoryname_arabic,
+    collection: "",
+    category:prod.category,
+    description_english: prod.description_english,
+    description_arabic: prod.description_arabic,
+    sizes: prod.sizes,
+    available: prod.quantities.map((q: number) => q > 0),
+    colors: [prod.color],
+    inStock: (prod.quantity>0)? true:false,
+    rating: 4.8,
+    reviews: 124
+  }
+      )
+      
+    });
+    console.log(products)
+    return products; // Optional: return the data for external use
+  } catch (error) {
+    console.error('Error loading products:', error);
+    
+  } 
+}
+export async function loadCategories() {
+  
+  try {
+    const response = await axios({
+      baseURL: import.meta.env.VITE_BACKENDURL,
+      method: "get",
+      url: "/admin/product/category/list",
+    
+    });
+    //let products = response.data;
+    let categories: Category[] = [];
+    response.data.forEach(cat => {
+      categories.push(
+       
+   {
+    id: cat._id,
+    name_english: cat.name_english,
+    name_arabic: cat.name_arabic,
+    image:cat.image,
+    image_id:cat.image_id,
+    products:cat.products
+  },
+      )
+      
+    });
+    console.log(categories)
+    return categories; // Optional: return the data for external use
+  } catch (error) {
+    console.error('Error loading products:', error);
+    
+  } 
+}
 export const products: Product[] = [
   {
     id: "1",
@@ -7,15 +202,14 @@ export const products: Product[] = [
     price: 189,
     image: "/p11.jpeg",
     hoverImage: "/p12.jpeg",
-   hoverImage2:"",
     images : ['/p12.jpeg','/p11.jpeg'],
     category_english: "Dresses",
     category_arabic:"فساتين",
-    collection: "summer",
+    collection: "",
+    category:"",
     description_english: "A flowing summer dress perfect for warm days",
     description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
     sizes: ["XS", "S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#a4ad98"],
     inStock: true,
@@ -29,17 +223,18 @@ export const products: Product[] = [
     price: 95,
     image: "/p22.jpeg",
     hoverImage: "/p23.jpeg",
-    hoverImage2:"/p21.jpeg",
+   // hoverImage2:"/p21.jpeg",
      images : ['/p22.jpeg','/p23.jpeg','/p21.jpeg'],
    // category_english: "Tops",
    // category_arabic: "قمصان",
       category_english: "Dresses",
     category_arabic:"فساتين",
     collection: "summer",
+     category:"",
     description_english: "Breathable linen shirt for casual occasions",
     description_arabic: "قميص كتان قابل للتنفس للمناسبات غير الرسمية",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#e44823"],
     inStock: true,
@@ -53,17 +248,18 @@ export const products: Product[] = [
     price: 450,
     image: "/p33.jpeg",
     hoverImage: "/p31.jpeg",
-    hoverImage2:"/p32.jpeg",
+   // hoverImage2:"/p32.jpeg",
      images : ['/p33.jpeg','/p31.jpeg','/p32.jpeg'],
     //category_english: "Outerwear",
    // category_arabic: "ملابس خارجية",
       category_english: "Dresses",
     category_arabic:"فساتين",
     collection: "winter",
+     category:"",
     description_english: "Luxurious wool coat for cold weather",
     description_arabic: "معطف صوف فاخر للطقس البارد",
     sizes: ["XS", "S", "M", "L"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+   // sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#842f51"],
     inStock: true,
@@ -77,17 +273,18 @@ export const products: Product[] = [
     price: 280,
     image: "/p43.jpeg",
     hoverImage: "/p42.jpeg",
-    hoverImage2:"/p41.jpeg",
+    //hoverImage2:"/p41.jpeg",
      images : ['/p43.jpeg','/p42.jpeg','/p41.jpeg'],
     //category_english: "Knitwear",
    // category_arabic: "تريكو",
       category_english: "Dresses",
     category_arabic:"فساتين",
     collection: "winter",
+     category:"",
     description_english: "Soft cashmere sweater for ultimate comfort",
     description_arabic: "سترة من الكشمير الناعم لتوفير أقصى درجات الراحة",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#b08183"],
     inStock: true,
@@ -101,15 +298,16 @@ export const products: Product[] = [
     price: 120,
     image: "/p52.jpeg",
     hoverImage: "/p53.jpeg",
-    hoverImage2:"/p51.jpeg",
+    //hoverImage2:"/p51.jpeg",
      images : ['/p52.jpeg','/p53.jpeg','/p51.jpeg'],
     category_english: "Tops",
      category_arabic: "قمصان",
     collection: "spring",
+     category:"",
     description_english: "Delicate floral blouse for spring occasions",
     description_arabic: "بلوزة زهرية رقيقة لمناسبات الربيع",
     sizes: ["XS", "S", "M", "L"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#deccb4"],
     inStock: true,
@@ -123,17 +321,18 @@ export const products: Product[] = [
     price: 155,
     image: "/p63.jpeg",
     hoverImage: "/p62.jpeg",
-    hoverImage2:"/p61.jpeg",
+    //hoverImage2:"/p61.jpeg",
      images : ['/p63.jpeg','/p62.jpeg','/p61.jpeg'],
     //category_english: "Knitwear",
    // category_arabic: "تريكو",
      category_english: "Tops",
      category_arabic: "قمصان",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#a2a0ab"],
     inStock: true,
@@ -147,18 +346,19 @@ export const products: Product[] = [
     price: 155,
     image: "/p71.jpeg",
     hoverImage: "/p73.jpeg",
-    hoverImage2:"/p72.jpeg",
+    //hoverImage2:"/p72.jpeg",
      images : ['/p71.jpeg','/p73.jpeg','/p72.jpeg'],
    // category_english: "Knitwear",
    // category_arabic: "تريكو",
      category_english: "Tops",
      category_arabic: "قمصان",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#c96357"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     inStock: true,
     rating: 4.4,
@@ -171,17 +371,18 @@ export const products: Product[] = [
     price: 155,
     image: "/p81.jpeg",
     hoverImage: "/p82.jpeg",
-    hoverImage2:"/p83.jpeg",
+    //hoverImage2:"/p83.jpeg",
      images : ['/p81.jpeg','/p82.jpeg','/p83.jpeg'],
    // category_english: "Knitwear",
    // category_arabic: "تريكو",
      category_english: "Tops",
      category_arabic: "قمصان",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#cea790"],
     inStock: true,
@@ -195,15 +396,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p91.jpeg",
     hoverImage: "/p92.jpeg",
-    hoverImage2:"/p93.jpeg",
+    //hoverImage2:"/p93.jpeg",
      images : ['/p91.jpeg','/p92.jpeg','/p93.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#c4d4b8"],
     inStock: true,
@@ -217,15 +419,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p101.jpeg",
     hoverImage: "/p103.jpeg",
-    hoverImage2:"/p102.jpeg",
+    //hoverImage2:"/p102.jpeg",
      images : ['/p101.jpeg','/p103.jpeg','/p102.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#e9e0b7"],
     inStock: true,
@@ -239,15 +442,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p111.jpeg",
     hoverImage: "/p112.jpeg",
-    hoverImage2:"",
+    //hoverImage2:"",
      images : ['/p111.jpeg','/p112.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#9d767b"],
     inStock: true,
@@ -261,15 +465,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p123.jpeg",
     hoverImage: "/p122.jpeg",
-    hoverImage2:"/p121.jpeg",
+    //hoverImage2:"/p121.jpeg",
      images : ['/p123.jpeg','/p122.jpeg','/p121.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#f74368"],
     inStock: true,
@@ -283,15 +488,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p131.jpeg",
     hoverImage: "/p133.jpeg",
-    hoverImage2:"/p132.jpeg",
+    //hoverImage2:"/p132.jpeg",
      images : ['/p131.jpeg','/p133.jpeg','/p132.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#704c32"],
     inStock: true,
@@ -305,15 +511,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p142.jpeg",
     hoverImage: "/p143.jpeg",
-    hoverImage2:"/p141.jpeg",
+    //hoverImage2:"/p141.jpeg",
      images : ['/p142.jpeg','/p143.jpeg','/p141.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#d1aa99"],
     inStock: true,
@@ -327,15 +534,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p153.jpeg",
     hoverImage: "/p152.jpeg",
-    hoverImage2:"/p151.jpeg",
+    //hoverImage2:"/p151.jpeg",
      images : ['/p152.jpeg','/p153.jpeg','/p151.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#ce96b2"],
     inStock: true,
@@ -349,15 +557,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p162.jpeg",
     hoverImage: "/p163.jpeg",
-    hoverImage2:"/p161.jpeg",
+    //hoverImage2:"/p161.jpeg",
      images : ['/p163.jpeg','/p162.jpeg','/p161.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#9c5392"],
     inStock: true,
@@ -371,15 +580,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p171.jpeg",
     hoverImage: "/p172.jpeg",
-    hoverImage2:"/p173.jpeg",
+    //hoverImage2:"/p173.jpeg",
      images : ['/p171.jpeg','/p172.jpeg','/p173.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#11110f"],
     inStock: true,
@@ -393,15 +603,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p181.jpeg",
     hoverImage: "/p183.jpeg",
-    hoverImage2:"/p182.jpeg",
+    //hoverImage2:"/p182.jpeg",
      images : ['/p181.jpeg','/p183.jpeg','/p182.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#8d181a"],
     inStock: true,
@@ -415,15 +626,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p193.jpeg",
     hoverImage: "/p192.jpeg",
-    hoverImage2:"/p191.jpeg",
+    //hoverImage2:"/p191.jpeg",
      images : ['/p193.jpeg','/p192.jpeg','/p191.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#f5e7c1"],
     inStock: true,
@@ -437,15 +649,16 @@ export const products: Product[] = [
     price: 155,
     image: "/p201.jpeg",
     hoverImage: "/p202.jpeg",
-    hoverImage2:"/p203.jpeg",
+    //hoverImage2:"/p203.jpeg",
      images : ['/p201.jpeg','/p202.jpeg','/p203.jpeg'],
     category_english: "Knitwear",
     category_arabic: "تريكو",
     collection: "spring",
+     category:"",
     description_english: "Perfect layering piece for transitional weather",
     description_arabic: "قطعة طبقات مثالية للطقس الانتقالي",
     sizes: ["S", "M", "L", "XL"],
-    sizes2:["34","36","38","40","42","44","46","48","50","52"],
+    //sizes2:["34","36","38","40","42","44","46","48","50","52"],
     available:[true,false,false,false,true,false,true,true,true,true],
     colors: ["#88bab9"],
     inStock: true,
@@ -454,59 +667,59 @@ export const products: Product[] = [
   }
 ];
 
-export const categories: Category[] = [
+export const categories2: Category[] = [
   {
     id: "1",
     name_english: "Dresses",
     name_arabic: "فساتين",
-    image: "/p13.jpeg",
-    hoverImage: "/p93.jpeg",
-    description: "A flowing summer dress perfect for warm days",
+    //image: "/p13.jpeg",
+    //hoverImage: "/p93.jpeg",
+   // description: "A flowing summer dress perfect for warm days",
     products:products
   },
    {
     id: "2",
     name_english: "Shirts",
     name_arabic: "قمصان",
-    image: "/p13.jpeg",
-    hoverImage: "/p93.jpeg",
-    description: "A flowing summer dress perfect for warm days",
+    //image: "/p13.jpeg",
+    //hoverImage: "/p93.jpeg",
+    //description: "A flowing summer dress perfect for warm days",
     products:products
   },
    {
     id: "3",
     name_english: "Pants",
     name_arabic: "سراويل",
-    image: "/p13.jpeg",
-    hoverImage: "/p93.jpeg",
-    description: "A flowing summer dress perfect for warm days",
+    //image: "/p13.jpeg",
+    //hoverImage: "/p93.jpeg",
+    //description: "A flowing summer dress perfect for warm days",
     products:products
   },
    {
     id: "4",
     name_english: "Jumpsuits",
     name_arabic: "بدلات",
-    image: "/p13.jpeg",
-    hoverImage: "/p93.jpeg",
-    description: "A flowing summer dress perfect for warm days",
+    //image: "/p13.jpeg",
+    //hoverImage: "/p93.jpeg",
+    //description: "A flowing summer dress perfect for warm days",
     products:products
   },
     {
     id: "5",
     name_english: "Skirts",
     name_arabic:"تنانير",
-    image: "/p13.jpeg",
-    hoverImage: "/p93.jpeg",
-    description: "A flowing summer dress perfect for warm days",
+    //image: "/p13.jpeg",
+    //hoverImage: "/p93.jpeg",
+    //description: "A flowing summer dress perfect for warm days",
     products:products
   },
     {
     id: "6",
     name_english: "Bags",
     name_arabic:"حقائب",
-    image: "/p13.jpeg",
-    hoverImage: "/p93.jpeg",
-    description: "A flowing summer dress perfect for warm days",
+   // image: "/p13.jpeg",
+   // hoverImage: "/p93.jpeg",
+    //description: "A flowing summer dress perfect for warm days",
     products:products
   },
 ];

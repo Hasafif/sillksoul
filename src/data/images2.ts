@@ -1,3 +1,36 @@
+import axios from "axios";
+
+export async function loadImages() {
+  
+  try {
+    const response = await axios({
+      baseURL: import.meta.env.VITE_BACKENDURL,
+      method: "get",
+      url: "/admin/product/list",
+    });
+    //let products = response.data;
+    //console.log(response.data)
+    let images = [];
+    response.data.forEach(prod => {
+      images.push(
+        {
+    id: prod._id,
+    src: prod.images[0],
+     srcSet:prod.images[1],
+    alt: prod.name_english,
+    href: `/product/${prod._id}`,
+    category:prod.category._id
+  }
+      )
+      
+    });
+    console.log(images)
+    return images; // Optional: return the data for external use
+  } catch (error) {
+    console.error('Error loading products:', error);
+    
+  } 
+}
 export const images = [
   {
     id: 1,

@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import Footer from "../components/CustomFooter";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
-import { categories } from "../data/product";
+import { categories2, products, loadCategories, loadProducts, loadCategory } from "../data/product";
 import ProductCard from "../components/ProductCard";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
@@ -13,14 +13,42 @@ import Benefits from "../components/benifits";
 
 const Category = () => {
   const { id } = useParams();
-  const category = categories.find(p => p.id === id);
+  const [category, setCategory] = useState( {
+    
+        id: "1",
+        name_english: "Dresses",
+        name_arabic: "فساتين",
+        products:[]
+  });
+  useEffect(() => {
+    const fetchCategory = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const  categoryData = await loadCategory(id);
+        setCategory(categoryData);
+      } catch (err) {
+        setCategory(categories2.find((p => p.id === id)));
+        console.error('Error loading products:', err);
+        setError(err.message || 'Failed to load products');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategory();
+  }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [sortBy, setSortBy] = useState("name");
   const [filterBy, setFilterBy] = useState("all");
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 100000000000000000 });
   const { language, isRTL } = useLanguage();
   const { t } = useTranslation();
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   if (!category) {
     return (
@@ -38,14 +66,35 @@ const Category = () => {
   }
 
   let category_name = (language == 'en') ? category.name_english : category.name_arabic;
-  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const productData = await loadProducts(id);
+        setProducts(productData);
+      } catch (err) {
+        setProducts(category.products)
+        console.error('Error loading products:', err);
+        setError(err.message || 'Failed to load products');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
   // Filter and sort products
-  let filteredProducts = category.products;
+ // let filteredProducts = category.products;
+  let filteredProducts = products;
+  //console.log(products)
+  console.log(filteredProducts)
   if (filterBy !== "all" && language == 'en') {
-    filteredProducts = filteredProducts.filter(p => p.category_english.toLowerCase() === filterBy);
+    filteredProducts = filteredProducts.filter(p => p.categoryname_english.toLowerCase() === filterBy);
   }
   else if (filterBy !== "all" && language == 'ar') {
-    filteredProducts = filteredProducts.filter(p => p.category_arabic.toLowerCase() === filterBy);
+    filteredProducts = filteredProducts.filter(p => p.categoryname_arabic.toLowerCase() === filterBy);
   }
 
   // Apply price range

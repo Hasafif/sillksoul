@@ -7,7 +7,7 @@ import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { ShoppingCart, Heart, Share2, Truck, RotateCcw, ChevronRight } from "lucide-react";
-import { products } from "../data/product";
+import { loadProduct, loadProducts,products } from "../data/product";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useCurrency } from "../contexts/CurrencyProvider";
@@ -16,7 +16,52 @@ import MultiSlider from "../components/multislider";
 import { useTranslation } from "../hooks/useTranslation";
 const Product = () => {
   const { id } = useParams();
-  const product = products.find(p => p.id === id);
+  const [product, setProduct] = useState( {
+    id: "1",
+    name_english: "Elegant Summer Dress",
+    name_arabic: "فستان صيفي أنيق",
+    price: 189,
+    image: "/p11.jpeg",
+    hoverImage: "/p12.jpeg",
+    images : ['/p12.jpeg','/p11.jpeg'],
+    category_english: "Dresses",
+    category_arabic:"فساتين",
+    collection: "",
+    category:"",
+    description_english: "A flowing summer dress perfect for warm days",
+    description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    available:[true,false,false,false,true,false,true,true,true,true],
+    colors: ["#a4ad98"],
+    inStock: true,
+    rating: 4.8,
+    reviews: 124
+  });
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        const fetchProducts = async () => {
+          setIsLoading(true);
+          setError(null);
+          
+          try {
+            const productData = await loadProduct(id);
+           // setProducts(productData);
+           // console.log(products)
+           console.log(productData)
+           setProduct(productData);
+          } catch (err) {
+            setProduct(products.find(p => p.id === id))
+            console.error('Error loading products:', err);
+            setError(err.message || 'Failed to load products');
+          } finally {
+            setIsLoading(false);
+          }
+        };
+    
+        fetchProducts();
+      }, []);
+    // const product = products.find(p => p.id === id);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState("");
@@ -32,6 +77,7 @@ const Product = () => {
      const [isTablet, setIsTablet] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
+    
      useEffect(() => {
        const handleResize = () => {
          setScreenWidth(window.innerWidth);
@@ -136,8 +182,8 @@ else {
             {language === 'en' ? 'Home' : 'الصفحة الرئيسية'}
           </Link>
           <span className={`${isRTL ? 'mx-2' : 'mx-2'}`}>/</span>
-          <Link to="/category/1" className="hover:text-gray-900">
-            {language === 'en' ? 'Ready-to-Wear' : 'ملابس جاهزة'}
+          <Link to={`/category/${product.category}`} className="hover:text-gray-900">
+            {language === 'en' ? `${product.category_english}` : `${product.category_arabic}`}
           </Link>
           <span className={`${isRTL ? 'mx-2' : 'mx-2'}`}>/</span>
           <span className="text-gray-900">{productName}</span>
@@ -317,7 +363,7 @@ else {
       )}
       </div>
     <div className="variant_option country_size">
-    {product.sizes2.map((size, index) => (
+    {product.sizes.map((size, index) => (
         <>
             <input
                 type="radio"
@@ -634,7 +680,7 @@ else {
       )}
       </div>
     <div className="variant_option country_size">
-    {product.sizes2.map((size, index) => (
+    {product.sizes.map((size, index) => (
         <>
             <input
                 type="radio"

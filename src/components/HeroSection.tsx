@@ -35,7 +35,7 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
   };
 
   // Simple navigation function
-  const navigateTo = () => navigate('/category/1');
+  const navigateTo = () => navigate('/exclusive');
   const navigateToHome = () => navigate('/');
    const swiperRef = useRef(null);
 

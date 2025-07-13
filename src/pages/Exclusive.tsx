@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import ProductCard from "../components/ProductCard";
@@ -6,22 +6,63 @@ import Footer from "../components/CustomFooter";
 import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
-import { products } from "../data/product";
+import { loadAllProducts, loadCategories, products } from "../data/product";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
-import { categories } from "../data/product";
+import { categories2 } from "../data/product";
 
 const Exclusive = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [sortBy, setSortBy] = useState("name");
   const [filterBy, setFilterBy] = useState("all");
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000000000000000000000 });
   const { language, isRTL } = useLanguage();
   const { t } = useTranslation();
+  const [all_products, setAllProducts] = useState([]);
+  const [all_categories, setAllCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const productData = await loadAllProducts();
+        setAllProducts(productData);
+      } catch (err) {
+        setAllProducts(products)
+        console.error('Error loading products:', err);
+        setError(err.message || 'Failed to load products');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
+    fetchProducts();
+  }, []);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const categoryData = await loadCategories();
+        setAllCategories(categoryData);
+      } catch (err) {
+        setAllCategories(categories2)
+        console.error('Error loading categories:', err);
+        setError(err.message || 'Failed to load categories');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
   // Filter and sort products
-  let filteredProducts = products;
+  let filteredProducts = all_products;
 
   // Apply filters
   if (filterBy !== "all" && language === 'en') {
@@ -105,7 +146,7 @@ const Exclusive = () => {
                 <option value="all">
                   {language === 'en' ? 'All Collections' : 'جميع المجموعات'}
                 </option>
-                {categories.map((category, index) => (
+                {all_categories.map((category, index) => (
                   <option key={index} value={language === 'en' ? category.name_english.toLowerCase() : category.name_arabic.toLowerCase()}>
                     {language === 'en' ? category.name_english: category.name_arabic}
                   </option>

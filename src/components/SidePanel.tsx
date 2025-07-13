@@ -4,7 +4,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
 import { useState, useEffect, useRef } from "react";
-import { categories } from "../data/product";
+import { categories2, loadCategories } from "../data/product";
 
 interface SidePanelProps {
   isOpen: boolean;
@@ -18,7 +18,28 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
+    const [categories, setCategories] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+     useEffect(() => {
+        const fetchCategories = async () => {
+          setIsLoading(true);
+          setError(null);
+          
+          try {
+            const categoryData = await loadCategories();
+            setCategories(categoryData);
+          } catch (err) {
+          //  setCategories(categories)
+            console.error('Error loading products:', err);
+            setError(err.message || 'Failed to load products');
+          } finally {
+            setIsLoading(false);
+          }
+        };
+    
+        fetchCategories();
+      }, []);
   // Define the dropdown options
   const collectionOptions = [
     ...(categories || []).map(category => ({
