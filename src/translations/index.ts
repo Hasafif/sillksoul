@@ -282,8 +282,11 @@ export const translations = {
             DeliveryReturns:"Delivery &amp; Returns",
             ProductCare:"Product Care",
             // Shop Ready-To-Wear
-            ShopReadyToWear:"Shop Ready-To-Wear"
-
+            ShopReadyToWear:"Shop Ready-To-Wear",
+            //Delviery & returns
+            DeliveryReturns1:"We offer complimentary shipping on all online orders, with delivery typically completed within 10 business days.",
+            DeliveryReturns2:"Please note that you may be subject to additional import duties, taxes, or fees depending on your delivery destination.",
+            ProductCare1:"Seek professional cleaner",
       },
     ar: {
       // Navigation
@@ -565,7 +568,11 @@ Description:"وصف",
 DeliveryReturns:"التوصيل والإرجاع",
 ProductCare:"العناية بالمنتج",
 // Shop Ready-To-Wear
-ShopReadyToWear:"تسوق الملابس الجاهزة"
+ShopReadyToWear:"تسوق الملابس الجاهزة",
+//Delviery & returns
+DeliveryReturns1:"نحن نقدم شحنًا مجانيًا لجميع الطلبات عبر الإنترنت، ويتم تسليم الطلب عادةً خلال 10 أيام عمل.",
+DeliveryReturns2:"يرجى ملاحظة أنك قد تخضع لرسوم استيراد أو ضرائب أو رسوم إضافية اعتمادًا على وجهة التسليم الخاصة بك.",
+ProductCare1:"ابحث عن منظف محترف",
 
     }
   };

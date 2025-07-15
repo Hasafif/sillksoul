@@ -14,6 +14,7 @@ import { useCurrency } from "../contexts/CurrencyProvider";
 import { toast } from "../hooks/use-toast";
 import MultiSlider from "../components/multislider";
 import { useTranslation } from "../hooks/useTranslation";
+import ProductAccordion from "../components/CollapsibleAccordion";
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState( {
@@ -192,13 +193,13 @@ else {
 
       {/* Product Details */}
       <section className="max-w-7xl max-auto px-4 pb-16">
-       {!isTablet && (<div className={`${isMobile?'flex flex-col items-center gap-5':'flex flex-row justify-between'}`}>
+       {!isTablet && (<div className={`${isMobile?'flex flex-col items-center gap-5':'grid grid-cols-12 gap-8'}`}>
           {/* Product Images */}
            {/* Multi-Slider Component - Left Side */}
-          <div className={`relative w-20`}
+          <div className={`col-span-2 ${isRTL?'pl-20':'pr-20'} flex justify-center`}
           style={{display:isMobile?'none':'flex'}}
           >
-            <div className="relative flex flex-col gap-3 top-20 left-20">
+            <div className={`relative flex flex-col gap-3 top-20 ${isRTL?'right-20':'left-20'}`}>
       {/* Vertical Thumbnail Slider */}
       
         {/* Thumbnails Container */}
@@ -256,9 +257,9 @@ else {
      
 
       {/* Main Horizontal Slider */}
-      <div className="flex-1 max-w-lg mx-4">
-        <div className="relative">
-           <div className="aspect-[3/4] rounded-lg overflow-hidden bg-gray-100">
+      <div className={`col-span-6 ${isRTL?'pr-20':'pl-20'}`}>
+        <div className="relative max-w-lg w-full">
+           <div className="aspect-[3/4] flex items-center justify-center rounded-lg overflow-hidden bg-gray-100">
           <img
             src={productImages[currentImageIndex]}
             alt="Product main view"
@@ -311,7 +312,7 @@ else {
         
 
           {/* Product Information */}
-          <div className={`flex-shrink-0 space-y-6 ${isRTL ? 'lg:order-1 text-right' : 'lg:order-2 text-left'}`}>
+          <div className={`col-span-4 ${isRTL?'pr-20':'pl-20'} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
             <div className="product-title-container text-center">
               <h1 className="product-title h6" style={{textTransform:"capitalize"}}>{productName}</h1>
             <div className="product-price-container">
@@ -413,106 +414,25 @@ else {
                 </button>*/}
               </div>
             </div>
-              <div className={`product__accordion accordion ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`} dir={isRTL?'rtl':'ltr'}>
-             
-    <details>
-        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
-                                    {t('Description')}
-                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
-                  <svg className="w-4 h-4 transform transition-transform group-open:rotate-90" viewBox="0 0 10 6" width="14">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                  </svg>
-
-                </span>
-                </summary>
-                <div className="collapsible__content accordion__content rte">
-               <div className="max-height max-height--no-background" data-max="110" style={{
-     '--max-height': '110px',
-     '--bg-body': '#fbfbfb',  
-     '--bg-body-rgb': '251,251,251'
-    } as React.CSSProperties}
-   >
-<div className="max-height--inner">
-<div className="max-height--inner-content rte ">
-    <p>Flowing and refined, this chiffon long skirt in Marchesa Orange features a wrap silhouette with a front slit and straight cut. The full-length design offers graceful movement, making it an elegant choice for warm-weather dressing. Wear with matching top for a coordinated, chic look.<br/></p>
-<ul>
-    <li>100% Polyester</li>    
-        <li>Product Code:&nbsp;SK186NP25CH001</li>  </ul>
-</div>
-</div>
- <button className="max-height-toggle m-none" data-bs-toggle="modal" data-bs-target=".exampleModal" data-target-tab="#collapsible_tab_bp663g"><span className="animation-underline text-button--read-more">View more</span></button>
-               </div>
-                </div>
-    </details>
-                
-            
-            </div>
-          <div className="product__accordion accordion">
-             
-    <details>
-        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
-                                  {t('DeliveryReturns')}
-                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
-                  <svg viewBox="0 0 10 6" width="14">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                  </svg>
-                </span>
-                </summary>
-                <div className="collapsible__content accordion__content rte">
-               <div className="max-height max-height--no-background" data-max="110" style={{
-     '--max-height': '110px',
-     '--bg-body': '#fbfbfb',  
-     '--bg-body-rgb': '251,251,251'
-    } as React.CSSProperties}
-   >
-<div className="max-height--inner">
-    <div className="max-height--inner-content rte ">
+         
+             <ProductAccordion title={t('Description')} maxHeight={110}>
+        <p>
+                 {isRTL? product.description_arabic:product.description_english}
+        </p>
       
-              <p>We offer complimentary shipping on all online orders, with delivery typically completed within 10 business days.<br></br>Please note that you may be subject to additional import duties, taxes, or fees depending on your delivery destination. These charges are determined by local customs authorities and are not collected or controlled by our Online Store. While shipping is free, these additional costs may apply and are the responsibility of the customer.<br></br>If your estimated delivery date is not convenient, you may choose an alternative date within 5 business days. Where available, you can also select a specific time slot for delivery.<br/><br/>Our shipping partners include DHL, UPS, TNT, FedEx, Royal Mail, Chronopost, and Aramex.<br></br>We accept returns within 15 days of delivery. To request an exchange, please complete the <em>Return Form using your order number.</em> Items must be returned in their original condition—unworn, unwashed, with all tags and packaging intact. You may also exchange items at any Elie Saab boutique by presenting your airway bill and invoice.
+      </ProductAccordion>
+       <ProductAccordion title={t('DeliveryReturns')} maxHeight={130}>
+            <p>{t('DeliveryReturns1')}<br></br>{t('DeliveryReturns2')} 
               </p>
-              <p><br/>If the new item is of higher value, you will be charged the difference. If it is of lesser value, the difference will be refunded.
-              </p>
+
+      
+      </ProductAccordion>
+  <ProductAccordion title={t('ProductCare')} maxHeight={110}>
+         <p>{t('ProductCare1')}</p>
+      
+      </ProductAccordion>
     
-    </div>
-</div>
- <button className="max-height-toggle m-none" data-bs-toggle="modal" data-bs-target=".exampleModal" data-target-tab="#collapsible_tab_bp663g"><span className="animation-underline text-button--read-more">View more</span></button>
-               </div>
-                </div>
-    </details>
-                
             
-            </div>
-             <div className="product__accordion accordion">
-             
-    <details>
-        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
-                                   {t('ProductCare')}
-                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
-                  <svg viewBox="0 0 10 6" width="14">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                  </svg>
-                </span>
-                </summary>
-                <div className="collapsible__content accordion__content rte">
-               <div className="max-height max-height--no-background" data-max="110" style={{
-     '--max-height': '110px',
-     '--bg-body': '#fbfbfb',  
-     '--bg-body-rgb': '251,251,251'
-    } as React.CSSProperties}
-   >
-<div className="max-height--inner">
-    <div className="max-height--inner-content rte ">
-       <p>Seek professional cleaner</p>
-    
-    </div>
-</div>
- <button className="max-height-toggle m-none" data-bs-toggle="modal" data-bs-target=".exampleModal" data-target-tab="#collapsible_tab_bp663g"><span className="animation-underline text-button--read-more">View more</span></button>
-               </div>
-                </div>
-    </details>
-                
-            
-            </div>
           </div>
           
         </div>)}
@@ -525,7 +445,7 @@ else {
           <div className={`relative w-20 flex-shrink-0`}
           style={{display:isMobile?'none':'flex'}}
           >
-            <div className="relative flex flex-col gap-2 top-20 left-20">
+            <div className={`relative flex flex-col gap-2 top-20 ${isRTL?'right-20':'left-20'}`}>
       {/* Vertical Thumbnail Slider */}
       
         {/* Thumbnails Container */}
@@ -730,106 +650,22 @@ else {
                 </button>*/}
               </div>
             </div>
-            <div className={`product__accordion accordion ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`} dir={isRTL?'rtl':'ltr'}>
-             
-    <details>
-        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
-                                    {t('Description')}
-                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
-                  <svg className="w-4 h-4 transform transition-transform group-open:rotate-90" viewBox="0 0 10 6" width="14">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                  </svg>
-
-                </span>
-                </summary>
-                <div className="collapsible__content accordion__content rte">
-               <div className="max-height max-height--no-background" data-max="110" style={{
-     '--max-height': '110px',
-     '--bg-body': '#fbfbfb',  
-     '--bg-body-rgb': '251,251,251'
-    } as React.CSSProperties}
-   >
-<div className="max-height--inner">
-<div className="max-height--inner-content rte ">
-    <p>Flowing and refined, this chiffon long skirt in Marchesa Orange features a wrap silhouette with a front slit and straight cut. The full-length design offers graceful movement, making it an elegant choice for warm-weather dressing. Wear with matching top for a coordinated, chic look.<br/></p>
-<ul>
-    <li>100% Polyester</li>    
-        <li>Product Code:&nbsp;SK186NP25CH001</li>  </ul>
-</div>
-</div>
- <button className="max-height-toggle m-none" data-bs-toggle="modal" data-bs-target=".exampleModal" data-target-tab="#collapsible_tab_bp663g"><span className="animation-underline text-button--read-more">View more</span></button>
-               </div>
-                </div>
-    </details>
-                
-            
-            </div>
-          <div className="product__accordion accordion">
-             
-    <details>
-        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
-                                  {t('DeliveryReturns')}
-                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
-                  <svg viewBox="0 0 10 6" width="14">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                  </svg>
-                </span>
-                </summary>
-                <div className="collapsible__content accordion__content rte">
-               <div className="max-height max-height--no-background" data-max="110" style={{
-     '--max-height': '110px',
-     '--bg-body': '#fbfbfb',  
-     '--bg-body-rgb': '251,251,251'
-    } as React.CSSProperties}
-   >
-<div className="max-height--inner">
-    <div className="max-height--inner-content rte ">
+              <ProductAccordion title={t('Description')} maxHeight={110}>
+        <p>
+                 {isRTL? product.description_arabic:product.description_english}
+        </p>
       
-              <p>We offer complimentary shipping on all online orders, with delivery typically completed within 10 business days.<br></br>Please note that you may be subject to additional import duties, taxes, or fees depending on your delivery destination. These charges are determined by local customs authorities and are not collected or controlled by our Online Store. While shipping is free, these additional costs may apply and are the responsibility of the customer.<br></br>If your estimated delivery date is not convenient, you may choose an alternative date within 5 business days. Where available, you can also select a specific time slot for delivery.<br/><br/>Our shipping partners include DHL, UPS, TNT, FedEx, Royal Mail, Chronopost, and Aramex.<br></br>We accept returns within 15 days of delivery. To request an exchange, please complete the <em>Return Form using your order number.</em> Items must be returned in their original condition—unworn, unwashed, with all tags and packaging intact. You may also exchange items at any Elie Saab boutique by presenting your airway bill and invoice.
+      </ProductAccordion>
+       <ProductAccordion title={t('DeliveryReturns')} maxHeight={130}>
+            <p>{t('DeliveryReturns1')}<br></br>{t('DeliveryReturns2')} 
               </p>
-              <p><br/>If the new item is of higher value, you will be charged the difference. If it is of lesser value, the difference will be refunded.
-              </p>
-    
-    </div>
-</div>
- <button className="max-height-toggle m-none" data-bs-toggle="modal" data-bs-target=".exampleModal" data-target-tab="#collapsible_tab_bp663g"><span className="animation-underline text-button--read-more">View more</span></button>
-               </div>
-                </div>
-    </details>
-                
-            
-            </div>
-             <div className="product__accordion accordion">
-             
-    <details>
-        <summary className={`${isRTL?'accord-summary-arabic':'accord-summary-english'}`}>
-                                   {t('ProductCare')}
-                <span className={`${isRTL?'accord-span-arabic':'accord-span-english'}`}>
-                  <svg viewBox="0 0 10 6" width="14">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                  </svg>
-                </span>
-                </summary>
-                <div className="collapsible__content accordion__content rte">
-               <div className="max-height max-height--no-background" data-max="110" style={{
-     '--max-height': '110px',
-     '--bg-body': '#fbfbfb',  
-     '--bg-body-rgb': '251,251,251'
-    } as React.CSSProperties}
-   >
-<div className="max-height--inner">
-    <div className="max-height--inner-content rte ">
-       <p>Seek professional cleaner</p>
-    
-    </div>
-</div>
- <button className="max-height-toggle m-none" data-bs-toggle="modal" data-bs-target=".exampleModal" data-target-tab="#collapsible_tab_bp663g"><span className="animation-underline text-button--read-more">View more</span></button>
-               </div>
-                </div>
-    </details>
-                
-            
-            </div>
+
+      
+      </ProductAccordion>
+  <ProductAccordion title={t('ProductCare')} maxHeight={110}>
+         <p>{t('ProductCare1')}</p>
+      
+      </ProductAccordion>
           </div>
           
         </div>

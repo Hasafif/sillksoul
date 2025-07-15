@@ -21,8 +21,8 @@ export const CurrencyProvider = ({ children }) => {
   const formatPrice = (amount) => {
     const rate = 3.67; // 1 USD = 3.67 AED (approximate)
     const convertedAmount = currency === 'AED' ? amount * rate : amount;
+    //const symbol = currency === 'USD' ? '$' : 'د.إ';
     const symbol = currency === 'USD' ? '$' : 'د.إ';
-    
     return `${symbol}${convertedAmount.toFixed(2)}`;
   };
 
