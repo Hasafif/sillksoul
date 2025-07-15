@@ -283,7 +283,7 @@ console.log(productCategory)
      
 
       {/* Main Horizontal Slider */}
-      <div className={`col-span-6 ${isRTL?'pr-20':'pl-20'}`}>
+      <div className={`${!isMobile?`col-span-6 ${isRTL?'pr-20':'pl-20'}`:``} `}>
         <div className="relative max-w-lg w-full">
            <div className="aspect-[3/4] flex items-center justify-center rounded-lg overflow-hidden bg-gray-100">
           <img
@@ -338,7 +338,7 @@ console.log(productCategory)
         
 
           {/* Product Information */}
-          <div className={`col-span-4 ${isRTL?'pr-20':'pl-20'} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className={`${!isMobile?`col-span-4 ${isRTL?'pr-20':'pl-20'}`:``} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
             <div className="product-title-container text-center">
               <h1 className="product-title h6" style={{textTransform:"capitalize"}}>{productName}</h1>
             <div className="product-price-container">
@@ -346,7 +346,7 @@ console.log(productCategory)
                 </div>
             </div>
             {/* Color Selection */}
-            <div className="color-selector w-1/5">
+            <div className="color-selector">
              <div className={`form__label ${isRTL ? 'font-arabic':'font-english'}`}>
          {language === 'en' ? 'Color' : 'اللون'}
         <span className="form__label__value">{product.colors[0]}</span>
