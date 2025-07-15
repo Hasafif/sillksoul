@@ -2458,6 +2458,7 @@ width: 100%;
     width: 100%;
     padding: 4px;
 }
+/*
 @media (min-width: 768px) {
 .thumbnail_img {
     height: 132px;
@@ -2477,7 +2478,7 @@ width: 100%;
         display: none;
     }
 }
-
+*/
 /* Image and content styles (keep existing) */
 .sliderImgText {
     position: relative;

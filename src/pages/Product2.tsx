@@ -677,7 +677,7 @@ else {
             <h2 className={`text-2xl font-bold text-gray-900 mb-8 ${isRTL ? 'text-right' : 'text-left'}`}>
               {language === 'en' ? 'You May Also Like' : 'قد يعجبك أيضًا'}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
               {relatedProducts.map((relatedProduct) => {
                 const relatedProductName = language === 'en' 
                   ? relatedProduct.name_english 
