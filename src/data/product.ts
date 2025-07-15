@@ -95,8 +95,8 @@ export async function loadProducts(categoryID:string) {
     image: prod.images[0],
     hoverImage: prod.images[1],
     images : prod.images,
-    category_english: prod.categoryname_english,
-    category_arabic:prod.categoryname_arabic,
+    category_english: prod.categoryName_english,
+    category_arabic:prod.categoryName_arabic,
     collection: "",
     category:prod.category,
     description_english: prod.description_english,
@@ -128,6 +128,7 @@ export async function loadAllProducts() {
        
     });
     //let products = response.data;
+    console.log(response.data)
     let products: Product[] = [];
     response.data.forEach(prod => {
       products.push(
@@ -139,8 +140,8 @@ export async function loadAllProducts() {
     image: prod.images[0],
     hoverImage: prod.images[1],
     images : prod.images,
-    category_english: prod.categoryname_english,
-    category_arabic:prod.categoryname_arabic,
+    category_english: prod.categoryName_english,
+    category_arabic:prod.categoryName_arabic,
     collection: "",
     category:prod.category,
     description_english: prod.description_english,

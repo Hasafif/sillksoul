@@ -15,6 +15,7 @@ import { toast } from "../hooks/use-toast";
 import MultiSlider from "../components/multislider";
 import { useTranslation } from "../hooks/useTranslation";
 import ProductAccordion from "../components/CollapsibleAccordion";
+import { useNavigate } from 'react-router-dom';
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState( {
@@ -41,6 +42,7 @@ const Product = () => {
   const [all_products, setAllProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    
     useEffect(() => {
         const fetchProducts = async () => {
           setIsLoading(true);
@@ -59,7 +61,7 @@ const Product = () => {
         };
     
         fetchProducts();
-      }, []);
+      }, [id]);
     useEffect(() => {
         const fetchProducts = async () => {
           setIsLoading(true);
@@ -81,7 +83,7 @@ const Product = () => {
         };
     
         fetchProducts();
-      }, []);
+      }, [id]);
 
     // const product = products.find(p => p.id === id);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -99,7 +101,8 @@ const Product = () => {
      const [isTablet, setIsTablet] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
-    
+      const navigate = useNavigate();
+      const navigateTo = (url:string) => navigate(url);
      useEffect(() => {
        const handleResize = () => {
          setScreenWidth(window.innerWidth);
@@ -168,10 +171,12 @@ else {
     }
     addToCart(product, quantity, selectedSize, selectedColor);
   };
-
+console.log(all_products)
   const relatedProducts = all_products.filter(p => 
     (language === 'en' ? p.category_english : p.category_arabic) === productCategory && p.id !== product.id
   ).slice(0,4)
+console.log(relatedProducts)
+console.log(productCategory)
   const nextImage = () => {
     const newIndex = currentImageIndex === productImages.length - 1 ? 0 : currentImageIndex+ 1;
   setCurrentImageIndex(newIndex);
@@ -220,7 +225,7 @@ else {
           <div className={`col-span-2 ${isRTL?'pl-20':'pr-20'} flex justify-center`}
           style={{display:isMobile?'none':'flex'}}
           >
-            <div className={`relative flex flex-col gap-3 top-20 ${isRTL?'right-20':'left-20'}`}>
+            <div className={`relative flex flex-col gap-1/2 top-20 ${isRTL?'right-20':'left-20'}`}>
       {/* Vertical Thumbnail Slider */}
       
         {/* Thumbnails Container */}
@@ -705,12 +710,12 @@ else {
                   : relatedProduct.name_arabic;
                 
                 return (
-                  <Link
+             
+<Link
                     key={relatedProduct.id}
-                    to={`/product/${relatedProduct.id}`}
+                   // onClick={() => navigate(`/product/${relatedProduct.id}`)}
                     className="group"
-                    //onClick={() => window.scrollTo(0, 0)}
-                  >
+                    style={{ cursor: 'pointer' }} to={`/product/${relatedProduct.id}`}>
                     <div className="aspect-[3/4] overflow-hidden mb-4">
                       <img
                         src={relatedProduct.image}
