@@ -7,7 +7,7 @@ import Benefits from "../components/benifits";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
 import { ShoppingCart, Heart, Share2, Truck, RotateCcw, ChevronRight } from "lucide-react";
-import { loadProduct, loadProducts,products } from "../data/product";
+import { loadAllProducts, loadProduct, loadProducts,products } from "../data/product";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useCurrency } from "../contexts/CurrencyProvider";
@@ -38,8 +38,28 @@ const Product = () => {
     rating: 4.8,
     reviews: 124
   });
+  const [all_products, setAllProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    useEffect(() => {
+        const fetchProducts = async () => {
+          setIsLoading(true);
+          setError(null);
+          
+          try {
+            const productData = await loadAllProducts();
+            setAllProducts(productData);
+          } catch (err) {
+            setAllProducts(products)
+            console.error('Error loading products:', err);
+            setError(err.message || 'Failed to load products');
+          } finally {
+            setIsLoading(false);
+          }
+        };
+    
+        fetchProducts();
+      }, []);
     useEffect(() => {
         const fetchProducts = async () => {
           setIsLoading(true);
@@ -62,6 +82,7 @@ const Product = () => {
     
         fetchProducts();
       }, []);
+
     // const product = products.find(p => p.id === id);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -148,7 +169,7 @@ else {
     addToCart(product, quantity, selectedSize, selectedColor);
   };
 
-  const relatedProducts = products.filter(p => 
+  const relatedProducts = all_products.filter(p => 
     (language === 'en' ? p.category_english : p.category_arabic) === productCategory && p.id !== product.id
   ).slice(0,4)
   const nextImage = () => {
