@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
@@ -25,7 +25,31 @@ const Checkout = () => {
   const { t } = useTranslation();
   const {currency,formatPrice,formatPriceFloat} = useCurrency();
   const { language, isRTL } = useLanguage();
-
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+   useEffect(() => {
+         const handleResize = () => {
+           setScreenWidth(window.innerWidth);
+         };
+     
+         window.addEventListener('resize', handleResize);
+         
+         // Cleanup event listener on component unmount
+         return () => window.removeEventListener('resize', handleResize);
+       }, []);
+        // Check screen size on mount and resize
+       useEffect(() => {
+         const checkScreenSize = () => {
+           const width = window.innerWidth;
+           setIsMobile(width < 480);
+           setIsTablet(width >= 768 && width < 1200);
+         };
+     
+         checkScreenSize();
+         window.addEventListener('resize', checkScreenSize);
+         return () => window.removeEventListener('resize', checkScreenSize);
+       }, []);
   const [customerInfo, setCustomerInfo] = useState({
     email: "",
     firstName: "",
@@ -208,15 +232,15 @@ const Checkout = () => {
             }`}>
               <step.icon className="w-5 h-5" />
             </div>
-            <span className={`text-center sm:text-left mt-2 sm:mt-0 ${isRTL ? 'sm:mr-2' : 'sm:ml-2'} text-sm font-medium ${fontClass} ${
+            {!isMobile && (<span className={`text-center sm:text-left mt-2 sm:mt-0 ${isRTL ? 'sm:mr-2' : 'sm:ml-2'} text-xsm font-medium ${fontClass} ${
               currentStep >= step.number ? 'text-gray-900' : 'text-gray-500'
             }`}>
               {step.title}
-            </span>
+            </span>)}
           </div>
           {/* Progress Line */}
           {index < steps.length - 1 && (
-            <div className={`w-12 h-0.5 ${isRTL ? 'mr-4' : 'ml-4'} ${
+            <div className={`w-12 h-0.5  ${isRTL ? 'mr-4' : 'ml-4'} ${
               currentStep > step.number ? 'bg-gray-900' : 'bg-gray-200'
             }`} />
           )}
