@@ -8,6 +8,7 @@ interface LanguageContextType {
   isRTL: boolean;
 }
 
+
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
