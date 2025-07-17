@@ -10,6 +10,9 @@ import { useCart } from "../hooks/useCart";
 import { useTranslation } from "../hooks/useTranslation";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useCurrency } from "../contexts/CurrencyProvider";
+import HeroSection from "../components/HeroSection";
+import SidePanel from "../components/SidePanel";
+import SearchPanel from "../components/SearchPanel";
 
 // Initialize Stripe
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -23,6 +26,8 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { t } = useTranslation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const {currency,formatPrice,formatPriceFloat} = useCurrency();
   const { language, isRTL } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
@@ -195,6 +200,10 @@ const Checkout = () => {
     return (
       <div className={`min-h-screen bg-white ${fontClass} ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
         <Header />
+              <HeroSection
+              onMenuToggle={() => setIsMenuOpen(true)}
+              onSearchToggle={() => setIsSearchOpen(true)}
+            />
         <div className="max-w-3xl mx-auto px-4 py-16 text-center">
           <h1 className={`text-3xl font-bold text-gray-900 mb-4 ${fontClass}`}>{t('cartempty')}</h1>
           <Link
@@ -488,6 +497,8 @@ const Checkout = () => {
       </div>
       <Benefits />
       <Footer />
+        <SidePanel isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <SearchPanel isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );
 };
