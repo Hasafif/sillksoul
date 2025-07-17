@@ -1,21 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import Header from "../components/Header";
-import HeroSection from "../components/HeroSection";
 import Footer from "../components/CustomFooter";
 import Benefits from "../components/benifits";
-import SidePanel from "../components/SidePanel";
-import SearchPanel from "../components/SearchPanel";
 import { ShoppingCart, Heart, Share2, Truck, RotateCcw, ChevronRight } from "lucide-react";
 import { loadAllProducts, loadProduct, loadProducts,products } from "../data/product";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useCurrency } from "../contexts/CurrencyProvider";
 import { toast } from "../hooks/use-toast";
-import MultiSlider from "../components/multislider";
 import { useTranslation } from "../hooks/useTranslation";
 import ProductAccordion from "../components/CollapsibleAccordion";
-import { useNavigate } from 'react-router-dom';
+import SizeGuideSidepanel from "../components/SizeGuidePanel";
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState( {
@@ -101,8 +96,8 @@ const Product = () => {
      const [isTablet, setIsTablet] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
-      const navigate = useNavigate();
-      const navigateTo = (url:string) => navigate(url);
+    const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+     const productInfoRef = useRef(null);
      useEffect(() => {
        const handleResize = () => {
          setScreenWidth(window.innerWidth);
@@ -338,7 +333,9 @@ console.log(productCategory)
         
 
           {/* Product Information */}
-          <div className={`${!isMobile?`col-span-4 ${isRTL?'pr-20':'pl-20'}`:``} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div 
+             ref={productInfoRef}
+          className={`absolute right-10 ${!isMobile?`col-span-4 ${isRTL?'pr-20':'pl-20'}`:``} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
             <div className="product-title-container text-center">
               <h1 className="product-title h6" style={{textTransform:"capitalize"}}>{productName}</h1>
             <div className="product-price-container">
@@ -410,6 +407,20 @@ console.log(productCategory)
     ))}
     
 </div>
+ <button
+            onClick={() => setIsSizeGuideOpen(true)}
+            className={`relative bottom-1 ${isRTL ? 'left-0' : 'right-0'} text-xs ${isRTL ? 'font-arabic' : 'font-english'}`}
+            style={{ 
+              transform: 'translateY(100%)',
+              marginTop: '8px'
+            }}
+          >
+       
+            <span className="animation-underline text-button--read-more">
+                     {language === 'en' ? 'Size Guide' : 'دليل المقاسات'}
+                </span>
+          </button>
+
             </div>
 
             
@@ -739,9 +750,15 @@ console.log(productCategory)
        <Benefits/>
       <Footer />
 
-      {/* Side Panels */}
-      <SidePanel isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-      <SearchPanel isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+          {/* Size Guide Sidepanel */}
+      <SizeGuideSidepanel
+        isOpen={isSizeGuideOpen}
+        onClose={() => setIsSizeGuideOpen(false)}
+        language={language}
+        isRTL={isRTL}
+          containerRef={productInfoRef} 
+         // sectionBounds={{}}
+      />
     </div>
   );
 };

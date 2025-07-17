@@ -5,7 +5,8 @@ interface CurrencyContextType {
   currency: Currency;
   setCurrency: (curr: Currency) => void;
   switchCurrency: ()=>void;
-  formatPrice:(amount:number)=>string
+  formatPrice:(amount:number)=>string;
+  formatPriceFloat:(amount:number)=>number
 }
 // Currency Context
 
@@ -25,13 +26,20 @@ export const CurrencyProvider = ({ children }) => {
     const symbol = currency === 'USD' ? '$' : 'د.إ';
     return `${symbol}${convertedAmount.toFixed(2)}`;
   };
-
+ const formatPriceFloat = (amount) => {
+    const rate = 3.67; // 1 USD = 3.67 AED (approximate)
+    const convertedAmount = currency === 'AED' ? amount * rate : amount;
+    //const symbol = currency === 'USD' ? '$' : 'د.إ';
+   /// const symbol = currency === 'USD' ? '$' : 'د.إ';
+    return convertedAmount.toFixed(2);
+  };
   return (
     <CurrencyContext.Provider value={{
       currency,
       setCurrency,
       switchCurrency,
-      formatPrice
+      formatPrice,
+      formatPriceFloat
     }}>
       {children}
     </CurrencyContext.Provider>

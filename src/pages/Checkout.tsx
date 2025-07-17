@@ -1,19 +1,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
 import Header from "../components/Header";
 import Footer from "../components/CustomFooter";
 import Benefits from "../components/benifits";
-import { Lock, CreditCard, Truck, Package } from "lucide-react";
+import { Lock, CreditCard, Truck, Package, AlertCircle } from "lucide-react";
 import { useCart } from "../hooks/useCart";
 import { useTranslation } from "../hooks/useTranslation";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useCurrency } from "../contexts/CurrencyProvider";
 
+// Initialize Stripe
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+console.log(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
+  //const [currency] = useCurrency();
   const [currentStep, setCurrentStep] = useState(1);
   const [orderPlaced, setOrderPlaced] = useState(false);
-  const {t} = useTranslation()
-  const {language, isRTL} = useLanguage()
+  const [orderId, setOrderId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { t } = useTranslation();
+  const {currency,formatPrice,formatPriceFloat} = useCurrency();
+  const { language, isRTL } = useLanguage();
+
   const [customerInfo, setCustomerInfo] = useState({
     email: "",
     firstName: "",
@@ -29,20 +41,78 @@ const Checkout = () => {
     country: "US"
   });
 
-  const [paymentInfo, setPaymentInfo] = useState({
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    cardholderName: ""
-  });
-
   const shipping = getTotalPrice() > 200 ? 0 : 15;
   const tax = getTotalPrice() * 0.08;
   const total = getTotalPrice() + shipping + tax;
 
-  const handlePlaceOrder = () => {
-    setOrderPlaced(true);
-    clearCart();
+  // Handle Stripe Checkout Session
+  const handleCheckout = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const stripe = await stripePromise;
+      console.log(stripe)
+      // Create checkout session
+      const { data } = await axios.post(`${import.meta.env.VITE_BACKENDURL}/main/create-checkout-session`, {
+        items: items.map(item => ({
+          product: item.id,
+          quantity: item.quantity,
+          price: formatPriceFloat(item.price),
+          name: isRTL ? item.name_arabic : item.name_english,
+          selectedSize: item.selectedSize,
+          selectedColor: item.selectedColor,
+          image: item.image
+        })),
+        customerInfo: {
+          email: customerInfo.email,
+          firstName: customerInfo.firstName,
+          lastName: customerInfo.lastName,
+          phone: customerInfo.phone
+        },
+        shippingInfo: {
+          address: shippingInfo.address,
+          city: shippingInfo.city,
+          state: shippingInfo.state,
+          zipCode: shippingInfo.zipCode,
+          country: shippingInfo.country
+        },
+        shippingCost: shipping,
+        
+        taxAmount: tax,
+        totalAmount: total,
+        currency:currency,
+        successUrl: `${window.location.origin}/checkout?session_id={CHECKOUT_SESSION_ID}`,
+        cancelUrl: `${window.location.origin}/checkout`
+      });
+
+      // Redirect to Stripe Checkout
+      const result = await stripe.redirectToCheckout({
+        sessionId: data.sessionId
+      });
+
+      if (result.error) {
+        setError(result.error.message);
+      }
+
+    } catch (err) {
+      const errorMessage = err.response?.data?.error || err.message || 'Failed to create checkout session';
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Form validation
+  const validateStep = (step) => {
+    switch (step) {
+      case 1:
+        return customerInfo.email && customerInfo.firstName && customerInfo.lastName && customerInfo.phone;
+      case 2:
+        return shippingInfo.address && shippingInfo.city && shippingInfo.state && shippingInfo.zipCode;
+      default:
+        return true;
+    }
   };
 
   // Arabic placeholder translations
@@ -55,10 +125,6 @@ const Checkout = () => {
     city: isRTL ? "المدينة" : "City",
     state: isRTL ? "الولاية" : "State",
     zipCode: isRTL ? "الرمز البريدي" : "ZIP code",
-    cardNumber: isRTL ? "رقم البطاقة" : "Card number",
-    cardholderName: isRTL ? "اسم حامل البطاقة" : "Cardholder name",
-    expiryDate: isRTL ? "الشهر/السنة" : "MM/YY",
-    cvv: isRTL ? "رمز الأمان" : "CVV"
   };
 
   const fontClass = isRTL ? "font-arabic" : "font-english";
@@ -73,9 +139,14 @@ const Checkout = () => {
               <Package className="w-8 h-8 text-green-600" />
             </div>
             <h1 className={`text-3xl font-bold text-gray-900 mb-4 ${fontClass}`}>{t('OrderConfirmed')}</h1>
-            <p className={`text-lg text-gray-600 mb-8 ${fontClass}`}>
+            <p className={`text-lg text-gray-600 mb-4 ${fontClass}`}>
               {t('OrderConfirmedThank')}
             </p>
+            {orderId && (
+              <p className={`text-sm text-gray-500 mb-8 ${fontClass}`}>
+                {'Order Number'}: {orderId}
+              </p>
+            )}
             <div className="space-y-4">
               <p className={`text-gray-700 ${fontClass}`}>
                 {t('OrderEmail')}
@@ -103,10 +174,10 @@ const Checkout = () => {
         <div className="max-w-3xl mx-auto px-4 py-16 text-center">
           <h1 className={`text-3xl font-bold text-gray-900 mb-4 ${fontClass}`}>{t('cartempty')}</h1>
           <Link
-            to="/collections"
+            to="/"
             className={`btn2 btn2--primary inline-flex items-center px-6 py-3 text-white hover:bg-gray-600 transition-colors ${fontClass}`}
           >
-           {t('ContinueShopping')}
+            {t('ContinueShopping')}
           </Link>
         </div>
         <Footer />
@@ -168,6 +239,7 @@ const Checkout = () => {
                     value={customerInfo.email}
                     onChange={(e) => setCustomerInfo(prev => ({ ...prev, email: e.target.value }))}
                     className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
+                    required
                   />
                   <div className="grid grid-cols-2 gap-4">
                     <input
@@ -176,6 +248,7 @@ const Checkout = () => {
                       value={customerInfo.firstName}
                       onChange={(e) => setCustomerInfo(prev => ({ ...prev, firstName: e.target.value }))}
                       className={`px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
+                      required
                     />
                     <input
                       type="text"
@@ -183,6 +256,7 @@ const Checkout = () => {
                       value={customerInfo.lastName}
                       onChange={(e) => setCustomerInfo(prev => ({ ...prev, lastName: e.target.value }))}
                       className={`px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
+                      required
                     />
                   </div>
                   <input
@@ -191,11 +265,13 @@ const Checkout = () => {
                     value={customerInfo.phone}
                     onChange={(e) => setCustomerInfo(prev => ({ ...prev, phone: e.target.value }))}
                     className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
+                    required
                   />
                 </div>
                 <button
                   onClick={() => setCurrentStep(2)}
-                  className={`btn2 btn2--primary w-full mt-6 text-white py-3 px-6 hover:bg-gray-600 transition-colors ${fontClass}`}
+                  disabled={!validateStep(1)}
+                  className={`btn2 btn2--primary w-full mt-6 text-white py-3 px-6 hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${fontClass}`}
                 >
                   {t('ContinuetoShipping')}
                 </button>
@@ -213,6 +289,7 @@ const Checkout = () => {
                     value={shippingInfo.address}
                     onChange={(e) => setShippingInfo(prev => ({ ...prev, address: e.target.value }))}
                     className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
+                    required
                   />
                   <div className="grid grid-cols-2 gap-4">
                     <input
@@ -221,6 +298,7 @@ const Checkout = () => {
                       value={shippingInfo.city}
                       onChange={(e) => setShippingInfo(prev => ({ ...prev, city: e.target.value }))}
                       className={`px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
+                      required
                     />
                     <input
                       type="text"
@@ -228,6 +306,7 @@ const Checkout = () => {
                       value={shippingInfo.state}
                       onChange={(e) => setShippingInfo(prev => ({ ...prev, state: e.target.value }))}
                       className={`px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
+                      required
                     />
                   </div>
                   <input
@@ -236,6 +315,7 @@ const Checkout = () => {
                     value={shippingInfo.zipCode}
                     onChange={(e) => setShippingInfo(prev => ({ ...prev, zipCode: e.target.value }))}
                     className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
+                    required
                   />
                 </div>
                 <div className={`flex mt-6 ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
@@ -247,7 +327,8 @@ const Checkout = () => {
                   </button>
                   <button
                     onClick={() => setCurrentStep(3)}
-                    className={`btn2 btn2--primary flex-1 text-white py-3 px-6 hover:bg-gray-600 transition-colors ${fontClass}`}
+                    disabled={!validateStep(2)}
+                    className={`btn2 btn2--primary flex-1 text-white py-3 px-6 hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${fontClass}`}
                   >
                     {t('ContinuetoPayment')}
                   </button>
@@ -262,50 +343,65 @@ const Checkout = () => {
                   <Lock className={`w-5 h-5 text-green-600 ${isRTL ? 'ml-2' : 'mr-2'}`} />
                   <h2 className={`text-xl font-semibold text-gray-900 ${fontClass}`}>{t('PaymentInformation')}</h2>
                 </div>
-                <div className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder={placeholders.cardNumber}
-                    value={paymentInfo.cardNumber}
-                    onChange={(e) => setPaymentInfo(prev => ({ ...prev, cardNumber: e.target.value }))}
-                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
-                  />
-                  <input
-                    type="text"
-                    placeholder={placeholders.cardholderName}
-                    value={paymentInfo.cardholderName}
-                    onChange={(e) => setPaymentInfo(prev => ({ ...prev, cardholderName: e.target.value }))}
-                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
-                  />
-                  <div className="grid grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      placeholder={placeholders.expiryDate}
-                      value={paymentInfo.expiryDate}
-                      onChange={(e) => setPaymentInfo(prev => ({ ...prev, expiryDate: e.target.value }))}
-                      className={`px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
-                    />
-                    <input
-                      type="text"
-                      placeholder={placeholders.cvv}
-                      value={paymentInfo.cvv}
-                      onChange={(e) => setPaymentInfo(prev => ({ ...prev, cvv: e.target.value }))}
-                      className={`px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${fontClass} ${isRTL ? 'text-right' : 'text-left'}`}
-                    />
+                
+                <div className="space-y-6">
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      <Lock className={`w-4 h-4 text-blue-600 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                      <span className={`text-sm font-medium text-blue-900 ${fontClass}`}>
+                        {'Secure Checkout'}
+                      </span>
+                    </div>
+                    <p className={`text-sm text-blue-700 ${fontClass}`}>
+                      {'You will be redirected to Stripe\'s secure payment page to complete your purchase.'}
+                    </p>
                   </div>
+
+                  {error && (
+                    <div className={`flex items-center p-4 bg-red-50 border border-red-200 rounded-lg ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
+                      <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                      <p className={`text-sm text-red-700 ${fontClass}`}>{error}</p>
+                    </div>
+                  )}
+
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-2 text-sm text-gray-600">
+                      <Lock className="w-4 h-4" />
+                      <span className={fontClass}>
+                        {'Payment is secured by Stripe'}
+                      </span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 text-sm text-gray-600">
+                      <CreditCard className="w-4 h-4" />
+                      <span className={fontClass}>
+                        {'We accept all major credit cards'}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleCheckout}
+                    disabled={loading}
+                    className={`w-full btn2 btn2--primary text-white py-3 px-6 rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${fontClass}`}
+                  >
+                    {loading ? (
+                      <div className="flex items-center justify-center space-x-2">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>{'Processing...'}</span>
+                      </div>
+                    ) : (
+                      `${'Proceed to Payment'} ${formatPrice(total)}`
+                    )}
+                  </button>
                 </div>
+
                 <div className={`flex mt-6 ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
                   <button
                     onClick={() => setCurrentStep(2)}
                     className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors ${fontClass}`}
                   >
                     {t('Back')}
-                  </button>
-                  <button
-                    onClick={handlePlaceOrder}
-                    className={`btn2 btn2--primary flex-1 text-white py-3 px-6 hover:bg-gray-600 transition-colors ${fontClass}`}
-                  >
-                   {t("PlaceOrder")}
                   </button>
                 </div>
               </div>
@@ -321,19 +417,18 @@ const Checkout = () => {
                 <div key={`${item.id}-${item.selectedSize}-${item.selectedColor}`} className={`flex items-center ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
                   <img
                     src={item.image}
-                  //  alt={item.name}
                     className="w-16 h-16 object-cover rounded-md"
-                                 draggable={false}
-             onContextMenu={(e) => e.preventDefault()}
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
                   />
                   <div className="flex-1 min-w-0">
-                    <h4 className={`font-medium text-gray-900 ${fontClass}`}>{isRTL?item.name_arabic:item.name_english}</h4>
+                    <h4 className={`font-medium text-gray-900 ${fontClass}`}>{isRTL ? item.name_arabic : item.name_english}</h4>
                     <p className={`text-sm text-gray-600 ${fontClass}`}>{t('Qty')} {item.quantity}</p>
                     {item.selectedSize && (
                       <p className={`text-sm text-gray-600 ${fontClass}`}>{t('Size')} {item.selectedSize}</p>
                     )}
                   </div>
-                  <span className={`font-medium ${fontClass}`}>${(item.price * item.quantity).toFixed(2)}</span>
+                  <span className={`font-medium ${fontClass}`}>{formatPrice(item.price * item.quantity)}</span>
                 </div>
               ))}
             </div>
@@ -341,29 +436,29 @@ const Checkout = () => {
             <div className="border-t pt-4 space-y-2">
               <div className="flex justify-between">
                 <span className={`text-gray-600 ${fontClass}`}>{t('Subtotal')}</span>
-                <span className={`font-medium ${fontClass}`}>${getTotalPrice().toFixed(2)}</span>
+                <span className={`font-medium ${fontClass}`}>{formatPrice(getTotalPrice())}</span>
               </div>
               <div className="flex justify-between">
                 <span className={`text-gray-600 ${fontClass}`}>{t('Shipping')}</span>
                 <span className={`font-medium ${fontClass}`}>
-                  {shipping === 0 ? (isRTL ? 'مجاني' : 'Free') : `$${shipping.toFixed(2)}`}
+                  {shipping === 0 ? (isRTL ? 'مجاني' : 'Free') : `${formatPrice(shipping)}`}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className={`text-gray-600 ${fontClass}`}>{t('Tax')}</span>
-                <span className={`font-medium ${fontClass}`}>${tax.toFixed(2)}</span>
+                <span className={`font-medium ${fontClass}`}>{formatPrice(tax)}</span>
               </div>
               <div className="border-t pt-2">
                 <div className="flex justify-between">
                   <span className={`text-lg font-semibold ${fontClass}`}>{t('Total')}</span>
-                  <span className={`text-lg font-semibold ${fontClass}`}>${total.toFixed(2)}</span>
+                  <span className={`text-lg font-semibold ${fontClass}`}>{formatPrice(total)}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Benefits/>
+      <Benefits />
       <Footer />
     </div>
   );
