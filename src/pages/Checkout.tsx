@@ -195,32 +195,36 @@ const Checkout = () => {
     <div className={`min-h-screen bg-gray-50 ${fontClass} ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <Header />
       
-      {/* Progress Indicator */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 py-6 mt-6">
-          <div className={`flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
-            {steps.map((step, index) => (
-              <div key={step.number} className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  currentStep >= step.number ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-600'
-                }`}>
-                  <step.icon className="w-5 h-5" />
-                </div>
-                <span className={`${isRTL ? 'mr-2' : 'ml-2'} text-sm font-medium ${fontClass} ${
-                  currentStep >= step.number ? 'text-gray-900' : 'text-gray-500'
-                }`}>
-                  {step.title}
-                </span>
-                {index < steps.length - 1 && (
-                  <div className={`w-12 h-0.5 ${isRTL ? 'mr-4' : 'ml-4'} ${
-                    currentStep > step.number ? 'bg-gray-900' : 'bg-gray-200'
-                  }`} />
-                )}
-              </div>
-            ))}
+    {/* Progress Indicator */}
+<div className="bg-white border-b">
+  <div className="max-w-7xl mx-auto px-4 py-6 mt-6">
+    <div className={`flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
+      {steps.map((step, index) => (
+        <div key={step.number} className="flex items-center">
+          {/* Step Item - Mobile: Column, Desktop: Row */}
+          <div className="flex flex-col sm:flex-row sm:items-center">
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+              currentStep >= step.number ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-600'
+            }`}>
+              <step.icon className="w-5 h-5" />
+            </div>
+            <span className={`text-center sm:text-left mt-2 sm:mt-0 ${isRTL ? 'sm:mr-2' : 'sm:ml-2'} text-sm font-medium ${fontClass} ${
+              currentStep >= step.number ? 'text-gray-900' : 'text-gray-500'
+            }`}>
+              {step.title}
+            </span>
           </div>
+          {/* Progress Line */}
+          {index < steps.length - 1 && (
+            <div className={`w-12 h-0.5 ${isRTL ? 'mr-4' : 'ml-4'} ${
+              currentStep > step.number ? 'bg-gray-900' : 'bg-gray-200'
+            }`} />
+          )}
         </div>
-      </div>
+      ))}
+    </div>
+  </div>
+</div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

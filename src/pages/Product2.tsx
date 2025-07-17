@@ -335,7 +335,7 @@ console.log(productCategory)
           {/* Product Information */}
           <div 
              ref={productInfoRef}
-          className={`absolute right-10 ${!isMobile?`col-span-4 ${isRTL?'pr-20':'pl-20'}`:``} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+          className={`${!isMobile?`col-span-4 absolute right-10 ${isRTL?'pr-20':'pl-20'}`:``} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
             <div className="product-title-container text-center">
               <h1 className="product-title h6" style={{textTransform:"capitalize"}}>{productName}</h1>
             <div className="product-price-container">
