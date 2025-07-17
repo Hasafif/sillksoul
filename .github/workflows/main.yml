@@ -22,13 +22,14 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          envs: VITE_BACKENDURL
+          envs: VITE_BACKENDURL,VITE_STRIPE_PUBLISHABLE_KEY
           script: |
             cd /var/www
             
             # Create .env file with repository secrets
             cat > .env << EOF
             VITE_BACKENDURL=${{ secrets.VITE_BACKENDURL }}
+            VITE_STRIPE_PUBLISHABLE_KEY=${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}
             EOF
             
             # Set proper permissions for .env file
