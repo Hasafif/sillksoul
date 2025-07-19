@@ -20,6 +20,7 @@ import FloatingWhatsApp from '../src/components/Floatingwhatsapp';
 import { CurrencyProvider } from '../src/contexts/CurrencyProvider';
 import { FloatingCurrencySwitch } from "./components/CurrencySwitcher";
 import ScrollToTop from './ScrollToTop';
+import DesignerIntro from "./components/exper";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -44,6 +45,7 @@ const App = () => (
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/checkout" element={<Checkout />} />
                   <Route path="/aboutus" element={<AboutUs />} />
+                  <Route path="/exper" element={<DesignerIntro />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </BrowserRouter>

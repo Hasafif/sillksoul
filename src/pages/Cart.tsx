@@ -25,12 +25,12 @@ const Cart = () => {
   
   // Helper function to get localized item name
   const getItemName = (item) => {
-    return language === 'ar' ? (item.nameAr || item.name) : item.name;
+    return language === 'ar' ? (item.name_arabic) : item.name_english;
   };
 
   // Helper function to get localized category
   const getItemCategory = (item) => {
-    return language === 'ar' ? (item.categoryAr || item.category) : item.category;
+    return language === 'en' ? (item.category_english) : item.category_arabic;
   };
 
   if (items.length === 0) {
@@ -121,11 +121,11 @@ const Cart = () => {
                           {t('cartsize')} {item.selectedSize}
                         </p>
                       )}
-                      {item.selectedColor && (
+                      {/*item.selectedColor && (
                         <p className="text-xs text-gray-600">
                           {t('cartcolor')} {item.selectedColor}
                         </p>
-                      )}
+                      )*/}
                     </div>
                     
                     {/* Bottom Row: Price and Quantity Controls */}

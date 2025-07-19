@@ -108,7 +108,13 @@
     font-style:normal;
     font-display:swap;
 }
-
+@font-face{
+    font-family: "AGaramondPro-Regular";
+    src: url("./assets/fonts/AGaramondPro-Regular.otf") format("opentype");
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
 /* Ready-To-Wear Style */
 .columns--big .columns__wrapper {
     max-width: 110%;

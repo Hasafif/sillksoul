@@ -8,6 +8,7 @@ import SearchPanel from "../components/SearchPanel";
 import { useTranslation } from "..//hooks/useTranslation";
 import { useLanguage } from "../contexts/LanguageContext";
 import Benefits from "../components/benifits";
+import DesignerIntro from "../components/exper";
 
 
 const AboutUs = () => {
@@ -29,7 +30,8 @@ const AboutUs = () => {
      
      
 
-      <AboutSection />
+      {/*<AboutSection />*/}
+      <DesignerIntro/>
       <Benefits/>
       <Footer />
 
