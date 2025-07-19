@@ -37,6 +37,7 @@ const DesignerIntro = ({
       </p>
        <p  className={`BodyWrapper-kufPGa jsixHr body DesignerIntroBody-ewKWAa gWmsiL`}>
 {t('aboutDescription2')}        </p>
+
  
     </div>
  
@@ -59,19 +60,31 @@ const DesignerIntro = ({
             grid-template-columns: 1fr;
             gap: 1rem;
             margin-top: 2rem;
+             padding-bottom:4rem;
           
           }
-          
+          @media (max-width:480px) {
+          .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
+           padding-bottom:8rem;}
+          }
+           
           @media (min-width: 768px) {
             .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
               grid-template-areas: "image title" "image body";
               grid-template-columns: 1fr 1fr;
               margin-top: 4rem;
-              row-gap: 3rem;
+              gap: 1.5rem;
+              row-gap: 1rem;
                padding:4rem;
             }
           }
-          
+          @media (min-width: 768px) {
+    .ckNYsD {
+        --grid-gap: 1.5rem;
+        --grid-margin: 3rem;
+        
+    }
+}
           @media (min-width: 1024px) {
             .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
               --grid-gap: 2rem;
@@ -86,8 +99,15 @@ const DesignerIntro = ({
           
           .DesignerIntroTitle-jfmGui.csQcLb {
             grid-area: title;
-                align-self: end;
+             align-self: center;      
           }
+             @media (min-width:768px){
+               .DesignerIntroTitle-jfmGui.csQcLb {
+      position:relative;
+           top:-2rem;     
+          }
+                             
+             }
           
           /*.BaseWrap-sc-gjQpdd.BaseText-ewhhUZ.DesignerIntroHed-sc-KngdW.iUEiRd.cuCmeo.qRstE {
             margin: 0;
@@ -95,7 +115,7 @@ const DesignerIntro = ({
             font-weight: 400;
             line-height: 1.2;
             color: #1f1f1f;
-            font-family: 'Crimson Text', serif;
+            font-family: ${fontClass}, serif;
           }*/
          .qRstE {
     text-align: center;
@@ -115,12 +135,16 @@ const DesignerIntro = ({
           @media (min-width: 768px) {
     .qRstE {
         text-align: ${isRTL?'right':'left'};
+  
+
+       
     }
 }
     @media (min-width: 768px) {
     .qRstE {
         font-size: 64px;
         line-height: 1.125em;
+        
     }
 }
 
@@ -146,21 +170,22 @@ const DesignerIntro = ({
             border: 0px;
           }
           
-         /* .ClampWrapper-kZxfkB.hTTNGO.clamp {
+          .ClampWrapper-kZxfkB.hTTNGO.clamp {
             grid-area: body;
-          }*/
+          }
 
  
           
           .ClampContent-hilPkr.gjTTxQ {
             position: relative;
           }
-                 
+.iUEiRd {
+    margin: 0px;
+}
+   
           .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL {
-            align-self: start;
+            align-self:start;
             text-transform: none;
-            /*font-family: 'Crimson Text', serif;*/
-            /*font-family: AdobeGaramondPro, serif;*/
             font-family: "AGaramondPro-Regular";
             font-feature-settings: normal;
             font-style: normal;
@@ -169,10 +194,17 @@ const DesignerIntro = ({
             font-weight: 400;
             overflow-wrap: normal;
             color: rgb(31, 31, 31);
-             padding-left:0.5rem;
-             padding-right:0.5rem;
+            
+
              
           
+          }
+                       @media (max-width:768px) {
+          .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL {
+                       padding-left:0.5rem;
+             padding-right:0.5rem;
+             
+          }
           }
           .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL p {
             align-self: start;
@@ -197,7 +229,21 @@ const DesignerIntro = ({
               line-height: 1.41em;
             }
           }
-          
+          @media (min-width: 1080px)
+          {
+           .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL {
+           position:relative;
+           top:-3rem;
+            }
+          }      
+    @media (min-width: 768px) and (max-width:1080px)
+          {
+           .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL {
+           position:relative;
+           top:-1.5rem;
+            }
+          }  
+ 
           .fIsWrX {
             display: -webkit-box;
            /* overflow: hidden;*/
