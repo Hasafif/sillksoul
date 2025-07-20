@@ -335,7 +335,7 @@ console.log(productCategory)
           {/* Product Information */}
           <div 
              ref={productInfoRef}
-          className={`${!isMobile?`col-span-4 absolute right-10 ${isRTL?'pr-20':'pl-20'}`:``} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+          className={`${!isMobile?`col-span-4 relative ${isRTL?'left-10 pr-20':'right-0 pl-20'}`:``} space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
             <div className="product-title-container text-center">
               <h1 className="product-title h6" style={{textTransform:"capitalize"}}>{productName}</h1>
             <div className="product-price-container">
@@ -412,11 +412,15 @@ console.log(productCategory)
             className={`relative bottom-1 ${isRTL ? 'left-0' : 'right-0'} text-xs ${isRTL ? 'font-arabic' : 'font-english'}`}
             style={{ 
               transform: 'translateY(100%)',
-              marginTop: '8px'
+              marginTop: '2px',
+              position:'relative',
+              right:isRTL?'':'-70%',
+              left:isRTL?'-70%':'',
+              color:'#100F0d'
             }}
           >
        
-            <span className="animation-underline text-button--read-more">
+            <span className="animation-underline">
                      {language === 'en' ? 'Size Guide' : 'دليل المقاسات'}
                 </span>
           </button>
@@ -657,6 +661,23 @@ console.log(productCategory)
     ))}
     
 </div>
+ <button
+            onClick={() => setIsSizeGuideOpen(true)}
+            className={`relative bottom-1 ${isRTL ? 'left-0' : 'right-0'} text-xs ${isRTL ? 'font-arabic' : 'font-english'}`}
+            style={{ 
+              transform: 'translateY(100%)',
+              marginTop: '2px',
+              position:'relative',
+              right:isRTL?'':'-70%',
+              left:isRTL?'-70%':'',
+              color:'#100F0d'
+            }}
+          >
+       
+            <span className="animation-underline">
+                     {language === 'en' ? 'Size Guide' : 'دليل المقاسات'}
+                </span>
+          </button>
             </div>
 
             
@@ -756,6 +777,7 @@ console.log(productCategory)
         onClose={() => setIsSizeGuideOpen(false)}
         language={language}
         isRTL={isRTL}
+        isMobile={isMobile}
           containerRef={productInfoRef} 
          // sectionBounds={{}}
       />
