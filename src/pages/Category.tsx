@@ -28,8 +28,11 @@ const Category = () => {
       try {
         const  categoryData = await loadCategory(id);
         setCategory(categoryData);
+        const productData = await loadProducts(id);
+        setProducts(productData);
       } catch (err) {
         setCategory(categories2.find((p => p.id === id)));
+        setProducts(category.products)
         console.error('Error loading products:', err);
         setError(err.message || 'Failed to load products');
       } finally {
@@ -66,7 +69,7 @@ const Category = () => {
   }
 
   let category_name = (language == 'en') ? category.name_english : category.name_arabic;
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
       setError(null);
@@ -84,7 +87,7 @@ const Category = () => {
     };
 
     fetchProducts();
-  }, [id]);
+  }, [id]);*/
   // Filter and sort products
  // let filteredProducts = category.products;
   let filteredProducts = products;
