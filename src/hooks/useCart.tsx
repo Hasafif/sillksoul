@@ -6,7 +6,7 @@ import { useTranslation } from "./useTranslation";
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (product: Product, quantity?: number, size?: string, color?: string) => void;
+  addToCart: (product: Product, quantity?: number, size?: string, color?: string,customesizedata?:any) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -32,12 +32,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return ProductName;
   };
 
-  const addToCart = (product: Product, quantity = 1, size?: string, color?: string) => {
+  const addToCart = (product: Product, quantity = 1, size?: string, color?: string,customesizedata?:any) => {
     setItems(prev => {
       const existingItem = prev.find(item =>
         item.id === product.id &&
         item.selectedSize === size &&
-        item.selectedColor === color
+        item.selectedColor === color && 
+         item.customSizeData==customesizedata
       );
 
       const productName = getProductName(product);
@@ -50,7 +51,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         return prev.map(item =>
           item.id === product.id &&
           item.selectedSize === size &&
-          item.selectedColor === color
+          item.selectedColor === color && 
+         item.customSizeData==customesizedata
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
@@ -59,12 +61,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           title: t('cartaddedToCart'),
           description: `${productName} ${t('cartaddedToCartDesc')}`,
         });
+        console.log(customesizedata)
+        console.log(items)
         return [...prev, {
           ...product,
           quantity,
           selectedSize: size,
-          selectedColor: color
+          selectedColor: color,
+          customSizeData:customesizedata
         }];
+        
       }
     });
   };

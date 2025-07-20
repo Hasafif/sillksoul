@@ -16,7 +16,7 @@ import SearchPanel from "../components/SearchPanel";
 
 // Initialize Stripe
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-console.log(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+//console.log(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
   //const [currency] = useCurrency();
@@ -80,6 +80,8 @@ const Checkout = () => {
     setError(null);
 
     try {
+      console.log(items)
+      //console.log(items[1].customSizeData)
       const stripe = await stripePromise;
       console.log(stripe)
       // Create checkout session
@@ -90,6 +92,7 @@ const Checkout = () => {
           price: formatPriceFloat(item.price),
           name: isRTL ? item.name_arabic : item.name_english,
           selectedSize: item.selectedSize,
+          customeSizeData:item.customSizeData,
           selectedColor: item.selectedColor,
           image: item.image
         })),
@@ -192,6 +195,7 @@ const Checkout = () => {
           </div>
         </div>
         <Footer />
+
       </div>
     );
   }
@@ -214,6 +218,8 @@ const Checkout = () => {
           </Link>
         </div>
         <Footer />
+                        <SidePanel isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <SearchPanel isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       </div>
     );
   }

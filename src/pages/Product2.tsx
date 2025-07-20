@@ -37,7 +37,7 @@ const Product = () => {
   const [all_products, setAllProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    
+    const [customSizeData, setCustomSizeData] = useState(null);
     useEffect(() => {
         const fetchProducts = async () => {
           setIsLoading(true);
@@ -98,6 +98,16 @@ const Product = () => {
     const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
     const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
      const productInfoRef = useRef(null);
+       const handleCustomSizeSave = (sizeData) => {
+    setCustomSizeData(sizeData);
+    toast({title:language === 'en' ? "Custom Size" : "المقاس المخصص",description:language === 'en' ? "Custom size details saved!" : "تم حفظ تفاصيل القياس المخصص"})
+    console.log('custom')
+    //console.log(sizeData)
+   // console.log(customSizeData)
+    setSelectedSize('custom');
+   // setSuccessMessage('Custom size details saved successfully!');
+   // setShowSuccess(true);
+  };
      useEffect(() => {
        const handleResize = () => {
          setScreenWidth(window.innerWidth);
@@ -155,7 +165,7 @@ else {
 
    // setSelectedColor(product.colors[0])
      // console.log(selectedColor)
-    if (product.sizes.length > 0 && !selectedSize) {
+    if (product.sizes.length > 0 && !selectedSize && !customSizeData) {
       toast({title:language === 'en' ? "Size" : "المقاس",description:language === 'en' ? "Please select a size" : "يرجى اختيار المقاس"})
       return;
     }
@@ -164,7 +174,8 @@ else {
       toast({title:language === 'en' ? "Color" : "اللون",description:language === 'en' ? "Please select a color" : "يرجى اختيار اللون"})
       return;
     }
-    addToCart(product, quantity, selectedSize, selectedColor);
+    console.log(customSizeData)
+    addToCart(product, quantity, selectedSize, selectedColor,customSizeData);
   };
 console.log(all_products)
   const relatedProducts = all_products.filter(p => 
@@ -407,7 +418,7 @@ console.log(productCategory)
     ))}
     
 </div>
- <button
+ {/*<button
             onClick={() => setIsSizeGuideOpen(true)}
             className={`relative bottom-1 ${isRTL ? 'left-0' : 'right-0'} text-xs ${isRTL ? 'font-arabic' : 'font-english'}`}
             style={{ 
@@ -423,10 +434,46 @@ console.log(productCategory)
             <span className="animation-underline">
                      {language === 'en' ? 'Size Guide' : 'دليل المقاسات'}
                 </span>
-          </button>
-
+          </button>*/}
+        {/* Custom Size Option */}
+            <div className="pt-2 mb-4">
+              <button
+                  onClick={() => setIsSizeGuideOpen(true)}
+                className={`w-full py-3 px-4 border-2 border-dashed rounded-md text-center transition-colors ${
+                  selectedSize === 'custom'
+                    ? 'border-blue-500 bg-blue-50 text-blue-700'
+                    : 'border-gray-300 hover:border-blue-300 text-gray-700'
+                }`}
+              >
+                {customSizeData ? (language==="en"?'Edit Custom Size':'تعديل المقاس المخصص') : (language==="en"?'+ Custom Size':'+ مقاس مخصص')}
+              </button>
             </div>
-
+            {/* Display Custom Size Details */}
+            {customSizeData && selectedSize === 'custom' && (
+              <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
+                <h4 className="font-medium text-blue-900 mb-2">{language==="en"?'Custom Size Details:':'تفاصيل المقاس المخصص:'}</h4>
+                <div className="text-sm text-blue-800 space-y-1">
+                  <p>{language === 'en' ? "Bust:" : "صدر:"} {customSizeData.bust} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Waist:" : "خصر:"} {customSizeData.waist} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Hips:" : "أرداف:"} {customSizeData.hips} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Shoulders:" : "اكتاف:"} {customSizeData.shoulders} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Bust Point:" : "نقطة الصدر:"} {customSizeData.bustPoint} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Waist Point:" : "نقطة الخصر:"} {customSizeData.waistPoint} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Nipple to Nipple:" : "التباعد بين النهدين:"} {customSizeData.nippleToNipple} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Arm Round:" : "دوران اليد:"} {customSizeData.armRound} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Wrist:" : "دوران الرسغ:"} {customSizeData.wrist} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Arm Hole:" : "طول اليد:"} {customSizeData.armHole} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Sleeve Length:" : "طول الكم:"} {customSizeData.sleeveLength} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Full Length:" : "الطول الكامل:"} {customSizeData.fullLength} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Full Tail Length:" : "طول الذيل الكامل:"} {customSizeData.fullTailLength} {language === 'en' ? "Inch" : "إنش"}</p>
+                  {customSizeData.additionalNotes && (
+                    <p>{language === 'en' ? "Notes:" : "ملاحظات:"} {customSizeData.additionalNotes}</p>
+                  )}
+                </div>
+              </div>
+            )}
+            </div>
+          
             
 
             {/* Action Buttons */}
@@ -661,23 +708,42 @@ console.log(productCategory)
     ))}
     
 </div>
- <button
-            onClick={() => setIsSizeGuideOpen(true)}
-            className={`relative bottom-1 ${isRTL ? 'left-0' : 'right-0'} text-xs ${isRTL ? 'font-arabic' : 'font-english'}`}
-            style={{ 
-              transform: 'translateY(100%)',
-              marginTop: '2px',
-              position:'relative',
-              right:isRTL?'':'-70%',
-              left:isRTL?'-70%':'',
-              color:'#100F0d'
-            }}
-          >
-       
-            <span className="animation-underline">
-                     {language === 'en' ? 'Size Guide' : 'دليل المقاسات'}
-                </span>
-          </button>
+  <div className="pt-2 mb-4">
+              <button
+                  onClick={() => setIsSizeGuideOpen(true)}
+                className={`w-full py-3 px-4 border-2 border-dashed rounded-md text-center transition-colors ${
+                  selectedSize === 'custom'
+                    ? 'border-blue-500 bg-blue-50 text-blue-700'
+                    : 'border-gray-300 hover:border-blue-300 text-gray-700'
+                }`}
+              >
+                {customSizeData ? (language==="en"?'Edit Custom Size':'تعديل المقاس المخصص') : (language==="en"?'+ Custom Size':'+ مقاس مخصص')}
+              </button>
+            </div>
+            {/* Display Custom Size Details */}
+            {customSizeData && selectedSize === 'custom' && (
+              <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
+                <h4 className="font-medium text-blue-900 mb-2">{language==="en"?'Custom Size Details:':'تفاصيل المقاس المخصص:'}</h4>
+                <div className="text-sm text-blue-800 space-y-1">
+                  <p>{language === 'en' ? "Bust:" : "صدر:"} {customSizeData.bust} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Waist:" : "خصر:"} {customSizeData.waist} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Hips:" : "أرداف:"} {customSizeData.hips} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Shoulders:" : "اكتاف:"} {customSizeData.shoulders} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Bust Point:" : "نقطة الصدر:"} {customSizeData.bustPoint} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Waist Point:" : "نقطة الخصر:"} {customSizeData.waistPoint} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Nipple to Nipple:" : "التباعد بين النهدين:"} {customSizeData.nippleToNipple} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Arm Round:" : "دوران اليد:"} {customSizeData.armRound} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Wrist:" : "دوران الرسغ:"} {customSizeData.wrist} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Arm Hole:" : "طول اليد:"} {customSizeData.armHole} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Sleeve Length:" : "طول الكم:"} {customSizeData.sleeveLength} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Full Length:" : "الطول الكامل:"} {customSizeData.fullLength} {language === 'en' ? "Inch" : "إنش"}</p>
+                  <p>{language === 'en' ? "Full Tail Length:" : "طول الذيل الكامل:"} {customSizeData.fullTailLength} {language === 'en' ? "Inch" : "إنش"}</p>
+                  {customSizeData.additionalNotes && (
+                    <p>{language === 'en' ? "Notes:" : "ملاحظات:"} {customSizeData.additionalNotes}</p>
+                  )}
+                </div>
+              </div>
+            )}
             </div>
 
             
@@ -745,7 +811,6 @@ console.log(productCategory)
              
 <Link
                     key={relatedProduct.id}
-                   // onClick={() => navigate(`/product/${relatedProduct.id}`)}
                     className="group"
                     style={{ cursor: 'pointer' }} to={`/product/${relatedProduct.id}`}>
                     <div className="aspect-[3/4] overflow-hidden mb-4">
@@ -779,6 +844,8 @@ console.log(productCategory)
         isRTL={isRTL}
         isMobile={isMobile}
           containerRef={productInfoRef} 
+                  onSave={handleCustomSizeSave}
+        initialData={customSizeData}
          // sectionBounds={{}}
       />
     </div>

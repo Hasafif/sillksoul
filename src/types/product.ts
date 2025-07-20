@@ -33,5 +33,6 @@ export interface Product {
   export interface CartItem extends Product {
     quantity: number;
     selectedSize?: string;
+    customSizeData?:any;
     selectedColor?: string;
   }

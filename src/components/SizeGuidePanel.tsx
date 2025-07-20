@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { ArrowLeft, X, Ruler } from 'lucide-react';
-
+import { toast } from "../hooks/use-toast";
 const SizeGuideSidepanel = ({ 
   isOpen, 
   onClose, 
   language, 
   isRTL,
   isMobile,
-  containerRef, // Pass the ref of the container section
+  containerRef,
+  onSave, 
+  initialData
+  // Pass the ref of the container section
   //sectionBounds // Or pass the bounds directly: { top, left, width, height }
 }) => {
   const [formData, setFormData] = useState({
@@ -34,8 +37,38 @@ const SizeGuideSidepanel = ({
     }));
   };
 
-  const handleSave = () => {
-    console.log('Form data:', formData);
+   const handleSave = () => {
+    // Validate that required fields are filled
+    if (!formData.bust || !formData.waist || !formData.wrist 
+      || !formData.waistPoint || !formData.sleeveLength 
+      || !formData.shoulders || !formData.nippleToNipple 
+      || !formData.hips || !formData.fullTailLength 
+      || !formData.fullLength || !formData.bustPoint || !formData.armRound || !formData.armHole) {
+      //alert('Please fill in bust and waist measurements');
+      toast({title:language === 'en' ? "Custom Size" : "المقاس المخصص",description:language === 'en' ? "Please fill in all measurements" : "يرجى ملء جميع القياسات"})
+      
+      return;
+    }
+    
+      // Ensure all numeric fields are properly converted to numbers before saving
+    const numericData = {
+      bust: parseFloat(formData.bust) || 0,
+      waist: parseFloat(formData.waist) || 0,
+      hips: parseFloat(formData.hips) || 0,
+      shoulders: parseFloat(formData.shoulders) || 0,
+      bustPoint: parseFloat(formData.bustPoint) || 0,
+      waistPoint: parseFloat(formData.waistPoint) || 0,
+      nippleToNipple: parseFloat(formData.nippleToNipple) || 0,
+      armRound: parseFloat(formData.armRound) || 0,
+      wrist: parseFloat(formData.wrist) || 0,
+      armHole: parseFloat(formData.armHole) || 0,
+      sleeveLength: parseFloat(formData.sleeveLength) || 0,
+      fullLength: parseFloat(formData.fullLength) || 0,
+      fullTailLength: parseFloat(formData.fullTailLength) || 0,
+      additionalNotes: formData.additionalNotes
+    };
+    
+    onSave(numericData);
     onClose();
   };
 
@@ -55,9 +88,10 @@ const SizeGuideSidepanel = ({
         <input
           type="number"
           step="0.1"
+          min={0}
           value={formData[field]}
           onChange={(e) => handleInputChange(field, e.target.value)}
-          className={` w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm ${isRTL ? 'text-right pr-8' : 'text-left pl-3'} hover:border-gray-400`}
+          className={`w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm ${isRTL ? 'text-right pr-8' : 'text-left pl-3'} hover:border-gray-400`}
           placeholder={language === 'en' ? placeholder : placeholderAr}
           required={required}
         />
