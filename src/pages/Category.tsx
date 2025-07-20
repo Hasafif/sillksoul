@@ -186,11 +186,11 @@ const Category = () => {
             ))}
           </div>
 
-          {filteredProducts.length === 0 && (
+          {/*filteredProducts.length === 0 && !isLoading && (
             <div className={`text-center py-12 ${isRTL ? 'font-arabic text-right' : 'font-english text-left'} md:text-center`}>
               <p className="text-gray-500 text-lg">{t("filter1")}</p>
             </div>
-          )}
+          )*/}
         </div>
       </section>
       <Benefits/>
