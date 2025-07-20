@@ -38,7 +38,7 @@ const Category = () => {
     };
 
     fetchCategory();
-  }, []);
+  }, [id]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [sortBy, setSortBy] = useState("name");
@@ -84,7 +84,7 @@ const Category = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [id]);
   // Filter and sort products
  // let filteredProducts = category.products;
   let filteredProducts = products;

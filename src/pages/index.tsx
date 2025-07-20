@@ -447,7 +447,7 @@ const swiperConfig = {
                  data-sizes="auto" 
                  alt={image.alt} 
                  style={{ objectPosition: "% % " }} 
-                 srcSet={image.srcSet}
+                 //srcSet={image.srcSet}
                               draggable={false}
              onContextMenu={(e) => e.preventDefault()}
                  />
