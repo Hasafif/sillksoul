@@ -13,7 +13,7 @@ const DesignerIntro = ({
     const { t } = useTranslation();
     const { isRTL } = useLanguage();
     name = t('aboutTitle');
-    const fontClass = isRTL ? "font-arabic" : "font-english";
+    const fontClass = isRTL ? "URW DIN ARABIC" : "Helvetica Neue LT W05";
   const defaultContent = (
      <div>
 <p
@@ -30,15 +30,18 @@ const DesignerIntro = ({
  const defaultContent2 = (
      <div>
 <p
-            className={`BodyWrapper-kufPGa jsixHr body DesignerIntroBody-ewKWAa gWmsiL`}
+          className={`BodyWrapper-kufPGa jsixHr body DesignerIntroBody-ewKWAa gWmsiL`}
+          // className={`pb-4`}
 
 > {t('aboutDescription1')}
 
       </p>
-       <p  className={`BodyWrapper-kufPGa jsixHr body DesignerIntroBody-ewKWAa gWmsiL`}>
+       <p  
+       className={`BodyWrapper-kufPGa jsixHr body DesignerIntroBody-ewKWAa gWmsiL`}
+       // className={`pb-4`}
+       >
 {t('aboutDescription2')}        </p>
 
- 
     </div>
  
   );
@@ -73,9 +76,9 @@ const DesignerIntro = ({
               grid-template-areas: "image title" "image body";
               grid-template-columns: 1fr 1fr;
               margin-top: 4rem;
-              gap: 1.5rem;
-              row-gap: 1rem;
-               padding:4rem;
+              gap: 2rem;
+              row-gap: 3rem;
+           
             }
           }
           @media (min-width: 768px) {
@@ -99,15 +102,15 @@ const DesignerIntro = ({
           
           .DesignerIntroTitle-jfmGui.csQcLb {
             grid-area: title;
-             align-self: center;      
+             align-self: end;    
           }
-             @media (min-width:768px){
+            /* @media (min-width:768px){
                .DesignerIntroTitle-jfmGui.csQcLb {
       position:relative;
            top:-2rem;     
           }
                              
-             }
+             }*/
           
           /*.BaseWrap-sc-gjQpdd.BaseText-ewhhUZ.DesignerIntroHed-sc-KngdW.iUEiRd.cuCmeo.qRstE {
             margin: 0;
@@ -121,7 +124,8 @@ const DesignerIntro = ({
     text-align: center;
     --type-token: discovery . page-hed-section;
     text-transform: none;
-    font-family: FBDidotS, serif;
+    /*font-family: FBDidotS, serif;*/
+    font-family: ${fontClass}, serif;
     font-feature-settings: normal;
     font-style: normal;
     letter-spacing: 0.0416667em;
@@ -131,6 +135,7 @@ const DesignerIntro = ({
     font-weight: 300;
     overflow-wrap: normal;
     color: rgb(0, 0, 0);
+    padding-bottom:0.5rem;
 }
           @media (min-width: 768px) {
     .qRstE {
@@ -170,9 +175,9 @@ const DesignerIntro = ({
             border: 0px;
           }
           
-          .ClampWrapper-kZxfkB.hTTNGO.clamp {
+         /* .ClampWrapper-kZxfkB.hTTNGO.clamp {
             grid-area: body;
-          }
+          }*/
 
  
           
@@ -182,11 +187,14 @@ const DesignerIntro = ({
 .iUEiRd {
     margin: 0px;
 }
-   
+   .gWmsiL.gWmsiL.gWmsiL {
+    margin-top: -1rem;
+}
           .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL {
             align-self:start;
             text-transform: none;
-            font-family: "AGaramondPro-Regular";
+            /*font-family: "AGaramondPro-Regular";*/
+            font-family: ${fontClass};
             font-feature-settings: normal;
             font-style: normal;
             letter-spacing: normal;
@@ -211,14 +219,17 @@ const DesignerIntro = ({
             text-transform: none;
             /*font-family: 'Crimson Text', serif;*/
             /*font-family: AdobeGaramondPro, serif;*/
-            font-family: "AGaramondPro-Regular";
+            /*font-family: "AGaramondPro-Regular";*/
+            font-family: ${fontClass};
             font-feature-settings: normal;
             font-style: normal;
             letter-spacing: normal;
             line-break: auto;
             font-weight: 400;
             overflow-wrap: normal;
-              padding-bottom:10px;
+              padding-bottom:0.2rem;
+              padding-top:1rem;
+              margin-top:0;
             color: rgb(31, 31, 31);
           
           }
@@ -229,7 +240,7 @@ const DesignerIntro = ({
               line-height: 1.41em;
             }
           }
-          @media (min-width: 1080px)
+          /*@media (min-width: 1080px)
           {
            .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL {
            position:relative;
@@ -242,11 +253,11 @@ const DesignerIntro = ({
            position:relative;
            top:-1.5rem;
             }
-          }  
+          }  */
  
           .fIsWrX {
             display: -webkit-box;
-           /* overflow: hidden;*/
+          /* overflow: hidden;*/
             text-overflow: ellipsis;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: ${isExpanded ? 'none' : '12'};
@@ -352,13 +363,35 @@ const DesignerIntro = ({
         
         <span className="SpanWrapper-umhxW cudDwW responsive-asset DesignerIntroImage-bNPsMh hDgjsm">
           <picture className="ResponsiveImagePicture-cWuUZO dUOtEa DesignerIntroImage-bNPsMh hDgjsm responsive-image">
-            <img 
-              alt={imageAlt}
-              className="ResponsiveImageContainer-eybHBd fptoWY responsive-image__image"
-              src={imageUrl}
+           {
+<img
+             alt={imageAlt}
+            className="ResponsiveImageContainer-eybHBd fptoWY responsive-image__image"
+            //  src={`/Ghala.mp4`}
+            src={imageUrl}
               srcSet={imageSrcSet}
-              sizes="100vw"
+             sizes="100vw"
+           //  autoPlay={true}
             />
+
+} 
+               {/*<video 
+            className="ResponsiveImageContainer-eybHBd fptoWY responsive-image__image"
+src={`/Ghala.mp4`} 
+       //  src="https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4"
+
+ autoPlay
+          muted
+          loop
+          playsInline
+        style={{
+            //width:'120',
+            //height: '140',
+           // maxWidth: '100%',
+         //  maxHeight: '20%',
+           // transform: 'scale(1.2)'
+          }}
+        />*/}
           </picture>
         </span>
         

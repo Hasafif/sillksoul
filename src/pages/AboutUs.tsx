@@ -20,19 +20,27 @@ const AboutUs = () => {
  
 
   return (
-    <div className={`min-h-screen bg-white ${fontClass} ${isRTL ? 'rtl' : 'ltr'}`}>
+    <div className={`min-h-screen bg-white ${fontClass} ${isRTL ? 'rtl' : 'ltr'}`} style={{
+         // "padding":"4rem"
+    }}>
       <Header />
-      <HeroSection 
+      {/*<HeroSection 
         onMenuToggle={() => setIsMenuOpen(true)}
         onSearchToggle={() => setIsSearchOpen(true)}
-      />
+      />*/}
       
      
      
 
       {/*<AboutSection />*/}
-      <DesignerIntro/>
-      <Benefits/>
+      <div style={{
+         "padding":"3rem"
+    }}>
+
+  <DesignerIntro/>
+      </div>
+    
+      {/*<Benefits/>*/}
       <Footer />
 
       {/* 
