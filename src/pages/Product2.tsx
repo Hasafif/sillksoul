@@ -98,6 +98,7 @@ const Product = () => {
     const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
     const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
      const productInfoRef = useRef(null);
+     const imgRef = useRef(null);
   const [targetBounds, setTargetBounds] = useState({ top: 0, left: 0, width: 0, height: 0 });
        const handleCustomSizeSave = (sizeData) => {
     setCustomSizeData(sizeData);
@@ -205,13 +206,14 @@ console.log(productCategory)
   const [mainStyle, setMainStyle] = useState({}); // Style for the main container
   const sidePanelRef = useRef(null); // Ref for the sidepanel container
   useEffect(() => {
-    if (isSizeGuideOpen && productInfoRef.current) {
+    if (isSizeGuideOpen && productInfoRef.current && imgRef.current) {
       const rect = productInfoRef.current.getBoundingClientRect();
+      const rect2 = imgRef.current.getBoundingClientRect();
       setTargetBounds({
-        top: rect.top + window.scrollY,
+        top: rect2.top + window.scrollY,
         left: rect.left + window.scrollX,
         width: rect.width,
-        height: rect.height,
+        height: rect2.height,
       });
 
       // Use a timeout to allow the panel to render before measuring it
@@ -221,7 +223,7 @@ console.log(productCategory)
           const targetHeight = rect.height;
           if (panelHeight > targetHeight) {
             // Add padding to main container if panel is taller
-            const paddingBottom = 16+(panelHeight - targetHeight)*100;
+            const paddingBottom = (panelHeight - targetHeight)*100;
             console.log(paddingBottom)
             setMainStyle({ paddingBottom: `${paddingBottom}px` });
           }
@@ -233,7 +235,7 @@ console.log(productCategory)
     }
   }, [isSizeGuideOpen]);
   return (
-    <div className={`min-h-screen relative bg-white`} dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className={`min-h-screen relative bg-white overflow-hidden`} dir={isRTL ? 'rtl' : 'ltr'}>
       {/*<Header />
       <HeroSection 
         onMenuToggle={() => setIsMenuOpen(true)}
@@ -256,7 +258,7 @@ console.log(productCategory)
       </div>
 
       {/* Product Details */}
-      <section className="max-w-7xl max-auto px-4 pb-16" style={mainStyle}>
+      <section className="max-w-7xl max-auto px-4 pb-16">
              
        {!isTablet && (<div className={`${isMobile?'flex flex-col items-center gap-5':'grid grid-cols-12 gap-8'}`}>
           {/* Product Images */}
@@ -322,7 +324,9 @@ console.log(productCategory)
      
 
       {/* Main Horizontal Slider */}
-      <div className={`${!isMobile?`col-span-6 ${isRTL?'pr-20':'pl-20'}`:``} `}>
+      <div 
+      ref={imgRef}
+      className={`${!isMobile?`col-span-6 ${isRTL?'pr-20':'pl-20'}`:``} `}>
         <div className="relative max-w-lg w-full">
            <div className="aspect-[3/4] flex items-center justify-center rounded-lg overflow-hidden bg-gray-100">
           <img
@@ -877,9 +881,10 @@ console.log(productCategory)
          ref={sidePanelRef}
         style={{
             top: `${targetBounds.top}px`,
+           // bottom: `${targetBounds.bottom}px`,
             left: `${targetBounds.left}px`,
             width: `${targetBounds.width}px`,
-            height: `${targetBounds.height+2}px`,
+            height: `${targetBounds.height}px`,
             //paddingBottom:'50px',
            // opacity: isSizeGuideOpen ? 1 : 0,
             pointerEvents: isSizeGuideOpen ? 'auto' : 'none',

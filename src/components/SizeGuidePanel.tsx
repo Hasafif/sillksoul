@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { toast } from "../hooks/use-toast";
 // Floating Label Input Field Component
 // NEW: Floating Label Textarea Field Component
-const TextareaField = ({ field, label, labelAr, value, onchange, language = "en", rows = 4 }) => {
+// MODIFIED: Floating Label Textarea Field Component
+const TextareaField = ({ field, label, labelAr, value, onchange, language = "en", rows = 2 }) => {
   const isRTL = language === 'ar';
   return (
     <div className="relative">
       <textarea
-       style={{
-          border: '2px solid #eeeeee',
+           style={{
+          border: '2px solid #d1d5db',
           outline: 'none',
    
         }}
@@ -16,12 +17,12 @@ const TextareaField = ({ field, label, labelAr, value, onchange, language = "en"
         value={value}
         onChange={onchange}
         rows={rows}
-        className="block h-20 px-2.5 py-2 pb-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        className="block px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         placeholder=" "
       />
       <label
         htmlFor={field}
-        className={`absolute text-sm text-gray-500 duration-300 transform -translate-y-2 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-2 ${isRTL ? 'right-2' : 'left-1'}`}
+        className={`absolute text-sm text-gray-500 duration-300 transform -translate-y-7 scale-75 top-5 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7 ${isRTL ? 'right-2' : 'left-1'}`}
       >
         {language === "en" ? label : labelAr}
       </label>
@@ -40,13 +41,13 @@ const InputField = ({ field, label, labelAr, value, onchange, language = "en" })
    
         }}
         type="text" 
-        className="block pt-6 pb-0 px-0 w-full text-sm text-gray-900 bg-transparent appearance-none dark:text-white dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+        className="block pt-3 pb-0 px-0 w-full text-sm text-gray-900 bg-transparent appearance-none dark:text-white dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
         placeholder=" " 
         id={field}
         value={value}
         onChange={onchange}
       />
-      <label className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 bottom-1 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+      <label className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 bottom-1 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
         {language === "en" ? label : labelAr}
       </label>
     </div>
@@ -109,18 +110,18 @@ const SizeGuideSidepanel = ({
     <aside className="w-96 flex-shrink-0 bg-white border-r border-gray-200">
       <div className="flex flex-col h-full">
         {/* Header */}
-        <div className="pb-1 flex-shrink-0">
+        <div className="pb-2 flex-shrink-0">
           <button onClick={onClose} className={`flex items-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`} style={{ fontSize: '13px', fontWeight: '500', color: '#100f0d' }}>
             <span style={{ transform: 'rotate(90deg)' }}>
               <svg width="10" height="10" viewBox="0 0 10 6"><path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
             </span>
-            <span className="animation-underline">{language === 'en' ? 'Size Guide' : 'دليل المقاسات'}</span>
+            <span className="animation-underline">{language === 'en' ? ' Custom Size' : 'مقاس مخصص'}</span>
           </button>
         </div>
 
         {/* Content */}
-        <div className="flex-1 p-1">
-          <div className="space-y-6">
+        <div className="flex-1">
+          <div className="space-y-8 pt-1">
             {/* Input fields... */}
             <div className="grid grid-cols-2 gap-6">
               <InputField field="bust" label="Bust" labelAr="صدر" value={formData.bust} onchange={handleNumericChange("bust")} language={language} />
@@ -167,7 +168,7 @@ const SizeGuideSidepanel = ({
               <textarea 
               value={formData.additionalNotes} onChange={handleInputChange('additionalNotes')} rows={4} className={`w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'}`} style={{ "border": "1px solid #d1d1d0", "borderRadius": "3px" ,outline:'none'}} placeholder={language === 'en' ? 'Please write any additional notes clearly...' : 'لأي ملاحظات أخرى يرجى كتابتها بوضوح...'} />
             </div>*/}
-                     <div className="absolute right-0 bottom-1 flex-shrink-0">
+                     <div className="absolute right-0 bottom-0 flex-shrink-0">
           <button onClick={handleSave} className={`flex items-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`} style={{ fontSize: '13px', fontWeight: '500', color: '#100f0d' }}>
                        <span className="animation-underline">{language === 'en' ? 'Save & Return to product' : 'حفظ وعودة إلى المنتج'}</span>
             <span style={{ transform: 'rotate(270deg)' }}>
