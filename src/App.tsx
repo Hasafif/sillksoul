@@ -21,6 +21,7 @@ import { CurrencyProvider } from '../src/contexts/CurrencyProvider';
 import { FloatingCurrencySwitch } from "./components/CurrencySwitcher";
 import ScrollToTop from './ScrollToTop';
 import DesignerIntro from "./components/exper";
+import Demo from "./pages/demo";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -46,6 +47,7 @@ const App = () => (
                   <Route path="/checkout" element={<Checkout />} />
                   <Route path="/aboutus" element={<AboutUs />} />
                   <Route path="/exper" element={<DesignerIntro />} />
+                  <Route path="/demo" element={<Demo />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </BrowserRouter>

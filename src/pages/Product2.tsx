@@ -98,6 +98,7 @@ const Product = () => {
     const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
     const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
      const productInfoRef = useRef(null);
+  const [targetBounds, setTargetBounds] = useState({ top: 0, left: 0, width: 0, height: 0 });
        const handleCustomSizeSave = (sizeData) => {
     setCustomSizeData(sizeData);
     toast({title:language === 'en' ? "Custom Size" : "المقاس المخصص",description:language === 'en' ? "Custom size details saved!" : "تم حفظ تفاصيل القياس المخصص"})
@@ -200,8 +201,39 @@ console.log(productCategory)
   const prevVertical = () => {
     prevImage();
   };
+  // Effect to calculate and set the panel's position and main content padding
+  const [mainStyle, setMainStyle] = useState({}); // Style for the main container
+  const sidePanelRef = useRef(null); // Ref for the sidepanel container
+  useEffect(() => {
+    if (isSizeGuideOpen && productInfoRef.current) {
+      const rect = productInfoRef.current.getBoundingClientRect();
+      setTargetBounds({
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        height: rect.height,
+      });
+
+      // Use a timeout to allow the panel to render before measuring it
+      setTimeout(() => {
+        if (sidePanelRef.current) {
+          const panelHeight = sidePanelRef.current.offsetHeight;
+          const targetHeight = rect.height;
+          if (panelHeight > targetHeight) {
+            // Add padding to main container if panel is taller
+            const paddingBottom = 16+(panelHeight - targetHeight)*100;
+            console.log(paddingBottom)
+            setMainStyle({ paddingBottom: `${paddingBottom}px` });
+          }
+        }
+      }, 0);
+    } else {
+      // Reset padding when panel is closed
+      setMainStyle({});
+    }
+  }, [isSizeGuideOpen]);
   return (
-    <div className={`min-h-screen bg-white`} dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className={`min-h-screen relative bg-white`} dir={isRTL ? 'rtl' : 'ltr'}>
       {/*<Header />
       <HeroSection 
         onMenuToggle={() => setIsMenuOpen(true)}
@@ -224,7 +256,8 @@ console.log(productCategory)
       </div>
 
       {/* Product Details */}
-      <section className="max-w-7xl max-auto px-4 pb-16">
+      <section className="max-w-7xl max-auto px-4 pb-16" style={mainStyle}>
+             
        {!isTablet && (<div className={`${isMobile?'flex flex-col items-center gap-5':'grid grid-cols-12 gap-8'}`}>
           {/* Product Images */}
            {/* Multi-Slider Component - Left Side */}
@@ -418,7 +451,7 @@ console.log(productCategory)
     ))}
     
 </div>
- {/*<button
+ {<button
             onClick={() => setIsSizeGuideOpen(true)}
             className={`relative bottom-1 ${isRTL ? 'left-0' : 'right-0'} text-xs ${isRTL ? 'font-arabic' : 'font-english'}`}
             style={{ 
@@ -434,8 +467,8 @@ console.log(productCategory)
             <span className="animation-underline">
                      {language === 'en' ? 'Size Guide' : 'دليل المقاسات'}
                 </span>
-          </button>*/}
-        {/* Custom Size Option */}
+          </button>}
+        {/* Custom Size Option 
             <div className="pt-2 mb-4">
               <button
                   onClick={() => setIsSizeGuideOpen(true)}
@@ -447,9 +480,9 @@ console.log(productCategory)
               >
                 {customSizeData ? (language==="en"?'Edit Custom Size':'تعديل المقاس المخصص') : (language==="en"?'+ Custom Size':'+ مقاس مخصص')}
               </button>
-            </div>
+            </div>*/}
             {/* Display Custom Size Details */}
-            {customSizeData && selectedSize === 'custom' && (
+            {/*customSizeData && selectedSize === 'custom' && (
               <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
                 <h4 className="font-medium text-blue-900 mb-2">{language==="en"?'Custom Size Details:':'تفاصيل المقاس المخصص:'}</h4>
                 <div className="text-sm text-blue-800 space-y-1">
@@ -471,7 +504,7 @@ console.log(productCategory)
                   )}
                 </div>
               </div>
-            )}
+            )*/}
             </div>
           
             
@@ -835,19 +868,33 @@ console.log(productCategory)
       </section>
        <Benefits/>
       <Footer />
-
-          {/* Size Guide Sidepanel */}
-      <SizeGuideSidepanel
-        isOpen={isSizeGuideOpen}
-        onClose={() => setIsSizeGuideOpen(false)}
-        language={language}
-        isRTL={isRTL}
-        isMobile={isMobile}
-          containerRef={productInfoRef} 
-                  onSave={handleCustomSizeSave}
-        initialData={customSizeData}
-         // sectionBounds={{}}
+      <div
+        className={`absolute inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${isSizeGuideOpen ? 'opacity-0' : 'opacity-0 pointer-events-none'}`}
+        onClick={() => setIsSizeGuideOpen(false)}
       />
+      <div
+        className={`absolute bg-white z-50 transition-transform duration-300 ease-in-out ${isSizeGuideOpen ? 'translate-x-0' : (isRTL ? '-translate-x-full' : 'translate-x-full')}`}
+         ref={sidePanelRef}
+        style={{
+            top: `${targetBounds.top}px`,
+            left: `${targetBounds.left}px`,
+            width: `${targetBounds.width}px`,
+            height: `${targetBounds.height+2}px`,
+            //paddingBottom:'50px',
+           // opacity: isSizeGuideOpen ? 1 : 0,
+            pointerEvents: isSizeGuideOpen ? 'auto' : 'none',
+          }}
+      >
+        {isSizeGuideOpen && (
+          <SizeGuideSidepanel
+            onClose={() => setIsSizeGuideOpen(false)}
+            onSave={handleCustomSizeSave}
+            language={language}
+            isRTL={isRTL}
+          />
+        )}
+      </div>
+    
     </div>
   );
 };
