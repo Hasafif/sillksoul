@@ -862,7 +862,7 @@ console.log(productCategory)
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-20">
-            <h2 className={` ${isMobile?'text-center':''} text-2xl font-bold text-gray-900 mb-3 ${isRTL ? 'text-right' : 'text-left'}`}>
+            <h2 className={` px-5 ${isMobile?'text-center':''} text-2xl font-bold text-gray-900 mb-3 ${isRTL ? 'text-right' : 'text-left'}`}>
               {language === 'en' ? 'You May Also Like' : 'قد يعجبك أيضًا'}
             </h2>
             <div className="px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
