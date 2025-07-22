@@ -206,7 +206,7 @@ console.log(productCategory)
   const [mainStyle, setMainStyle] = useState({}); // Style for the main container
   const sidePanelRef = useRef(null); // Ref for the sidepanel container
   useEffect(() => {
-    if (isSizeGuideOpen && productInfoRef.current && imgRef.current) {
+    if (!isMobile && isSizeGuideOpen && productInfoRef.current && imgRef.current) {
       const rect = productInfoRef.current.getBoundingClientRect();
       const rect2 = imgRef.current.getBoundingClientRect();
       setTargetBounds({
@@ -884,18 +884,18 @@ console.log(productCategory)
        <Benefits/>
       <Footer />
       <div
-        className={`absolute inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${isSizeGuideOpen ? 'opacity-0' : 'opacity-0 pointer-events-none'}`}
+        className={`${!isMobile?'absolute':'fixed'} inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${isSizeGuideOpen ? 'opacity-0' : 'opacity-0 pointer-events-none'}`}
         onClick={() => setIsSizeGuideOpen(false)}
       />
       <div
-        className={`absolute bg-white z-50 transition-transform duration-300 ease-in-out ${isSizeGuideOpen ? 'translate-x-0' : (isRTL ? '-translate-x-full' : 'translate-x-full')}`}
+        className={`${!isMobile?'absolute':'fixed'} bg-white z-50 transition-transform duration-300 ease-in-out ${isSizeGuideOpen ? 'translate-x-0' : (isRTL ? '-translate-x-full' : 'translate-x-full')}`}
          ref={sidePanelRef}
         style={{
-            top: `${targetBounds.top}px`,
+            top: isMobile?`0px`:`${targetBounds.top}px`,
            // bottom: `${targetBounds.bottom}px`,
-            left: `${targetBounds.left}px`,
-            width: `${targetBounds.width}px`,
-            height: `${targetBounds.height}px`,
+            left: isMobile?`0px`:`${targetBounds.left}px`,
+            width: isMobile?`100%`:`${targetBounds.width}px`,
+            height: isMobile?`100%`:`${targetBounds.height}px`,
             //paddingBottom:'50px',
            // opacity: isSizeGuideOpen ? 1 : 0,
             pointerEvents: isSizeGuideOpen ? 'auto' : 'none',
@@ -907,6 +907,7 @@ console.log(productCategory)
             onSave={handleCustomSizeSave}
             language={language}
             isRTL={isRTL}
+            isMobile={isMobile}
           />
         )}
       </div>
