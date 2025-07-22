@@ -42,13 +42,13 @@ const InputField = ({ field, label, labelAr, value, onchange, language = "en" })
    
         }}
         type="text" 
-        className="block pt-3 pb-0 px-0 w-full text-sm text-black bg-transparent appearance-none dark:text-white dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+        className="block pt-2 pb-0 px-0 w-full text-sm text-black bg-transparent appearance-none dark:text-white dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
         placeholder=" " 
         id={field}
         value={value}
         onChange={onchange}
       />
-      <label className="absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 bottom-1 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+      <label className="absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-5 scale-75 bottom-1 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
         {language === "en" ? label : labelAr}
       </label>
     </div>
@@ -111,7 +111,7 @@ const SizeGuideSidepanel = ({
     <aside className="w-96 flex-shrink-0 bg-white border-r border-gray-200">
       <div className="flex flex-col h-full">
         {/* Header */}
-        <div className="pb-2 flex-shrink-0">
+        <div className="pb-3 flex-shrink-0">
           <button onClick={onClose} className={`flex items-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`} style={{ fontSize: '13px', fontWeight: '500', color: '#100f0d' }}>
             <span style={{ transform: 'rotate(90deg)' }}>
               <svg width="10" height="10" viewBox="0 0 10 6"><path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
@@ -122,7 +122,7 @@ const SizeGuideSidepanel = ({
 
         {/* Content */}
         <div className="flex-1">
-          <div className="space-y-8 pt-1">
+          <div className="space-y-9 pt-2">
             {/* Input fields... */}
             <div className="grid grid-cols-2 gap-6">
               <InputField field="bust" label="Bust" labelAr="صدر" value={formData.bust} onchange={handleNumericChange("bust")} language={language} />
@@ -152,7 +152,7 @@ const SizeGuideSidepanel = ({
               <InputField field="fullTailLength" label="Full Tail Length" labelAr="طول الذيل الكامل" value={formData.fullTailLength} onchange={handleNumericChange("fullTailLength")} language={language} />
               <div></div>
             </div>
-            <div className="space-y-2 pt-5">
+            <div className="space-y-2 pt-6">
                    {/* MODIFIED: Replaced standard textarea with the new TextareaField component */}
                 <TextareaField
                     field="additionalNotes"
@@ -170,7 +170,7 @@ const SizeGuideSidepanel = ({
               value={formData.additionalNotes} onChange={handleInputChange('additionalNotes')} rows={4} className={`w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'}`} style={{ "border": "1px solid #d1d1d0", "borderRadius": "3px" ,outline:'none'}} placeholder={language === 'en' ? 'Please write any additional notes clearly...' : 'لأي ملاحظات أخرى يرجى كتابتها بوضوح...'} />
             </div>*/}
                      <div className="flex justify-center flex-shrink-0">
-          <button onClick={handleSave} className={`flex items-center relative -bottom-12 gap-1 ${isRTL ? 'flex-row-reverse' : ''}`} style={{ fontSize: '13px', fontWeight: '500', color: '#100f0d' }}>
+          <button onClick={handleSave} className={`flex items-center relative -bottom-7 gap-1 ${isRTL ? 'flex-row-reverse' : ''}`} style={{ fontSize: '13px', fontWeight: '500', color: '#100f0d' }}>
                        <span className="animation-underline">{language === 'en' ? 'Save & Return to product' : 'حفظ وعودة إلى المنتج'}</span>
             <span style={{ transform: 'rotate(270deg)' }}>
               <svg width="10" height="10" viewBox="0 0 10 6"><path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>

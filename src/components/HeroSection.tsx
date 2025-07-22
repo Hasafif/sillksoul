@@ -136,8 +136,9 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
             </Swiper>*/}
        <video 
           className="w-full h-full object-cover" 
-          src="https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4"
-          autoPlay
+         // src="https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4"
+         src="/hero2.mp4" 
+         autoPlay
           muted
           loop
           playsInline

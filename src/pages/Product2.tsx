@@ -455,7 +455,8 @@ console.log(productCategory)
     ))}
     
 </div>
- {<button
+
+ {/*<button
             onClick={() => setIsSizeGuideOpen(true)}
             className={`relative bottom-1 ${isRTL ? 'left-0' : 'right-0'} text-xs ${isRTL ? 'font-arabic' : 'font-english'}`}
             style={{ 
@@ -471,7 +472,7 @@ console.log(productCategory)
             <span className="animation-underline">
                      {language === 'en' ? 'Size Guide' : 'دليل المقاسات'}
                 </span>
-          </button>}
+          </button>*/}
         {/* Custom Size Option 
             <div className="pt-2 mb-4">
               <button
@@ -515,6 +516,22 @@ console.log(productCategory)
 
             {/* Action Buttons */}
             <div className="space-y-3">
+                 <div 
+             
+              className={` pb-2 flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
+                <button 
+                onClick={() => setIsSizeGuideOpen(true)}
+                 /* style={{        backgroundColor: '#fbfbfb',
+        color: "#100f0d",
+        border: '1px solid #eeeeee',}}*/
+                className={`wishlist-btn flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+                  <span>{language === 'en' ? ' Custom Size' : 'مقاس مخصص'}</span>
+                </button>
+                {/*<button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+                  <Share2 className="w-5 h-5" />
+                  <span>{language === 'en' ? 'Share' : 'مشاركة'}</span>
+                </button>*/}
+              </div>
            <button
       onClick={handleAddToCart}
       disabled={availability || (selectedSizeIndex !== null && !product.available[selectedSizeIndex])}
@@ -845,7 +862,7 @@ console.log(productCategory)
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-20">
-            <h2 className={` ${isMobile?'text-center':''} text-2xl font-bold text-gray-900 mb-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+            <h2 className={` ${isMobile?'text-center':''} text-2xl font-bold text-gray-900 mb-3 ${isRTL ? 'text-right' : 'text-left'}`}>
               {language === 'en' ? 'You May Also Like' : 'قد يعجبك أيضًا'}
             </h2>
             <div className="px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
