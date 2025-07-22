@@ -94,7 +94,7 @@ const Checkout = () => {
           selectedSize: item.selectedSize,
           customeSizeData:item.customSizeData,
           selectedColor: item.selectedColor,
-          image: item.image
+          image: item.image, 
         })),
         customerInfo: {
           email: customerInfo.email,
