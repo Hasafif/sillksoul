@@ -1067,7 +1067,7 @@ input[type=button], input[type=submit], button {
 @media screen and (max-width: 1024px) {
 .footer-menu {
     flex-direction: column;
-    gap: 50px;
+    gap: 25px;
 }}
 .footer-menu {
     width: 100%;
@@ -2321,6 +2321,12 @@ span.label__value_soldout {
         font-weight: 400;
     color: #100F0D;
 }
+@media (max-width:768px) {
+    .size-selector .variant_option input[type=radio]+label {
+
+        border-radius: 5px;
+    }
+}
 .size-selector .size-flex {
     display: flex;
     align-items: center;
@@ -2507,6 +2513,22 @@ width: 100%;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-
-
+.wishlist-btn {
+     
+        color: #100f0d;
+        border: 1px solid #eeeeee;
+            align-items: center;
+    cursor: pointer;
+    display: flex
+;
+    font-family: inherit;
+    justify-content: center;
+    padding: 10px;
+        margin-top: 10px;
+}
+.wishlist-btn:hover {
+  background-color: #fafafa;
+        color: #100f0d;
+        border: 1px solid #ececec;
+}
 

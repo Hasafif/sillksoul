@@ -528,9 +528,15 @@ console.log(productCategory)
       <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
     </button>
               
-              <div className={`flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-                <button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
-                  <Heart className="w-5 h-5" />
+              <div 
+             
+              className={`flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
+                <button 
+                 /* style={{        backgroundColor: '#fbfbfb',
+        color: "#100f0d",
+        border: '1px solid #eeeeee',}}*/
+                className={`wishlist-btn flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+                  <Heart className="absolute left-24 w-5 h-5" />
                   <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
                 </button>
                 {/*<button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
@@ -801,7 +807,11 @@ console.log(productCategory)
     </button>
               
               <div className={`flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-                <button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+                <button 
+                style={{        backgroundColor: '#fafafa',
+        color: "#100f0d",
+        border: '1px solid #ececec',}}
+                className={`flex-1 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                   <Heart className="w-5 h-5" />
                   <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
                 </button>
@@ -835,7 +845,7 @@ console.log(productCategory)
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-20">
-            <h2 className={`text-2xl font-bold text-gray-900 mb-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+            <h2 className={` ${isMobile?'text-center':''} text-2xl font-bold text-gray-900 mb-8 ${isRTL ? 'text-right' : 'text-left'}`}>
               {language === 'en' ? 'You May Also Like' : 'قد يعجبك أيضًا'}
             </h2>
             <div className="px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
