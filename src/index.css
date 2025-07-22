@@ -2125,7 +2125,7 @@ span.label__value_soldout {
     -webkit-tap-highlight-color: transparent;
     transition: 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
    border: 1px solid #100F0D;
-    border-radius: 3px;
+    border-radius: 1px;
     margin: 0 10px 0 0;
     vertical-align: middle;
     font-size: 100%;
@@ -2152,6 +2152,31 @@ span.label__value_soldout {
     border-radius: 9px;
     border: 1px solid #d1d1d0;
     
+}
+@media (max-width:768px){
+    .color-selector input[type=radio]+label span {
+    border-radius: 4px;
+
+    
+}
+.animation-underline {
+    --lineWidth: 100%; 
+    --lineColor: currentColor;
+    display: inline-block;
+    position: relative;
+    -webkit-background-position: calc(100% - var(--lineWidth, 0%)) 100%;
+    background-position: calc(100% - var(--lineWidth, 0%)) 100%;
+    background-repeat: no-repeat;
+    background-size: var(--lineWidth, 0) 0.0625rem;
+    background-image: linear-gradient(var(--lineColor) 0 0);
+    transition: 0.3s ease, background-position 0.3s ease;
+    cursor: pointer;
+}
+
+.animation-underline:hover {
+    --lineWidth: 0%;
+    right: 0;
+}
 }
 /*
 @media screen and (max-width:1250px) and (min-width:1200px) {
@@ -2220,7 +2245,9 @@ span.label__value_soldout {
     cursor: pointer;
     z-index: 4;
     overflow: hidden;
-    padding-bottom: 8px;
+    padding-bottom: 4px;
+  
+  
 }
 
 
