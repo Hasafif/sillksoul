@@ -541,7 +541,7 @@ console.log(productCategory)
           : 'text-white hover:bg-gray-600'
       }`}
     >
-      <ShoppingCart className="w-5 h-5" />
+      <ShoppingCart className="absolute left-24 w-5 h-5" />
       <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
     </button>
               
@@ -768,48 +768,30 @@ console.log(productCategory)
     ))}
     
 </div>
-  <div className="pt-2 mb-4">
-              <button
-                  onClick={() => setIsSizeGuideOpen(true)}
-                className={`w-full py-3 px-4 border-2 border-dashed rounded-md text-center transition-colors ${
-                  selectedSize === 'custom'
-                    ? 'border-blue-500 bg-blue-50 text-blue-700'
-                    : 'border-gray-300 hover:border-blue-300 text-gray-700'
-                }`}
-              >
-                {customSizeData ? (language==="en"?'Edit Custom Size':'تعديل المقاس المخصص') : (language==="en"?'+ Custom Size':'+ مقاس مخصص')}
-              </button>
-            </div>
+
             {/* Display Custom Size Details */}
-            {customSizeData && selectedSize === 'custom' && (
-              <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
-                <h4 className="font-medium text-blue-900 mb-2">{language==="en"?'Custom Size Details:':'تفاصيل المقاس المخصص:'}</h4>
-                <div className="text-sm text-blue-800 space-y-1">
-                  <p>{language === 'en' ? "Bust:" : "صدر:"} {customSizeData.bust} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Waist:" : "خصر:"} {customSizeData.waist} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Hips:" : "أرداف:"} {customSizeData.hips} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Shoulders:" : "اكتاف:"} {customSizeData.shoulders} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Bust Point:" : "نقطة الصدر:"} {customSizeData.bustPoint} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Waist Point:" : "نقطة الخصر:"} {customSizeData.waistPoint} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Nipple to Nipple:" : "التباعد بين النهدين:"} {customSizeData.nippleToNipple} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Arm Round:" : "دوران اليد:"} {customSizeData.armRound} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Wrist:" : "دوران الرسغ:"} {customSizeData.wrist} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Arm Hole:" : "طول اليد:"} {customSizeData.armHole} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Sleeve Length:" : "طول الكم:"} {customSizeData.sleeveLength} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Full Length:" : "الطول الكامل:"} {customSizeData.fullLength} {language === 'en' ? "Inch" : "إنش"}</p>
-                  <p>{language === 'en' ? "Full Tail Length:" : "طول الذيل الكامل:"} {customSizeData.fullTailLength} {language === 'en' ? "Inch" : "إنش"}</p>
-                  {customSizeData.additionalNotes && (
-                    <p>{language === 'en' ? "Notes:" : "ملاحظات:"} {customSizeData.additionalNotes}</p>
-                  )}
-                </div>
-              </div>
-            )}
             </div>
 
             
 
             {/* Action Buttons */}
             <div className="space-y-3">
+              <div 
+             
+              className={` pb-2 flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
+                <button 
+                onClick={() => setIsSizeGuideOpen(true)}
+                 /* style={{        backgroundColor: '#fbfbfb',
+        color: "#100f0d",
+        border: '1px solid #eeeeee',}}*/
+                className={`wishlist-btn flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+                  <span>{language === 'en' ? ' Custom Size' : 'مقاس مخصص'}</span>
+                </button>
+                {/*<button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+                  <Share2 className="w-5 h-5" />
+                  <span>{language === 'en' ? 'Share' : 'مشاركة'}</span>
+                </button>*/}
+              </div>
               <button
       onClick={handleAddToCart}
       disabled={availability || (selectedSizeIndex !== null && !product.available[selectedSizeIndex])}
@@ -819,17 +801,19 @@ console.log(productCategory)
           : 'text-white hover:bg-gray-600'
       }`}
     >
-      <ShoppingCart className="w-5 h-5" />
+      <ShoppingCart className="absolute left-24 w-5 h-5" />
       <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
     </button>
               
-              <div className={`flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
+           <div 
+             
+              className={`flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
                 <button 
-                style={{        backgroundColor: '#fafafa',
+                 /* style={{        backgroundColor: '#fbfbfb',
         color: "#100f0d",
-        border: '1px solid #ececec',}}
-                className={`flex-1 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
-                  <Heart className="w-5 h-5" />
+        border: '1px solid #eeeeee',}}*/
+                className={`wishlist-btn flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+                  <Heart className="absolute left-24 w-5 h-5" />
                   <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
                 </button>
                 {/*<button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
