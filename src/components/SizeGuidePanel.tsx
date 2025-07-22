@@ -136,7 +136,7 @@ pb-2 flex-shrink-0
         </div>
 
         {/* Scrollable content with responsive grid */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-4 pl-8 pr-8">
           <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-x-6 gap-y-8`}>
             {fields.map(field => (
               <InputField
