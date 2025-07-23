@@ -72,7 +72,7 @@ const DesignerIntro = ({
                 .DesignerIntroTitle-jfmGui.csQcLb {
                   grid-area: title;
                   align-self: start; 
-                  padding-top: 5rem; 
+                  padding-top: 6rem; 
                 }
 
                 .qRstE {
@@ -86,7 +86,7 @@ const DesignerIntro = ({
                 @media (min-width: 768px) {
                   .qRstE {
                     text-align: ${isRTL ? 'right' : 'left'};
-                    margin-bottom: 0.8rem; 
+                    margin-bottom: 0.7rem; 
                     font-size: 64px;
                     line-height: 1.125em;
                   }
