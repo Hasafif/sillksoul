@@ -210,7 +210,7 @@ useEffect(() => {
           </div>
 
           {/* No Results Message */}
-          {filteredProducts.length === 0 && (
+          {/*filteredProducts.length === 0 && (
             <div className={`
               text-center py-12
               ${isRTL ? 'text-right' : 'text-left'} sm:text-center
@@ -222,7 +222,7 @@ useEffect(() => {
                 {t("filter1")}
               </p>
             </div>
-          )}
+          )*/}
         </div>
       </section>
         <Benefits/>
