@@ -33,14 +33,18 @@ const DesignerIntro = ({
           className={`BodyWrapper-kufPGa jsixHr body DesignerIntroBody-ewKWAa gWmsiL`}
           // className={`pb-4`}
 
-> {t('aboutDescription1')}
+> {t('par1')}
 
       </p>
        <p  
        className={`BodyWrapper-kufPGa jsixHr body DesignerIntroBody-ewKWAa gWmsiL`}
        // className={`pb-4`}
        >
-{t('aboutDescription2')}        </p>
+{t('par2')}        </p>
+ <p  
+        className={`BodyWrapper-kufPGa jsixHr body DesignerIntroBody-ewKWAa gWmsiL`}
+        >
+{t('par3')}        </p>
 
     </div>
  
@@ -89,15 +93,15 @@ const DesignerIntro = ({
         --grid-gap: 2rem;
     }
 }
-          @media (max-width:480px) {
+          @media (max-width:560px) {
           .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
-           padding-bottom:8rem;
+           padding-bottom:4rem;
         
            }
           }
               @media (max-width:330px) {
           .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
-           padding-bottom:12rem;
+           padding-bottom:8rem;
         
            }
           }
@@ -266,7 +270,7 @@ const DesignerIntro = ({
             font-weight: 400;
             overflow-wrap: normal;
               padding-bottom:0.3rem;
-              padding-top:0.5rem;
+              padding-top:0.8rem;
               margin-top:0;
             color: rgb(31, 31, 31);
           
@@ -295,7 +299,7 @@ const DesignerIntro = ({
  
           .fIsWrX {
             display: -webkit-box;
-          /* overflow: hidden;*/
+           overflow: hidden;
             text-overflow: ellipsis;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: ${isExpanded ? 'none' : '12'};
@@ -446,7 +450,7 @@ src={`/v2.mp4`}
             </div>
           </div>
           
-          {/*<button 
+          {<button 
             className="BaseButton-bLlsy ButtonWrapper-xCepQ cRxydS dYPVcQ button button--secondary button--collapse button__icon--chevron-up"
             data-event-click="{&quot;element&quot;:&quot;Button&quot;}"
             data-testid="Button"
@@ -475,7 +479,7 @@ src={`/v2.mp4`}
                 />
               </svg>
             </div>
-          </button>*/}
+          </button>}
         </div>
       </section>
 
