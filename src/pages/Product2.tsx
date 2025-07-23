@@ -535,27 +535,28 @@ console.log(productCategory)
            <button
       onClick={handleAddToCart}
       disabled={availability || (selectedSizeIndex !== null && !product.available[selectedSizeIndex])}
-      className={`btn2 btn2--primary ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'} flex items-center justify-center w-full py-3 px-6 transition-all duration-200 ${
+      className={`btn2 btn2--primary ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'} relative flex items-center justify-center w-full py-3 px-6 transition-all duration-200 ${
         availability || (selectedSizeIndex !== null && !product.available[selectedSizeIndex])
           ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60 hover:bg-gray-400' 
           : 'text-white hover:bg-gray-600'
       }`}
     >
-      <ShoppingCart className={`absolute ${isRTL?'left-5':'left-24'} w-5 h-5`}/>
+      <ShoppingCart className={`absolute left-6 w-5 h-5`}/>
       <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
     </button>
               
               <div 
              
               className={`flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-                <button 
-                 /* style={{        backgroundColor: '#fbfbfb',
-        color: "#100f0d",
-        border: '1px solid #eeeeee',}}*/
-                className={`wishlist-btn flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
-                  <Heart className={`absolute ${isRTL?'left-5':'left-24'} w-5 h-5`} />
-                  <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
-                </button>
+              <button
+    className="wishlist-btn relative flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
+  >
+    {/* MODIFIED: Icon is now positioned absolutely on the left, inside the button's padding. */}
+    <Heart className="absolute left-6 w-5 h-5" />
+    
+    {/* The text will remain centered within the button. */}
+    <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
+  </button>
                 {/*<button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                   <Share2 className="w-5 h-5" />
                   <span>{language === 'en' ? 'Share' : 'مشاركة'}</span>
@@ -774,9 +775,8 @@ console.log(productCategory)
 
             
 
-            {/* Action Buttons */}
-            <div className="space-y-3">
-              <div 
+  <div className="space-y-3">
+                 <div 
              
               className={` pb-2 flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
                 <button 
@@ -792,30 +792,31 @@ console.log(productCategory)
                   <span>{language === 'en' ? 'Share' : 'مشاركة'}</span>
                 </button>*/}
               </div>
-              <button
+           <button
       onClick={handleAddToCart}
       disabled={availability || (selectedSizeIndex !== null && !product.available[selectedSizeIndex])}
-      className={`btn2 btn2--primary ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'} flex items-center justify-center w-full py-3 px-6 transition-all duration-200 ${
+      className={`btn2 btn2--primary ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'} relative flex items-center justify-center w-full py-3 px-6 transition-all duration-200 ${
         availability || (selectedSizeIndex !== null && !product.available[selectedSizeIndex])
           ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60 hover:bg-gray-400' 
           : 'text-white hover:bg-gray-600'
       }`}
     >
-      <ShoppingCart className={`absolute ${isRTL?'left-5':'left-24'} w-5 h-5`} />
+      <ShoppingCart className={`absolute left-6 w-5 h-5`}/>
       <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
     </button>
               
-           <div 
+              <div 
              
               className={`flex ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-                <button 
-                 /* style={{        backgroundColor: '#fbfbfb',
-        color: "#100f0d",
-        border: '1px solid #eeeeee',}}*/
-                className={`wishlist-btn flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
-                  <Heart className={`absolute ${isRTL?'left-5':'left-24'} w-5 h-5`} />
-                  <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
-                </button>
+              <button
+    className="wishlist-btn relative flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
+  >
+    {/* MODIFIED: Icon is now positioned absolutely on the left, inside the button's padding. */}
+    <Heart className="absolute left-6 w-5 h-5" />
+    
+    {/* The text will remain centered within the button. */}
+    <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
+  </button>
                 {/*<button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                   <Share2 className="w-5 h-5" />
                   <span>{language === 'en' ? 'Share' : 'مشاركة'}</span>

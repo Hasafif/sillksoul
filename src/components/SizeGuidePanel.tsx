@@ -15,12 +15,12 @@ const TextareaField = ({ field, label, labelAr, value, onchange, language = "en"
         value={value}
         onChange={onchange}
         rows={rows}
-        className="block px-2.5 pb-3 pt-5 w-full text-sm text-black bg-transparent rounded-lg border border-gray-300 appearance-none resize-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        className={`${isRTL?'font-arabic':'font-english'} block px-2.5 pb-3 pt-5 w-full text-sm text-black bg-transparent rounded-lg border border-gray-300 appearance-none resize-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
         placeholder=" "
       />
       <label
         htmlFor={field}
-        className={`absolute text-sm text-black duration-300 transform -translate-y-7 scale-75 top-5 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7 ${isRTL ? 'right-2' : 'left-1'}`}
+        className={`${isRTL?'font-arabic':'font-english'} absolute text-sm text-black duration-300 transform -translate-y-7 scale-75 top-5 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7 ${isRTL ? 'right-2' : 'left-1'}`}
       >
         {language === "en" ? label : labelAr}
       </label>
@@ -30,6 +30,7 @@ const TextareaField = ({ field, label, labelAr, value, onchange, language = "en"
 
 // InputField Component (No changes)
 const InputField = ({ field, label, labelAr, value, onchange, language = "en" }) => {
+    const isRTL = language === 'ar';
   return (
     <div className="relative z-0">
       <input 
@@ -39,13 +40,13 @@ const InputField = ({ field, label, labelAr, value, onchange, language = "en" })
           outline: 'none',
         }}
         type="text" 
-        className="block pt-2 pb-0 px-0 w-full text-sm text-black bg-transparent appearance-none dark:text-white dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+        className={`${isRTL?'font-arabic':'font-english'} block pt-2 pb-0 px-0 w-full text-sm text-black bg-transparent appearance-none dark:text-white dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
         placeholder=" " 
         id={field}
         value={value}
         onChange={onchange}
       />
-      <label className="absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-5 scale-75 bottom-1 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+      <label className={`${isRTL?'font-arabic':'font-english'} absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-5 scale-75 bottom-1 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto`}>
         {language === "en" ? label : labelAr}
       </label>
     </div>
@@ -131,7 +132,7 @@ pb-2 flex-shrink-0
             <span style={{ transform: 'rotate(90deg)' }}>
               <svg width="10" height="10" viewBox="0 0 10 6"><path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
             </span>
-            <span className="animation-underline">{language === 'en' ? ' Custom Size' : 'مقاس مخصص'}</span>
+            <span className={`${isRTL?'font-arabic':'font-english'} animation-underline`}>{language === 'en' ? ' Custom Size' : 'مقاس مخصص'}</span>
           </button>
         </div>
 
@@ -167,7 +168,7 @@ pb-2 flex-shrink-0
         <div className={`flex-shrink-0 ${isMobile?'p-4':'pt-6'}  border-t border-gray-200`}>
            <div className="flex justify-center">
              <button onClick={handleSave} className={`flex items-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`} style={{ fontSize: '13px', fontWeight: '500', color: '#100f0d' }}>
-               <span className="animation-underline">{language === 'en' ? 'Save & Return to product' : 'حفظ وعودة إلى المنتج'}</span>
+               <span className={`${isRTL?'font-arabic':'font-english'} animation-underline`}>{language === 'en' ? 'Save & Return to product' : 'حفظ وعودة إلى المنتج'}</span>
                <span style={{ transform: 'rotate(270deg)' }}>
                  <svg width="10" height="10" viewBox="0 0 10 6"><path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
                </span>
