@@ -206,7 +206,7 @@ console.log(productCategory)
   const [mainStyle, setMainStyle] = useState({}); // Style for the main container
   const sidePanelRef = useRef(null); // Ref for the sidepanel container
   useEffect(() => {
-    if (!isMobile && isSizeGuideOpen && productInfoRef.current && imgRef.current) {
+    if (!isMobile && !isTablet && isSizeGuideOpen && productInfoRef.current && imgRef.current) {
       const rect = productInfoRef.current.getBoundingClientRect();
       const rect2 = imgRef.current.getBoundingClientRect();
       setTargetBounds({
@@ -541,7 +541,7 @@ console.log(productCategory)
           : 'text-white hover:bg-gray-600'
       }`}
     >
-      <ShoppingCart className="absolute left-24 w-5 h-5" />
+      <ShoppingCart className={`absolute ${isRTL?'left-5':'left-24'} w-5 h-5`}/>
       <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
     </button>
               
@@ -553,7 +553,7 @@ console.log(productCategory)
         color: "#100f0d",
         border: '1px solid #eeeeee',}}*/
                 className={`wishlist-btn flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
-                  <Heart className="absolute left-24 w-5 h-5" />
+                  <Heart className={`absolute ${isRTL?'left-5':'left-24'} w-5 h-5`} />
                   <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
                 </button>
                 {/*<button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
@@ -801,7 +801,7 @@ console.log(productCategory)
           : 'text-white hover:bg-gray-600'
       }`}
     >
-      <ShoppingCart className="absolute left-24 w-5 h-5" />
+      <ShoppingCart className={`absolute ${isRTL?'left-5':'left-24'} w-5 h-5`} />
       <span>{language === 'en' ? 'Add to Cart' : 'أضف إلى السلة'}</span>
     </button>
               
@@ -813,7 +813,7 @@ console.log(productCategory)
         color: "#100f0d",
         border: '1px solid #eeeeee',}}*/
                 className={`wishlist-btn flex-1 py-3 px-6 rounded-lg transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
-                  <Heart className="absolute left-24 w-5 h-5" />
+                  <Heart className={`absolute ${isRTL?'left-5':'left-24'} w-5 h-5`} />
                   <span>{language === 'en' ? 'Add to Wishlist' : 'أضف إلى المفضلة'}</span>
                 </button>
                 {/*<button className={`flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
@@ -891,11 +891,11 @@ console.log(productCategory)
         className={`${!isMobile?'absolute':'fixed'} bg-white z-50 transition-transform duration-300 ease-in-out ${isSizeGuideOpen ? 'translate-x-0' : (isRTL ? '-translate-x-full' : 'translate-x-full')}`}
          ref={sidePanelRef}
         style={{
-            top: isMobile?`0px`:`${targetBounds.top}px`,
+            top: (isMobile||isTablet)?`0px`:`${targetBounds.top}px`,
            // bottom: `${targetBounds.bottom}px`,
-            left: isMobile?`0px`:`${targetBounds.left}px`,
-            width: isMobile?`100%`:`${targetBounds.width}px`,
-            height: isMobile?`100%`:`${targetBounds.height}px`,
+            left: (isMobile||isTablet)?`0px`:(isRTL?`${targetBounds.left-40}px`:`${targetBounds.left}px`),
+            width: (isMobile||isTablet)?`100%`:`${targetBounds.width}px`,
+            height: (isMobile||isTablet)?`100%`:`${targetBounds.height}px`,
             //paddingBottom:'50px',
            // opacity: isSizeGuideOpen ? 1 : 0,
             pointerEvents: isSizeGuideOpen ? 'auto' : 'none',
@@ -907,7 +907,8 @@ console.log(productCategory)
             onSave={handleCustomSizeSave}
             language={language}
             isRTL={isRTL}
-            isMobile={isMobile}
+            isMobile={isMobile||isTablet}
+           // isTablet={true}
           />
         )}
       </div>

@@ -126,7 +126,7 @@ const SizeGuideSidepanel = ({
         {/* MODIFIED: Header is now the same for mobile and desktop 
 pb-2 flex-shrink-0
 */}
-        <div className="flex-shrink-0 p-4 border-b border-gray-200">
+        <div className={`flex-shrink-0 ${isMobile?(isRTL?'pr-8':'p-4'):'pb-4'} border-b border-gray-200`}>
           <button onClick={onClose} className={`flex items-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`} style={{ fontSize: '13px', fontWeight: '500', color: '#100f0d' }}>
             <span style={{ transform: 'rotate(90deg)' }}>
               <svg width="10" height="10" viewBox="0 0 10 6"><path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
@@ -136,8 +136,8 @@ pb-2 flex-shrink-0
         </div>
 
         {/* Scrollable content with responsive grid */}
-        <div className="flex-1 overflow-y-auto p-4 pl-8 pr-8">
-          <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-x-6 gap-y-8`}>
+        <div className={`flex-1 overflow-y-auto p-4 ${isMobile?'pl-8 pr-8':''}`}>
+          <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-x-6 ${isMobile?'gap-y-8':'gap-y-10'}`}>
             {fields.map(field => (
               <InputField
                 key={field.name}
@@ -151,7 +151,7 @@ pb-2 flex-shrink-0
             ))}
           </div>
 
-          <div className="mt-8">
+          <div className={`${isMobile?'mt-8':' mt-12'}`}>
             <TextareaField
               field="additionalNotes"
               label="Additional Notes (Optional)"
@@ -164,7 +164,7 @@ pb-2 flex-shrink-0
         </div>
         
         {/* MODIFIED: Footer is now the same for mobile and desktop */}
-        <div className="flex-shrink-0 p-4 border-t border-gray-200">
+        <div className={`flex-shrink-0 ${isMobile?'p-4':'pt-6'}  border-t border-gray-200`}>
            <div className="flex justify-center">
              <button onClick={handleSave} className={`flex items-center gap-1 ${isRTL ? 'flex-row-reverse' : ''}`} style={{ fontSize: '13px', fontWeight: '500', color: '#100f0d' }}>
                <span className="animation-underline">{language === 'en' ? 'Save & Return to product' : 'حفظ وعودة إلى المنتج'}</span>
