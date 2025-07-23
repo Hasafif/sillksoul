@@ -869,10 +869,10 @@ console.log(productCategory)
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <h3 className={`font-medium text-gray-900 ${isRTL ? 'text-right' : 'text-left'}`}>
+                    <h3 className={`text-center font-medium text-gray-900`}>
                       {relatedProductName}
                     </h3>
-                    <p className={`text-gray-600 ${isRTL ? 'text-right' : 'text-left'}`}>
+                    <p className={`text-center text-gray-600`}>
                       {formatPrice(relatedProduct.price)}
                     </p>
                   </Link>

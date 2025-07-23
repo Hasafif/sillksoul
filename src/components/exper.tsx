@@ -51,33 +51,67 @@ const DesignerIntro = ({
         {`
 
          @font-face{
-    font-family: "AGaramondPro-Regular";
-    src: url("../assets/fonts/AGaramondPro-Regular.otf") format("opentype");
+    font-family: "Starsight";
+    src: url("../assets/fonts/Starsight.ttf") format("truetype");
     font-weight:normal;
     font-style:normal;
     font-display:swap;
 }
             .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
             display: grid;
-            grid-template-areas: "title" "image" "body";
+            grid-template-areas: "title" "video" "body";
             grid-template-columns: 1fr;
-            gap: 1rem;
-            margin-top: 2rem;
+            /*gap: 1rem;*/
+            margin-top: 4rem;
              padding-bottom:4rem;
           
           }
+             .gkCFoE {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0px auto;
+    --grid-gap: 1rem;
+    --grid-margin: 1.5rem;
+    max-width: 1600px;
+    padding-right: -calc(1 * var(--grid-margin));
+    padding-left: -calc(1 * var(--grid-margin));
+}
+    @media (min-width: 768px) {
+    .gkCFoE {
+        --grid-gap: 1.5rem;
+        --grid-margin: 3rem;
+          padding-right: calc(1 * var(--grid-margin));
+    padding-left: calc(1 * var(--grid-margin));
+    }
+}
+    @media (min-width: 1024px) {
+    .gkCFoE {
+        --grid-gap: 2rem;
+    }
+}
           @media (max-width:480px) {
           .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
-           padding-bottom:8rem;}
+           padding-bottom:8rem;
+        
+           }
           }
-           
+              @media (max-width:330px) {
+          .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
+           padding-bottom:12rem;
+        
+           }
+          }
+           .ckNYsD {
+                         gap: 1rem;
+           }
           @media (min-width: 768px) {
             .DesignerIntroWrapper-sc-cdteAU.ckNYsD {
-              grid-template-areas: "image title" "image body";
+              grid-template-areas: "video title" "video body";
               grid-template-columns: 1fr 1fr;
               margin-top: 4rem;
-              gap: 2rem;
+              gap:2rem;
               row-gap: 3rem;
+         
            
             }
           }
@@ -125,7 +159,8 @@ const DesignerIntro = ({
     --type-token: discovery . page-hed-section;
     text-transform: none;
     /*font-family: FBDidotS, serif;*/
-    font-family: ${fontClass}, serif;
+    /*font-family: ${fontClass}, serif;*/
+    font-family:Starsight;
     font-feature-settings: normal;
     font-style: normal;
     letter-spacing: 0.0416667em;
@@ -135,11 +170,12 @@ const DesignerIntro = ({
     font-weight: 300;
     overflow-wrap: normal;
     color: rgb(0, 0, 0);
-    padding-bottom:0.5rem;
+    
 }
           @media (min-width: 768px) {
     .qRstE {
         text-align: ${isRTL?'right':'left'};
+        margin-bottom:2rem;
   
 
        
@@ -155,7 +191,7 @@ const DesignerIntro = ({
 
 
           .SpanWrapper-umhxW.cudDwW.responsive-asset.DesignerIntroImage-bNPsMh.hDgjsm {
-            grid-area: image;
+            grid-area: video;
             display: block;
             transition: opacity 1s;
             opacity: 1;
@@ -194,7 +230,8 @@ const DesignerIntro = ({
             align-self:start;
             text-transform: none;
             /*font-family: "AGaramondPro-Regular";*/
-            font-family: ${fontClass};
+            /*font-family: ${fontClass};*/
+            font-family:Starsight;
             font-feature-settings: normal;
             font-style: normal;
             letter-spacing: normal;
@@ -209,8 +246,8 @@ const DesignerIntro = ({
           }
                        @media (max-width:768px) {
           .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL {
-                       padding-left:0.5rem;
-             padding-right:0.5rem;
+                       padding-left:0.7rem;
+             padding-right:0.7rem;
              
           }
           }
@@ -220,15 +257,16 @@ const DesignerIntro = ({
             /*font-family: 'Crimson Text', serif;*/
             /*font-family: AdobeGaramondPro, serif;*/
             /*font-family: "AGaramondPro-Regular";*/
-            font-family: ${fontClass};
+            /*font-family: ${fontClass};*/
+             font-family:Starsight;
             font-feature-settings: normal;
             font-style: normal;
             letter-spacing: normal;
             line-break: auto;
             font-weight: 400;
             overflow-wrap: normal;
-              padding-bottom:0.2rem;
-              padding-top:1rem;
+              padding-bottom:0.3rem;
+              padding-top:0.5rem;
               margin-top:0;
             color: rgb(31, 31, 31);
           
@@ -347,8 +385,8 @@ const DesignerIntro = ({
           }
         `}
       </style>
-      
-      <section 
+      <div className='gkCFoE'>
+<section 
         data-testid="designer-intro" 
         className="DesignerIntroWrapper-sc-cdteAU ckNYsD"
       >
@@ -360,10 +398,11 @@ const DesignerIntro = ({
             {name}
           </h1>
         </div>
+        {/* MODIFIED: Video element is now in a styled container */}
         
-        <span className="SpanWrapper-umhxW cudDwW responsive-asset DesignerIntroImage-bNPsMh hDgjsm">
+        {<span className="SpanWrapper-umhxW cudDwW responsive-asset DesignerIntroImage-bNPsMh hDgjsm">
           <picture className="ResponsiveImagePicture-cWuUZO dUOtEa DesignerIntroImage-bNPsMh hDgjsm responsive-image">
-           {
+           {/*
 <img
              alt={imageAlt}
             className="ResponsiveImageContainer-eybHBd fptoWY responsive-image__image"
@@ -372,12 +411,12 @@ const DesignerIntro = ({
               srcSet={imageSrcSet}
              sizes="100vw"
            //  autoPlay={true}
-            />
+            />*/}
 
-} 
-               {/*<video 
+
+               {<video 
             className="ResponsiveImageContainer-eybHBd fptoWY responsive-image__image"
-src={`/Ghala.mp4`} 
+src={`/v2.mp4`} 
        //  src="https://res.cloudinary.com/www-eliesaab-com/video/upload/c_scale,f_auto,h_1200,q_auto/v1747121895/ES_Summer_Escapade_Banner_1_eumrdh.mp4"
 
  autoPlay
@@ -391,9 +430,9 @@ src={`/Ghala.mp4`}
          //  maxHeight: '20%',
            // transform: 'scale(1.2)'
           }}
-        />*/}
+        />}
           </picture>
-        </span>
+        </span>}
         
         <div data-testid="ClampWrapper" className="ClampWrapper-kZxfkB hTTNGO clamp">
           <div className="ClampContent-hilPkr fIsWrX">
@@ -439,6 +478,9 @@ src={`/Ghala.mp4`}
           </button>*/}
         </div>
       </section>
+
+      </div>
+      
     </div>
   );
 };
