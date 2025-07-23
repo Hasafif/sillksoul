@@ -458,7 +458,7 @@ src={`/v2.mp4`}
             onClick={() => setIsExpanded(!isExpanded)}
           >
             <span className="ButtonLabel-cjAuJN hzwRuG button__label">
-              {isExpanded ? 'Read less' : 'Read more'}
+              {isExpanded ? t('readLess') : t('readMore')}
             </span>
             <div className="ButtonIconWrapper-gFdzAL iJyRRe button__icon-container">
               <svg 

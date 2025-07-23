@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X, Search } from "lucide-react";
-import { products } from "../data/product";
+import { loadAllProducts } from "../data/product";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -12,7 +12,9 @@ interface SearchPanelProps {
 const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const { language,isRTL } = useLanguage();
-
+     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
   const filteredProducts = products.filter(product => {
     // Get the appropriate product name based on language
     const productName = (language === 'en') 
@@ -27,7 +29,25 @@ const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
     return productName.toLowerCase().includes(searchTerm.toLowerCase()) ||
            categoryName.toLowerCase().includes(searchTerm.toLowerCase());
   });
-
+ useEffect(() => {
+        const fetchProducts = async () => {
+          setIsLoading(true);
+          setError(null);
+          
+          try {
+            const productData = await loadAllProducts();
+            setProducts(productData);
+          } catch (err) {
+            setProducts([])
+            console.error('Error loading products:', err);
+            setError(err.message || 'Failed to load products');
+          } finally {
+            setIsLoading(false);
+          }
+        };
+    
+        fetchProducts();
+      }, []);
   return (
     <>
       {/* Overlay */}
