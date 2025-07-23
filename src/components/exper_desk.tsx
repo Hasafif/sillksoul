@@ -86,7 +86,8 @@ const DesignerIntro = ({
                 @media (min-width: 768px) {
                   .qRstE {
                     text-align: ${isRTL ? 'right' : 'left'};
-                    margin-bottom: 0.7rem; 
+                    margin-bottom: 1rem;
+                    padding-top:0.7rem; 
                     font-size: 64px;
                     line-height: 1.125em;
                   }
