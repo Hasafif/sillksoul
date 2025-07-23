@@ -13,7 +13,7 @@ interface CurrencyContextType {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 // Currency Provider Component
 export const CurrencyProvider = ({ children }) => {
-  const [currency, setCurrency] = useState<Currency>('USD');
+  const [currency, setCurrency] = useState<Currency>('AED');
   
   const switchCurrency = () => {
     setCurrency(prev => prev === 'USD' ? 'AED' : 'USD');
