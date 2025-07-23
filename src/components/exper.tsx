@@ -164,7 +164,7 @@ const DesignerIntro = ({
     text-transform: none;
     /*font-family: FBDidotS, serif;*/
     /*font-family: ${fontClass}, serif;*/
-    font-family:Starsight;
+    font-family:"Starsight";
     font-feature-settings: normal;
     font-style: normal;
     letter-spacing: 0.0416667em;
@@ -235,7 +235,7 @@ const DesignerIntro = ({
             text-transform: none;
             /*font-family: "AGaramondPro-Regular";*/
             /*font-family: ${fontClass};*/
-            font-family:Starsight;
+            font-family:"Starsight";
             font-feature-settings: normal;
             font-style: normal;
             letter-spacing: normal;
@@ -262,7 +262,7 @@ const DesignerIntro = ({
             /*font-family: AdobeGaramondPro, serif;*/
             /*font-family: "AGaramondPro-Regular";*/
             /*font-family: ${fontClass};*/
-             font-family:Starsight;
+             font-family:"Starsight";
             font-feature-settings: normal;
             font-style: normal;
             letter-spacing: normal;

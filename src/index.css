@@ -115,6 +115,14 @@
     font-style:normal;
     font-display:swap;
 }
+
+ @font-face{
+    font-family: "Starsight";
+    src: url("./assets/fonts/Starsight.ttf") format("truetype");
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
 /* Ready-To-Wear Style */
 .columns--big .columns__wrapper {
     max-width: 110%;

@@ -120,12 +120,14 @@ const DesignerIntro = ({
                 
                 .BodyWrapper-kufPGa.jsixHr.body.DesignerIntroBody-ewKWAa.gWmsiL {
                   text-transform: none;
-                  font-family: ${fontClass};
+                /*  font-family: ${fontClass};*/
+                 font-family:"Starsight";
                   font-weight: 400;
                   color: rgb(31, 31, 31);
                 }
                 .BodyWrapper-kufPGa.jsixHr.body p {
-                    font-family: ${fontClass}, sans-serif !important;
+                   /* font-family: ${fontClass}, sans-serif !important;*/
+                     font-family:"Starsight";
                 }
                 @media (min-width: 768px) {
                   .BodyWrapper-kufPGa.jsixHr.body p + p {
@@ -160,7 +162,8 @@ const DesignerIntro = ({
                   color: rgb(0, 0, 0);
                   background-color: transparent;
                   text-transform: uppercase;
-                  font-family: Arial, helvetica, sans-serif;
+                  /*font-family: Arial, helvetica, sans-serif;*/
+                   font-family:"Starsight";
                   font-size: 13px;
                   font-weight: 600;
                   border: none;
