@@ -90,7 +90,7 @@ const ProductAccordion = ({ title = "Description", children, maxHeight = 110 }) 
        .accordion-content-english {
           padding: 15px 0 5px 0;
           font-size: 0.9rem;
-              font-weight:400;
+              font-weight:300;
           font-family:Helvetica Neue LT W05;
           color: #100F0D;
           width: 100%;
@@ -98,7 +98,7 @@ const ProductAccordion = ({ title = "Description", children, maxHeight = 110 }) 
          .accordion-content-arabic {
           padding: 15px 0 5px 0;
           font-size: 0.9rem;
-              font-weight:400;
+              font-weight:300;
           font-family:URW DIN ARABIC;
           color: #100F0D;
           width: 100%;
