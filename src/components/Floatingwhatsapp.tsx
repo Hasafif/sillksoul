@@ -3,7 +3,7 @@ import { X, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const FloatingWhatsApp = ({ 
-  phoneNumber = "+971991913661", 
+  phoneNumber = "+971507894144", 
   message = "Hello! I'm interested in your services.",
   position = "bottom-right" 
 }) => {
@@ -17,7 +17,7 @@ const FloatingWhatsApp = ({
   };
 
   const handleWhatsAppClick = () => {
-    const formattedPhone = formatPhoneNumber('991913661');
+    const formattedPhone = formatPhoneNumber('507894144');
     const encodedMessage = encodeURIComponent(message);
     console.log(phoneNumber)
     const whatsappUrl = `https://wa.me/${formattedPhone}`;
