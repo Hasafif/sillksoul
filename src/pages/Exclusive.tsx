@@ -144,7 +144,7 @@ useEffect(() => {
                 dir={isRTL ? 'rtl' : 'ltr'}
               >
                 <option value="all">
-                  {language === 'en' ? 'All Collections' : 'جميع المجموعات'}
+                  {language === 'en' ? 'All Categories' : 'جميع الأصناف'}
                 </option>
                 {all_categories.map((category, index) => (
                   <option key={index} value={language === 'en' ? category.name_english.toLowerCase() : category.name_arabic.toLowerCase()}>
