@@ -167,7 +167,7 @@ useEffect(() => {
               ${isRTL ? 'flex-row-reverse' : 'flex-row'}
             `}>
               {/* Category Filter */}
-              <select
+             {/* <select
                 value={filterBy}
                 onChange={(e) => setFilterBy(e.target.value)}
                 className={`
@@ -185,7 +185,7 @@ useEffect(() => {
                     {language === 'en' ? category.name_english: category.name_arabic}
                   </option>
                 ))}
-              </select>
+              </select>*/}
 
               {/* Price Range */}
               {/*<div className={`
