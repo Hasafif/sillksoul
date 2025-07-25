@@ -17,6 +17,7 @@ const AboutSection = () => {
               <p className="text-lg mb-6">
                {t("aboutDescription1")}
               </p>
+              
               <p className="text-lg mb-8">
              {t("aboutDescription2")}
               </p>
