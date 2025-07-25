@@ -27,9 +27,51 @@ const Category = () => {
       
       try {
         const  categoryData = await loadCategory(id);
-        setCategory(categoryData);
+        if (!categoryData) {
+          setCategory(
+            {
+    
+        id: "1",
+        name_english: "Dresses",
+        name_arabic: "فساتين",
+        products:[]
+  }
+          )
+        }
+        else {
+ setCategory(categoryData);
+        }
+       
         const productData = await loadProducts(id);
-        setProducts(productData);
+        if (productData.length==0) {
+setProducts([
+              {
+    id: "1",
+    name_english: "Elegant Summer Dress",
+    name_arabic: "فستان صيفي أنيق",
+    price: 189,
+    image: "/p11.jpeg",
+    hoverImage: "/p12.jpeg",
+    images : ['/p12.jpeg','/p11.jpeg'],
+    category_english: "Dresses",
+    category_arabic:"فساتين",
+    collection: "",
+    category:"",
+    description_english: "A flowing summer dress perfect for warm days",
+    description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    available:[true,false,false,false,true,false,true,true,true,true],
+    colors: ["#a4ad98"],
+    inStock: true,
+    rating: 4.8,
+    reviews: 124
+  }
+            ])
+        }
+        else {
+  setProducts(productData);
+        }
+      
       } catch (err) {
         setCategory(categories2.find((p => p.id === id)));
         setProducts(category.products)

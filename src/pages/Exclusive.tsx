@@ -30,7 +30,35 @@ useEffect(() => {
       
       try {
         const productData = await loadAllProducts();
-        setAllProducts(productData);
+        if (productData.length==0) {
+          setAllProducts([
+              {
+    id: "1",
+    name_english: "Elegant Summer Dress",
+    name_arabic: "فستان صيفي أنيق",
+    price: 189,
+    image: "/p11.jpeg",
+    hoverImage: "/p12.jpeg",
+    images : ['/p12.jpeg','/p11.jpeg'],
+    category_english: "Dresses",
+    category_arabic:"فساتين",
+    collection: "",
+    category:"",
+    description_english: "A flowing summer dress perfect for warm days",
+    description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    available:[true,false,false,false,true,false,true,true,true,true],
+    colors: ["#a4ad98"],
+    inStock: true,
+    rating: 4.8,
+    reviews: 124
+  }
+            ])
+        }
+        else {
+ setAllProducts(productData);
+        }
+       
       } catch (err) {
         setAllProducts(products)
         console.error('Error loading products:', err);
@@ -49,7 +77,13 @@ useEffect(() => {
       
       try {
         const categoryData = await loadCategories();
-        setAllCategories(categoryData);
+        if (categoryData.length==0) {
+    setAllCategories(categories2)
+        }
+        else {
+   setAllCategories(categoryData);
+        }
+     
       } catch (err) {
         setAllCategories(categories2)
         console.error('Error loading categories:', err);

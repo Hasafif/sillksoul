@@ -31,7 +31,7 @@ export async function loadImages() {
     
   } 
 }
-export const images = [
+export const images_fallbacks = [
   {
     id: 1,
     src: "/p11.jpeg",

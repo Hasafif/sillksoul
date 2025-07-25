@@ -39,15 +39,36 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
   const navigateToHome = () => navigate('/');
 
   // Play the first video on initial component mount
-  useEffect(() => {
+ /* useEffect(() => {
     const firstVideo = videoRefs.current[0];
     if (firstVideo) {
       firstVideo.play().catch(error => {
         console.error("Initial video play failed:", error);
       });
     }
-  }, []);
+  }, []);*/
+  useEffect(() => {
+    const videoElement = videoRefs.current[0];
 
+    if (videoElement) {
+      // The play() method returns a promise.
+      const playPromise = videoElement.play();
+
+      if (playPromise !== undefined) {
+        // Handle the case where autoplay is blocked by the browser.
+        playPromise.catch(error => {
+          console.log("Autoplay was prevented. This is normal in most browsers.", error);
+        });
+      }
+    }
+
+    // The cleanup function will be called when the component unmounts.
+    return () => {
+      if (videoElement) {
+        videoElement.pause();
+      }
+    };
+  }, []); // An empty array ensures this effect runs only once on mount.
   const handleSlideChange = (swiper: any) => {
     // Pause all videos
     videoRefs.current.forEach(video => {

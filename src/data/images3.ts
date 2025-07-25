@@ -28,7 +28,7 @@ export async function loadImages2() {
     
   } 
 }
-export const images3 = [
+export const images3_fallbacks = [
   {
     id: 1,
     //src: "https://eliesaab.com/cdn/shop/files/ELIE_SAAB__SUMMER_ESCAPADE_LOOK_23.jpg?v=1747821461&amp;width=407",

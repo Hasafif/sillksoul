@@ -12,10 +12,102 @@ interface SearchPanelProps {
 const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const { language,isRTL } = useLanguage();
-     const [products, setProducts] = useState([]);
+     const [products, setProducts] = useState([
+      {
+    id: "1",
+    name_english: "Elegant Summer Dress",
+    name_arabic: "فستان صيفي أنيق",
+    price: 189,
+    image: "/p11.jpeg",
+    hoverImage: "/p12.jpeg",
+    images : ['/p12.jpeg','/p11.jpeg'],
+    category_english: "Dresses",
+    category_arabic:"فساتين",
+    collection: "",
+    category:"",
+    description_english: "A flowing summer dress perfect for warm days",
+    description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    available:[true,false,false,false,true,false,true,true,true,true],
+    colors: ["#a4ad98"],
+    inStock: true,
+    rating: 4.8,
+    reviews: 124
+  }
+     ]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-  const filteredProducts = products.filter(product => {
+  
+ useEffect(() => {
+        const fetchProducts = async () => {
+          setIsLoading(true);
+          setError(null);
+          
+          try {
+            const productData = await loadAllProducts();
+            if (productData.length==0) {
+             setProducts([
+
+              {
+    id: "1",
+    name_english: "Elegant Summer Dress",
+    name_arabic: "فستان صيفي أنيق",
+    price: 189,
+    image: "/p11.jpeg",
+    hoverImage: "/p12.jpeg",
+    images : ['/p12.jpeg','/p11.jpeg'],
+    category_english: "Dresses",
+    category_arabic:"فساتين",
+    collection: "",
+    category:"",
+    description_english: "A flowing summer dress perfect for warm days",
+    description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    available:[true,false,false,false,true,false,true,true,true,true],
+    colors: ["#a4ad98"],
+    inStock: true,
+    rating: 4.8,
+    reviews: 124
+  }
+            ])
+            }
+            else {
+            setProducts(productData);}
+          } catch (err) {
+            setProducts([
+
+              {
+    id: "1",
+    name_english: "Elegant Summer Dress",
+    name_arabic: "فستان صيفي أنيق",
+    price: 189,
+    image: "/p11.jpeg",
+    hoverImage: "/p12.jpeg",
+    images : ['/p12.jpeg','/p11.jpeg'],
+    category_english: "Dresses",
+    category_arabic:"فساتين",
+    collection: "",
+    category:"",
+    description_english: "A flowing summer dress perfect for warm days",
+    description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    available:[true,false,false,false,true,false,true,true,true,true],
+    colors: ["#a4ad98"],
+    inStock: true,
+    rating: 4.8,
+    reviews: 124
+  }
+            ])
+            console.error('Error loading products:', err);
+            setError(err.message || 'Failed to load products');
+          } finally {
+            setIsLoading(false);
+          }
+        };
+    
+        fetchProducts();
+      }, []);
+      const filteredProducts = products.filter(product => {
     // Get the appropriate product name based on language
     const productName = (language === 'en') 
       ? product.name_english 
@@ -29,25 +121,6 @@ const SearchPanel = ({ isOpen, onClose }: SearchPanelProps) => {
     return productName.toLowerCase().includes(searchTerm.toLowerCase()) ||
            categoryName.toLowerCase().includes(searchTerm.toLowerCase());
   });
- useEffect(() => {
-        const fetchProducts = async () => {
-          setIsLoading(true);
-          setError(null);
-          
-          try {
-            const productData = await loadAllProducts();
-            setProducts(productData);
-          } catch (err) {
-            setProducts([])
-            console.error('Error loading products:', err);
-            setError(err.message || 'Failed to load products');
-          } finally {
-            setIsLoading(false);
-          }
-        };
-    
-        fetchProducts();
-      }, []);
   return (
     <>
       {/* Overlay */}

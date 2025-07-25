@@ -24,11 +24,20 @@ const Footer = () => {
                 <div className="newsletter">     
                     <div className="subtitle">{t('newsletter')}</div>  
                    
-                    <form method="post" action="/contact" id="contact_form" accept-charset="UTF-8" className={`contact-form`} dir={isRTL ? 'rtl' : 'ltr'}>
-                    <input type="hidden" name="form_type" value="customer"/><input type="hidden" name="utf8" value="✓"/>
+                    <form method="post" action="/contact" id="contact_form" acceptCharset="UTF-8" className={`contact-form`} dir={isRTL ? 'rtl' : 'ltr'}>
+                    <input type="hidden" name="form_type" 
+                    defaultValue="customer"
+                    />
+                    <input type="hidden" name="utf8" 
+                    defaultValue="✓"
+                    />
                     <label className="form-el">
-                        <input type="hidden" name="contact[tags]" value="newsletter"/>
-                        <input className={`email ${isRTL?'form-el__field__arabic':'form-el__field'} form-el--required newsletter__email`} type="email" name="contact[email]" id="Email" value="" placeholder={t('enterEmail')} autoCorrect="off" autoCapitalize="off" required={true}/>
+                        <input type="hidden" name="contact[tags]" 
+                        defaultValue="newsletter"
+                        />
+                        <input className={`email ${isRTL?'form-el__field__arabic':'form-el__field'} form-el--required newsletter__email`} 
+                        type="email" name="contact[email]" id="Email" 
+                       defaultValue="" placeholder={t('enterEmail')} autoCorrect="off" autoCapitalize="off" required={true}/>
                         <span className={`${isRTL?'form-el--validate--arabic':'form-el--validate'} form-el--description`}>
                             {t('newsletterText')} <Link to={"/aboutus"} className="link">{t('privacyPolicy')}</Link>.</span>
 
@@ -210,7 +219,7 @@ const Footer = () => {
                 
                 
                 
-                    <a target="_blank" href="https://www.instagram.com" rel="noreferrer noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">         <rect width="24" height="24" rx="6" fill="#2D2D2D"></rect>         <path d="M19.8469 5.59214C19.8469 6.38902 19.2 7.0312 18.4078 7.0312C17.6109 7.0312 16.9688 6.38433 16.9688 5.59214C16.9688 4.79526 17.6156 4.15308 18.4078 4.15308C19.2 4.15308 19.8469 4.79995 19.8469 5.59214Z" fill="white"></path>         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="white" stroke="white" stroke-width="1.5"></path>     </svg></a>
+                    <a target="_blank" href="https://www.instagram.com" rel="noreferrer noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">         <rect width="24" height="24" rx="6" fill="#2D2D2D"></rect>         <path d="M19.8469 5.59214C19.8469 6.38902 19.2 7.0312 18.4078 7.0312C17.6109 7.0312 16.9688 6.38433 16.9688 5.59214C16.9688 4.79526 17.6156 4.15308 18.4078 4.15308C19.2 4.15308 19.8469 4.79995 19.8469 5.59214Z" fill="white"></path>         <path fillRule="evenodd" clipRule="evenodd" d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="white" stroke="white" strokeWidth="1.5"></path>     </svg></a>
                 
                 
                 
