@@ -90,7 +90,7 @@ const Checkout = () => {
           product: item.id,
           quantity: item.quantity,
           price: formatPriceFloat(item.price),
-          name: isRTL ? item.name_arabic : item.name_english,
+          name: item.name_english,
           selectedSize: item.selectedSize,
           customeSizeData:item.customSizeData,
           selectedColor: item.selectedColor,
