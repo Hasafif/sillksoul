@@ -75,14 +75,33 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-   const removeFromCart = (productId: string,selectedSize: string) => {
-    setItems(prev => prev.filter(item => (item.id !== productId && item.selectedSize!==selectedSize)));
-    toast({
-      title: t('cartitemRemoved'),
-      description: t('cartitemRemovedDesc'),
-      className: "destructive"
-    });
-  };
+  const removeFromCart = (productId: string, selectedSize: string) => {
+  setItems(prev => {
+    // Find the index of the first item to remove
+    const indexToRemove = prev.findIndex(
+      item => item.id === productId && item.selectedSize === selectedSize
+    );
+
+    // If no item is found, do nothing
+    if (indexToRemove === -1) {
+      return prev;
+    }
+
+    // Create a new array excluding the item at the found index
+    const newItems = [
+      ...prev.slice(0, indexToRemove),
+      ...prev.slice(indexToRemove + 1)
+    ];
+    
+    return newItems;
+  });
+
+  toast({
+    title: t('cartitemRemoved'),
+    description: t('cartitemRemovedDesc'),
+    className: "destructive"
+  });
+};
 
   const updateQuantity = (productId: string, selectedSize: string, quantity: number) => {
     if (quantity <= 0) {
