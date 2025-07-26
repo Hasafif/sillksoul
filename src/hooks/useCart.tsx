@@ -6,9 +6,9 @@ import { useTranslation } from "./useTranslation";
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (product: Product, quantity?: number, size?: string, color?: string,customesizedata?:any) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  addToCart: (product: Product, quantity?: number, size?: string, color?: string,customsizedata?:any) => void;
+  removeFromCart: (productId: string,selectedSize: string) => void;
+  updateQuantity: (productId: string,selectedSize: string, quantity: number) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
   getTotalItems: () => number;
@@ -32,13 +32,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return ProductName;
   };
 
-  const addToCart = (product: Product, quantity = 1, size?: string, color?: string,customesizedata?:any) => {
+  const addToCart = (product: Product, quantity = 1, size?: string, color?: string,customsizedata?:any) => {
     setItems(prev => {
       const existingItem = prev.find(item =>
         item.id === product.id &&
         item.selectedSize === size &&
         item.selectedColor === color && 
-         item.customSizeData==customesizedata
+         item.customSizeData==customsizedata
       );
 
       const productName = getProductName(product);
@@ -52,7 +52,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           item.id === product.id &&
           item.selectedSize === size &&
           item.selectedColor === color && 
-         item.customSizeData==customesizedata
+         item.customSizeData==customsizedata
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
@@ -61,22 +61,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           title: t('cartaddedToCart'),
           description: `${productName} ${t('cartaddedToCartDesc')}`,
         });
-        console.log(customesizedata)
+        console.log(customsizedata)
         console.log(items)
         return [...prev, {
           ...product,
           quantity,
           selectedSize: size,
           selectedColor: color,
-          customSizeData:customesizedata
+          customSizeData:customsizedata
         }];
         
       }
     });
   };
 
-   const removeFromCart = (productId: string) => {
-    setItems(prev => prev.filter(item => item.id !== productId));
+   const removeFromCart = (productId: string,selectedSize: string) => {
+    setItems(prev => prev.filter(item => (item.id !== productId && item.selectedSize!==selectedSize)));
     toast({
       title: t('cartitemRemoved'),
       description: t('cartitemRemovedDesc'),
@@ -84,15 +84,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (productId: string, selectedSize: string, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      removeFromCart(productId,selectedSize);
       return;
     }
 
     setItems(prev =>
       prev.map(item =>
-        item.id === productId ? { ...item, quantity } : item
+        item.id === productId && item.selectedSize===selectedSize ? { ...item, quantity } : item
       )
     );
   };

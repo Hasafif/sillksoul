@@ -92,7 +92,7 @@ const Checkout = () => {
           price: formatPriceFloat(item.price),
           name: item.name_english,
           selectedSize: item.selectedSize,
-          customeSizeData:item.customSizeData,
+          customSizeData:item.customSizeData,
           selectedColor: item.selectedColor,
           image: item.image, 
         })),

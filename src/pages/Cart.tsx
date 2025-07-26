@@ -101,7 +101,7 @@ const Cart = () => {
                         onContextMenu={(e) => e.preventDefault()}
                       />
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(item.id,item.selectedSize)}
                         className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors ml-2"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -135,14 +135,14 @@ const Cart = () => {
                       </p>
                       <div className={`flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-2`}>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.id,item.selectedSize, item.quantity - 1)}
                           className="w-7 h-7 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
                         <span className="text-base font-medium w-6 text-center">{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.id,item.selectedSize, item.quantity + 1)}
                           className="w-7 h-7 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100"
                         >
                           <Plus className="w-3 h-3" />
@@ -183,14 +183,14 @@ const Cart = () => {
                     
                     <div className={`flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-3`}>
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        onClick={() => updateQuantity(item.id,item.selectedSize ,item.quantity - 1)}
                         className="w-8 h-8 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100"
                       >
                         <Minus className="w-4 h-4" />
                       </button>
                       <span className="text-lg font-medium w-8 text-center">{item.quantity}</span>
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.id,item.selectedSize ,item.quantity + 1)}
                         className="w-8 h-8 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100"
                       >
                         <Plus className="w-4 h-4" />
@@ -198,7 +198,7 @@ const Cart = () => {
                     </div>
                     
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(item.id,item.selectedSize)}
                       className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
                     >
                       <Trash2 className="w-5 h-5" />
