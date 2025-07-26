@@ -177,7 +177,13 @@ else {
       return;
     }
     console.log(customSizeData)
-    addToCart(product, quantity, selectedSize, selectedColor,customSizeData);
+    if (selectedSize!='custom') {
+ addToCart(product, quantity, selectedSize, selectedColor,null);
+    }
+    else {
+addToCart(product, quantity, selectedSize, selectedColor,customSizeData);
+    }
+    
   };
 console.log(all_products)
   const relatedProducts = all_products.filter(p => 

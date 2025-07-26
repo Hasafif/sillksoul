@@ -78,7 +78,7 @@ const Checkout = () => {
   const handleCheckout = async () => {
     setLoading(true);
     setError(null);
-
+ 
     try {
       console.log(items)
       //console.log(items[1].customSizeData)
@@ -114,15 +114,15 @@ const Checkout = () => {
         taxAmount: tax,
         totalAmount: total,
         currency:currency,
-        successUrl: `${window.location.origin}/checkout?session_id={CHECKOUT_SESSION_ID}`,
+        successUrl: `${window.location.origin}?session_id={CHECKOUT_SESSION_ID}`,
         cancelUrl: `${window.location.origin}/checkout`
       });
-
+       
       // Redirect to Stripe Checkout
       const result = await stripe.redirectToCheckout({
         sessionId: data.sessionId
       });
-
+          clearCart();
       if (result.error) {
         setError(result.error.message);
       }
@@ -132,6 +132,7 @@ const Checkout = () => {
       setError(errorMessage);
     } finally {
       setLoading(false);
+     
     }
   };
 
