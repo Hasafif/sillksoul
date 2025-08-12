@@ -441,18 +441,18 @@ const HauteCoture = () => {
 
               <div className="bg-white p-8 rounded-xl shadow-xl">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                  {t("Contacttitle")}
+                  {t("contactInformation")}
                 </h3>
                 <div className="space-y-6">
                   <div className={`flex items-start ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
                     <Phone className="w-6 h-6 text-gray-600 mt-1 shrink-0" />
                     <div className={`${isRTL ? 'text-right' : 'text-left'}`}>
                       <h4 className="font-semibold text-gray-900">
-                        {t("Contactphonetitle")}
+                        {t("callUs")}
                       </h4>
-                      <p className="text-gray-600" dir="ltr">{t("Contactphonenumber")}</p>
+                      <p className="text-gray-600" dir="ltr">{t("phoneNumber")}</p>
                       <p className="text-sm text-gray-500">
-                        {t("Contactphonehours")}
+                        {t("phoneHours")}
                       </p>
                     </div>
                   </div>
@@ -461,11 +461,11 @@ const HauteCoture = () => {
                     <Mail className="w-6 h-6 text-gray-600 mt-1 shrink-0" />
                     <div className={`${isRTL ? 'text-right' : 'text-left'}`}>
                       <h4 className="font-semibold text-gray-900">
-                        {t("Contactemailtitle")}
+                        {t("emailUs")}
                       </h4>
-                      <p className="text-gray-600" dir="ltr">{t("Contactemailaddress")}</p>
+                      <p className="text-gray-600" dir="ltr">{t("emailAddress")}</p>
                       <p className="text-sm text-gray-500">
-                        {t("Contactemailresponse")}
+                        {t("emailResponse")}
                       </p>
                     </div>
                   </div>
@@ -474,12 +474,10 @@ const HauteCoture = () => {
                     <Clock className="w-6 h-6 text-gray-600 mt-1 shrink-0" />
                     <div className={`${isRTL ? 'text-right' : 'text-left'}`}>
                       <h4 className="font-semibold text-gray-900">
-                        {t("Contacthourstitle")}
+                        {t("storeHours")}
                       </h4>
                       <div className="text-gray-600 text-sm">
-                        <p>{t("Contacthoursweekdays")}</p>
-                        <p>{t("Contacthourssaturday")}</p>
-                        <p>{t("Contacthourssunday")}</p>
+                        <p>{t("alwaysworks")}</p>
                       </div>
                     </div>
                   </div>

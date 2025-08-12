@@ -27,8 +27,8 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
 
   // Array of your video sources
   const videoSources = [
-    '/hero1.mp4',
-    '/hero2.mp4'
+    '/GHALA 1.mp4',
+    '/GHALA 2.mp4'
   ];
 
   // Refs for video elements

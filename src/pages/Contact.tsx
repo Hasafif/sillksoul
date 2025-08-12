@@ -377,9 +377,7 @@ const Contact = () => {
                         text-gray-600 text-sm space-y-1
                         ${isRTL ? 'font-arabic' : 'font-english'}
                       `}>
-                        <p>{t('mondayFriday')}</p>
-                        <p>{t('saturday')}</p>
-                        <p>{t('sunday')}</p>
+                        <p>{t('alwaysworks')}</p>
                       </div>
                     </div>
                   </div>
