@@ -20,7 +20,7 @@ const Cart = () => {
   const {formatPrice} = useCurrency();
   const shipping = getTotalPrice() > 200 ? 0 : 15;
   const tax = getTotalPrice() * 0.08;
-  const total = getTotalPrice() + shipping + tax;
+  const total = getTotalPrice() + shipping;
   const fontClass = isRTL ? "font-arabic" : "font-english";
   
   // Helper function to get localized item name
@@ -118,7 +118,7 @@ const Cart = () => {
                       </p>
                       {item.selectedSize && (
                         <p className="text-xs text-gray-600">
-                          {t('cartsize')} {item.selectedSize}
+                          {t('cartsize')}: {item.selectedSize=="custom"?t('customsize'):item.selectedSize}
                         </p>
                       )}
                       {/*item.selectedColor && (
@@ -168,7 +168,7 @@ const Cart = () => {
                       </p>
                       {item.selectedSize && (
                         <p className="text-sm text-gray-600">
-                          {t('cartsize')}: {item.selectedSize}
+                          {t('cartsize')}: {item.selectedSize=="custom"?t('customsize'):item.selectedSize}
                         </p>
                       )}
                       {item.selectedColor && (
@@ -232,12 +232,12 @@ const Cart = () => {
                   </span>
                 </div>
                 
-                <div className="flex justify-between">
+                {/*<div className="flex justify-between">
                   <span className="text-gray-600 text-sm sm:text-base">{t('carttax')}</span>
                   <span className="font-medium text-sm sm:text-base">
                     {formatPrice(Number(tax.toFixed(2)))}
                   </span>
-                </div>
+                </div>*/}
                 
                 <div className="border-t pt-3 sm:pt-4">
                   <div className="flex justify-between">

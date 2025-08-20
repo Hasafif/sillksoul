@@ -303,6 +303,7 @@ export const translations = {
             DeliveryReturns1:"We offer complimentary shipping on all online orders, with delivery typically completed within 10 business days.",
             DeliveryReturns2:"Please note that you may be subject to additional import duties, taxes, or fees depending on your delivery destination.",
             ProductCare1:"Seek professional cleaner",
+            customsize:"custom"
       },
     ar: {
       // Navigation
@@ -604,6 +605,7 @@ ShopReadyToWear:"تسوق الملابس الجاهزة",
 DeliveryReturns1:"نحن نقدم شحنًا مجانيًا لجميع الطلبات عبر الإنترنت، ويتم تسليم الطلب عادةً خلال 10 أيام عمل.",
 DeliveryReturns2:"يرجى ملاحظة أنك قد تخضع لرسوم استيراد أو ضرائب أو رسوم إضافية اعتمادًا على وجهة التسليم الخاصة بك.",
 ProductCare1:"ابحث عن منظف محترف",
+ customsize:"مخصص"
 
     }
   };

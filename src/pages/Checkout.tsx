@@ -71,14 +71,15 @@ const Checkout = () => {
   });
 
   const shipping = getTotalPrice() > 200 ? 0 : 15;
-  const tax = getTotalPrice() * 0.08;
-  const total = getTotalPrice() + shipping + tax;
+  //const tax = getTotalPrice() * 0.08;
+  const total = getTotalPrice() + shipping;
 
   // Handle Stripe Checkout Session
   const handleCheckout = async () => {
     setLoading(true);
     setError(null);
- 
+    //console.log(currency)
+    console.log(items[0].price)
     try {
       console.log(items)
       //console.log(items[1].customSizeData)
@@ -109,9 +110,9 @@ const Checkout = () => {
           zipCode: shippingInfo.zipCode,
           country: shippingInfo.country
         },
-        shippingCost: shipping,
+        shippingCost: formatPriceFloat(shipping),
         
-        taxAmount: tax,
+       // taxAmount: tax,
         totalAmount: total,
         currency:currency,
         successUrl: `${window.location.origin}?session_id={CHECKOUT_SESSION_ID}`,
@@ -488,10 +489,10 @@ const Checkout = () => {
                   {shipping === 0 ? (isRTL ? 'مجاني' : 'Free') : `${formatPrice(shipping)}`}
                 </span>
               </div>
-              <div className="flex justify-between">
+              {/*<div className="flex justify-between">
                 <span className={`text-gray-600 ${fontClass}`}>{t('Tax')}</span>
                 <span className={`font-medium ${fontClass}`}>{formatPrice(tax)}</span>
-              </div>
+              </div>*/}
               <div className="border-t pt-2">
                 <div className="flex justify-between">
                   <span className={`text-lg font-semibold ${fontClass}`}>{t('Total')}</span>
