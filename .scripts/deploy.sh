@@ -3,6 +3,7 @@ set -e
 
 echo "Deployment started2..."
 
+
 # Pull the latest version of the app
 git fetch origin master
 git reset --hard origin/master
