@@ -5,48 +5,56 @@ import HeroSection from "../components/HeroSection";
 import Footer from "../components/CustomFooter";
 import SidePanel from "../components/SidePanel";
 import SearchPanel from "../components/SearchPanel";
-import { categories2, products, loadCategories, loadProducts, loadCategory } from "../data/product";
+import { categories2, products, loadCategories, loadProducts, loadCategory, loadProductsByCategoryName } from "../data/product";
 import ProductCard from "../components/ProductCard";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
 import Benefits from "../components/benifits";
 
-const Category = () => {
-  const { id } = useParams();
-   const [category, setCategory] = useState(null);
-     const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-useEffect(() => {
-  const fetchCategoryData = async () => {
-    setIsLoading(true);
-    setError(null);
-    setCategory(null); // Reset category on ID change
-    setProducts([]);   // Reset products on ID change
+const Jalabiyas = () => {
+  //const { id } = useParams();
+  const [category, setCategory] = useState( {
     
-    try {
-      // Fetch category details and products at the same time
-      const [categoryData, productData] = await Promise.all([
-        loadCategory(id),
-        loadProducts(id)
-      ]);
+        id: "7",
+     name_english: "Jalabiyas",
+    name_arabic: "جلابيات",
+    products:[]
+  });
+  useEffect(() => {
+    const fetchCategory = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+          setCategory(
+            {
+    
+        id: "7",
+     name_english: "Jalabiyas",
+    name_arabic: "جلابيات",
+    products:[]
+  }
+          )
+  
+       
+        const productData = await loadProductsByCategoryName('Jalabiyas');
+        
+ 
+  setProducts(productData);
+ 
+      
+      } catch (err) {
+        setCategory(categories2.find((p => p.id === category.id)));
+        setProducts(category.products)
+        console.error('Error loading products:', err);
+        setError(err.message || 'Failed to load products');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-      setCategory(categoryData);
-      setProducts(productData);
-
-    } catch (err) {
-      console.error('Error loading category data:', err);
-      setError(err.message || 'Failed to load data');
-      // Fallback logic for development
-      const fallbackCategory = categories2.find(c => c.id === id);
-      setCategory(fallbackCategory);
-      setProducts(fallbackCategory ? fallbackCategory.products : []);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  fetchCategoryData();
-}, [id]); // This effect re-runs whenever the category ID changes
+    fetchCategory();
+  }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [sortBy, setSortBy] = useState("name");
@@ -55,8 +63,8 @@ useEffect(() => {
   const { language, isRTL } = useLanguage();
   const { t } = useTranslation();
   const [products, setProducts] = useState([]);
-
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   // Show a loading spinner while fetching data
   if (isLoading) {
     return (
@@ -65,8 +73,6 @@ useEffect(() => {
       </div>
     );
   }
-
-  // Show a "Not Found" message if, after loading, the category is still not found
   if (!category && !isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -83,6 +89,25 @@ useEffect(() => {
   }
 
   let category_name = (language == 'en') ? category.name_english : category.name_arabic;
+  /*useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const productData = await loadProducts(id);
+        setProducts(productData);
+      } catch (err) {
+        setProducts(category.products)
+        console.error('Error loading products:', err);
+        setError(err.message || 'Failed to load products');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [id]);*/
   // Filter and sort products
  // let filteredProducts = category.products;
   let filteredProducts = products;
@@ -198,4 +223,4 @@ useEffect(() => {
   );
 };
 
-export default Category;
+export default Jalabiyas;

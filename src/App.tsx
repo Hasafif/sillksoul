@@ -22,6 +22,7 @@ import { FloatingCurrencySwitch } from "./components/CurrencySwitcher";
 import ScrollToTop from './ScrollToTop';
 import DesignerIntro from "./components/exper";
 import Demo from "./pages/demo";
+import Jalabiyas from "./pages/Jalabiyas";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -45,6 +46,7 @@ const App = () => (
                   <Route path="/category/:id" element={<Category />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/jalabiyas" element={<Jalabiyas />} />
                   <Route path="/aboutus" element={<AboutUs />} />
                   <Route path="/exper" element={<DesignerIntro />} />
                   <Route path="/demo" element={<Demo />} />

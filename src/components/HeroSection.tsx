@@ -190,7 +190,7 @@ const HeroSection = ({ onMenuToggle, onSearchToggle }: HeroSectionProps) => {
       {/* Hero Content */}
       <div className={`absolute bottom-40 left-0 right-0 z-20 items-center text-white px-4 text-center max-[1080px]:top-1/2 max-[1080px]:bottom-auto max-[1080px]:-translate-y-1/2 max-[1080px]:flex max-[1080px]:flex-col max-[1080px]:justify-center`}>
         <h1 className={`text-4xl sm:text-10xl md:text-6xl font-bold mb-6 ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}`}>
-          {t('hautecouture')}
+          {t('hautecouture2')}
         </h1>
         <p className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto ${isRTL ? 'font-arabic leading-tight' : 'font-english leading-tight'}`}>
           {t('hautecoutureDescription')}

@@ -15,8 +15,8 @@ export async function loadImages() {
       images.push(
         {
     id: prod._id,
-    src: prod.images[0],
-     srcSet:prod.images[1],
+    src: prod.colors[0].images[0],
+     srcSet:prod.colors[0].images[1],
     alt: prod.name_english,
     href: `/product/${prod._id}`,
     category:prod.category._id

@@ -94,14 +94,14 @@ const Cart = () => {
                     {/* Top Row: Image and Remove Button */}
                     <div className="flex items-start justify-between mb-3">
                       <img
-                        src={item.image}
+                       src={item.selectedColor?.images?.[0] || item.image}
                         alt={getItemName(item)}
                         className="w-20 h-20 object-cover rounded-md"
                         draggable={false}
                         onContextMenu={(e) => e.preventDefault()}
                       />
                       <button
-                        onClick={() => removeFromCart(item.id,item.selectedSize)}
+                        onClick={() => removeFromCart(item.id,item.selectedSize,item.selectedColor)}
                         className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors ml-2"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -118,14 +118,14 @@ const Cart = () => {
                       </p>
                       {item.selectedSize && (
                         <p className="text-xs text-gray-600">
-                          {t('cartsize')}: {item.selectedSize=="custom"?t('customsize'):item.selectedSize}
+                          {t('cartsize')} {item.selectedSize=="custom"?t('customsize'):item.selectedSize}
                         </p>
                       )}
-                      {/*item.selectedColor && (
+                      {item.selectedColor && (
                         <p className="text-xs text-gray-600">
-                          {t('cartcolor')} {item.selectedColor}
+                          {t('cartcolor')} {item.selectedColor.color}
                         </p>
-                      )*/}
+                      )}
                     </div>
                     
                     {/* Bottom Row: Price and Quantity Controls */}
@@ -135,14 +135,14 @@ const Cart = () => {
                       </p>
                       <div className={`flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-2`}>
                         <button
-                          onClick={() => updateQuantity(item.id,item.selectedSize, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.id,item.selectedSize,item.selectedColor, item.quantity - 1)}
                           className="w-7 h-7 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
                         <span className="text-base font-medium w-6 text-center">{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.id,item.selectedSize, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.id,item.selectedSize,item.selectedColor,item.quantity + 1)}
                           className="w-7 h-7 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100"
                         >
                           <Plus className="w-3 h-3" />
@@ -154,7 +154,7 @@ const Cart = () => {
                   {/* Desktop/Tablet Layout (>= 480px) */}
                   <div className={`hidden xs:flex items-start ${isRTL ? 'space-x-reverse' : ''} space-x-4`}>
                     <img
-                      src={item.image}
+                     src={item.selectedColor?.images?.[0] || item.image}
                       alt={getItemName(item)}
                       className="w-24 h-24 object-cover rounded-md"
                     />
@@ -173,7 +173,7 @@ const Cart = () => {
                       )}
                       {item.selectedColor && (
                         <p className="text-sm text-gray-600">
-                          {t('cartcolor')}: {item.selectedColor}
+                          {t('cartcolor')}: {item.selectedColor.color}
                         </p>
                       )}
                       <p className="text-lg font-semibold text-gray-900 mt-2">
@@ -183,14 +183,14 @@ const Cart = () => {
                     
                     <div className={`flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-3`}>
                       <button
-                        onClick={() => updateQuantity(item.id,item.selectedSize ,item.quantity - 1)}
+                        onClick={() => updateQuantity(item.id,item.selectedSize ,item.selectedColor,item.quantity - 1)}
                         className="w-8 h-8 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100"
                       >
                         <Minus className="w-4 h-4" />
                       </button>
                       <span className="text-lg font-medium w-8 text-center">{item.quantity}</span>
                       <button
-                        onClick={() => updateQuantity(item.id,item.selectedSize ,item.quantity + 1)}
+                        onClick={() => updateQuantity(item.id,item.selectedSize ,item.selectedColor,item.quantity + 1)}
                         className="w-8 h-8 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100"
                       >
                         <Plus className="w-4 h-4" />
@@ -198,7 +198,7 @@ const Cart = () => {
                     </div>
                     
                     <button
-                      onClick={() => removeFromCart(item.id,item.selectedSize)}
+                      onClick={() => removeFromCart(item.id,item.selectedSize,item.selectedColor)}
                       className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
                     >
                       <Trash2 className="w-5 h-5" />

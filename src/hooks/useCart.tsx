@@ -1,14 +1,14 @@
 import { useState, createContext, useContext, type ReactNode, useEffect } from "react";
-import type { CartItem, Product } from "../types/product";
+import type { CartItem, Product,ProductColor } from "../types/product";
 import { toast } from "../hooks/use-toast";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "./useTranslation";
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (product: Product, quantity?: number, size?: string, color?: string, customsizedata?: any) => void;
-  removeFromCart: (productId: string, selectedSize: string) => void;
-  updateQuantity: (productId: string, selectedSize: string, quantity: number) => void;
+  addToCart: (product: Product, quantity?: number, size?: string, color?: ProductColor, customsizedata?: any) => void;
+  removeFromCart: (productId: string, selectedSize: string,selectedColor:ProductColor) => void;
+  updateQuantity: (productId: string, selectedSize: string, selectedColor:ProductColor, quantity: number) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
   getTotalItems: () => number;
@@ -48,13 +48,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return language === 'en' ? product.name_english : product.name_arabic;
   };
 
-  const addToCart = (product: Product, quantity = 1, size?: string, color?: string, customsizedata?: any) => {
+  const addToCart = (product: Product, quantity = 1, size?: string, color?: ProductColor, customsizedata?: any) => {
     setItems(prev => {
       // Correctly find an existing item, handling custom data objects
       const existingItem = prev.find(item =>
         item.id === product.id &&
         item.selectedSize === size &&
-        item.selectedColor === color &&
+        JSON.stringify(item.selectedColor) === JSON.stringify(color) &&
         JSON.stringify(item.customSizeData) === JSON.stringify(customsizedata) // Deep compare custom data
       );
 
@@ -69,7 +69,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         return prev.map(item =>
           item.id === product.id &&
           item.selectedSize === size &&
-          item.selectedColor === color &&
+           JSON.stringify(item.selectedColor) === JSON.stringify(color) &&
           JSON.stringify(item.customSizeData) === JSON.stringify(customsizedata)
             ? { ...item, quantity: item.quantity + quantity }
             : item
@@ -91,10 +91,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const removeFromCart = (productId: string, selectedSize: string) => {
+  const removeFromCart = (productId: string, selectedSize: string,selectedColor:ProductColor) => {
     setItems(prev => {
       const indexToRemove = prev.findIndex(
-        item => item.id === productId && item.selectedSize === selectedSize
+        item => item.id === productId && item.selectedSize === selectedSize && 
+        JSON.stringify(item.selectedColor) === JSON.stringify(selectedColor)
       );
 
       if (indexToRemove === -1) return prev;
@@ -111,15 +112,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const updateQuantity = (productId: string, selectedSize: string, quantity: number) => {
+  const updateQuantity = (productId: string, selectedSize: string,selectedColor:ProductColor, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(productId, selectedSize);
+      removeFromCart(productId, selectedSize,selectedColor);
       return;
     }
 
     setItems(prev =>
       prev.map(item =>
-        item.id === productId && item.selectedSize === selectedSize ? { ...item, quantity } : item
+        item.id === productId && item.selectedSize === selectedSize && 
+         JSON.stringify(item.selectedColor) === JSON.stringify(selectedColor)
+        ? { ...item, quantity } : item
       )
     );
   };

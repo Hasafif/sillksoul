@@ -1,15 +1,28 @@
-import { X, Home, ShoppingBag, Phone, Star, FileText, ChevronDown } from "lucide-react";
+import { X, Home, ShoppingBag, Phone, Star, FileText, ChevronDown, Shirt } from "lucide-react";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "../hooks/useTranslation";
 import { useState, useEffect, useRef } from "react";
 import { categories2, loadCategories } from "../data/product";
-
+import { GiDress } from "react-icons/gi";
 interface SidePanelProps {
   isOpen: boolean;
   onClose: () => void;
 }
+/*
+// React component for Jalabiya Icon
+const JalabiyaIcon = (className) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M256 0c-22 0-40 18-40 40s18 40 40 40 40-18 40-40-18-40-40-40zm-64 128c-18 0-32 14-32 32v48c0 15 9 27 24 31l16 5v236c0 18 14 32 32 32h64c18 0 32-14 32-32V244l16-5c15-4 24-16 24-31v-48c0-18-14-32-32-32H192z"/>
+  </svg>
+);
+*/
 
 const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
   const { language, isRTL } = useLanguage();
@@ -131,7 +144,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
       }`}>
         <div className="p-6">
           {/* Header */}
-          <div className={`flex justify-between items-center mb-8 ${isRTL ? 'font-arabic' : 'font-english'}`}>
+          <div className={`flex justify-between items-center mb-4 ${isRTL ? 'font-arabic' : 'font-english'}`}>
             <h2 className="text-2xl font-bold text-gray-900">{t('menu')}</h2>
             <button
               onClick={onClose}
@@ -156,7 +169,22 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
               <Home className="w-5 h-5 text-gray-600" />
               <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('home')}</span>
             </Link>
-            
+                    <Link
+              to="/hautecouture"
+              onClick={onClose}
+              className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
+            >
+              <Star className="w-5 h-5 text-gray-600" />
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('hautecouture')}</span>
+            </Link>
+                    <Link
+              to="/jalabiyas"
+              onClick={onClose}
+              className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
+            >
+             <GiDress   className="w-5 h-5 text-gray-600" />
+              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('Jalabiyas')}</span>
+            </Link>
             {/* Ready to Wear with Dropdown */}
             <div 
               ref={dropdownRef}
@@ -197,14 +225,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
               )}
             </div>
 
-            <Link
-              to="/hautecouture"
-              onClick={onClose}
-              className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} p-3 rounded-lg hover:bg-gray-100 transition-colors`}
-            >
-              <Star className="w-5 h-5 text-gray-600" />
-              <span className={`text-gray-800 font-medium ${isRTL ? 'font-arabic' : 'font-english'}`}>{t('hautecouture')}</span>
-            </Link>
+    
 
             <Link
               to="/aboutus"
@@ -226,18 +247,25 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
           </nav>
 
           {/* Featured Section */}
-          <div className={`mt-2 p-4 bg-gray-50 rounded-lg ${isRTL ? 'font-arabic' : 'font-english'}`}>
-            <h3 className="font-semibold text-gray-900 mb-1">{t('featuredSection')}</h3>
+          <div className={`p-4 bg-gray-50 rounded-lg ${isRTL ? 'font-arabic' : 'font-english'}`}>
+            {/*<h3 className="font-semibold text-gray-900 mb-1">{t('featuredSection')}</h3>*/}
+                 <Link
+              to="/"
+              onClick={onClose}
+              className={`font-semibold text-gray-900 mb-1 ${isRTL ? 'font-arabic' : 'font-english'}`}
+            >
+              {t('shopNow')} →
+            </Link>
             <p className={`text-sm text-gray-600 mb-2 ${isRTL ? 'font-arabic' : 'font-english'}`}>
               {t('featuredText')}
             </p>
-            <Link
+            {/*<Link
               to="/"
               onClick={onClose}
               className={`text-sm font-medium text-gray-600 hover:text-gray-800 ${isRTL ? 'font-arabic' : 'font-english'}`}
             >
               {t('shopNow')} →
-            </Link>
+            </Link>*/}
           </div>
         </div>
       </div>

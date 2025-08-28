@@ -128,7 +128,31 @@ useEffect(() => {
         filteredProducts.sort((a, b) => a.name_arabic.localeCompare(b.name_arabic));
       }
   }
+// Show a loading spinner while fetching data
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-gray-500"></div>
+      </div>
+    );
+  }
 
+  // Show a "Not Found" message if, after loading, the category is still not found
+  if (filteredProducts.length === 0 && !isLoading) {
+    return (
+      <div className={`
+              text-center py-12
+              ${isRTL ? 'text-right' : 'text-left'} sm:text-center
+            `}>
+              <p className={`
+                text-gray-500 text-lg
+                ${isRTL ? 'font-arabic' : 'font-english'}
+              `}>
+                {t("filter1")}
+              </p>
+            </div>
+    );
+  }
   return (
     <div className={`min-h-screen bg-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       {/*<Header />

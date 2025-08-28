@@ -11,30 +11,11 @@ import { toast } from "../hooks/use-toast";
 import { useTranslation } from "../hooks/useTranslation";
 import ProductAccordion from "../components/CollapsibleAccordion";
 import SizeGuideSidepanel from "../components/SizeGuidePanel";
+import { Product as ProductType, ProductColor } from '../types/product'; // Import your types
 const Product = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState( {
-    id: "1",
-    name_english: "Elegant Summer Dress",
-    name_arabic: "فستان صيفي أنيق",
-    price: 189,
-    image: "/p11.jpeg",
-    hoverImage: "/p12.jpeg",
-    images : ['/p12.jpeg','/p11.jpeg'],
-    category_english: "Dresses",
-    category_arabic:"فساتين",
-    collection: "",
-    category:"",
-    description_english: "A flowing summer dress perfect for warm days",
-    description_arabic: "فستان صيفي متدفق مثالي للأيام الدافئة",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    available:[true,false,false,false,true,false,true,true,true,true],
-    colors: ["#a4ad98"],
-    inStock: true,
-    rating: 4.8,
-    reviews: 124
-  });
-  const [all_products, setAllProducts] = useState([]);
+const [product, setProduct] = useState<ProductType | null>(null); // Initialize as null
+  const [all_products, setAllProducts] = useState<ProductType[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [customSizeData, setCustomSizeData] = useState(null);
@@ -66,10 +47,19 @@ const Product = () => {
             const productData = await loadProduct(id);
            // setProducts(productData);
            // console.log(products)
-           console.log(productData)
+           //console.log(productData)
            setProduct(productData);
+            // Set the default selected color after the product loads
+  if (productData && productData.colors && productData.colors.length > 0) {
+    setSelectedColor(productData.colors[0]);
+  }
+ 
           } catch (err) {
-            setProduct(products.find(p => p.id === id))
+            const fallbackProduct = products.find(p => p.id === id);
+  setProduct(fallbackProduct);
+  if (fallbackProduct && fallbackProduct.colors && fallbackProduct.colors.length > 0) {
+    setSelectedColor(fallbackProduct.colors[0]);
+  }
             console.error('Error loading products:', err);
             setError(err.message || 'Failed to load products');
           } finally {
@@ -84,7 +74,7 @@ const Product = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedColor, setSelectedColor] = useState<ProductColor | null>(null); // This will hold the selected color OBJECT
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { language, isRTL } = useLanguage();
@@ -141,74 +131,7 @@ else {
   setSelectedSize(size)
 }
    }
-  if (!product) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            {language === 'en' ? 'Product Not Found' : 'المنتج غير موجود'}
-          </h1>
-          <Link to="/" className="text-blue-600 hover:text-blue-800">
-            {language === 'en' ? 'Return to Home' : 'العودة إلى الصفحة الرئيسية'}
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  // Get language-specific product data
-  const productName = language === 'en' ? product.name_english : product.name_arabic;
-  const productCategory = language === 'en' ? product.category_english : product.category_arabic;
-  const productDescription = language === 'en' ? product.description_english : product.description_arabic;
-
-  const productImages = product.images;
-
-  const handleAddToCart = () => {
-
-   // setSelectedColor(product.colors[0])
-     // console.log(selectedColor)
-    if (product.sizes.length > 0 && !selectedSize && !customSizeData) {
-      toast({title:language === 'en' ? "Size" : "المقاس",description:language === 'en' ? "Please select a size" : "يرجى اختيار المقاس"})
-      return;
-    }
-      
-    if (product.colors.length > 0 && !selectedColor) {
-      toast({title:language === 'en' ? "Color" : "اللون",description:language === 'en' ? "Please select a color" : "يرجى اختيار اللون"})
-      return;
-    }
-    console.log(customSizeData)
-    if (selectedSize!='custom') {
- addToCart(product, quantity, selectedSize, selectedColor,null);
-    }
-    else {
-addToCart(product, quantity, selectedSize, selectedColor,customSizeData);
-    }
-    
-  };
-console.log(all_products)
-  const relatedProducts = all_products.filter(p => 
-    (language === 'en' ? p.category_english : p.category_arabic) === productCategory && p.id !== product.id
-  ).slice(0,4)
-console.log(relatedProducts)
-console.log(productCategory)
-  const nextImage = () => {
-    const newIndex = currentImageIndex === productImages.length - 1 ? 0 : currentImageIndex+ 1;
-  setCurrentImageIndex(newIndex);
-  };
-
-  const prevImage = () => {
-    const newIndex = currentImageIndex === 0 ? productImages.length - 1 : currentImageIndex - 1;
-    setCurrentImageIndex(newIndex);
-  };
-
-  const nextVertical = () => {
-    nextImage();
-  };
-
-  const prevVertical = () => {
-    prevImage();
-  };
-  // Effect to calculate and set the panel's position and main content padding
+     // Effect to calculate and set the panel's position and main content padding
   const [mainStyle, setMainStyle] = useState({}); // Style for the main container
   const sidePanelRef = useRef(null); // Ref for the sidepanel container
   useEffect(() => {
@@ -240,6 +163,88 @@ console.log(productCategory)
       setMainStyle({});
     }
   }, [isSizeGuideOpen]);
+  
+    // NEW: Add a dedicated loading state render
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+       
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-gray-500"></div>
+      </div>
+    );
+  }
+  if (!product && !isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            {language === 'en' ? 'Product Not Found' : 'المنتج غير موجود'}
+          </h1>
+          <Link to="/" className="text-blue-600 hover:text-blue-800">
+            {language === 'en' ? 'Return to Home' : 'العودة إلى الصفحة الرئيسية'}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Get language-specific product data
+  const productName = language === 'en' ? product.name_english : product.name_arabic;
+  const productCategory = language === 'en' ? product.category_english : product.category_arabic;
+  const productDescription = language === 'en' ? product.description_english : product.description_arabic;
+
+  // The images to display now come from the selected color
+const currentImages = selectedColor ? selectedColor.images : [];
+const handleColorSelect = (color: ProductColor) => {
+  setSelectedColor(color);
+  setCurrentImageIndex(0); // Reset to the first image of the new color
+};
+  const handleAddToCart = () => {
+
+   // setSelectedColor(product.colors[0])
+     // console.log(selectedColor)
+    if (product.sizes.length > 0 && !selectedSize && !customSizeData) {
+      toast({title:language === 'en' ? "Size" : "المقاس",description:language === 'en' ? "Please select a size" : "يرجى اختيار المقاس"})
+      return;
+    }
+      
+    if (product.colors.length > 0 && !selectedColor) {
+      toast({title:language === 'en' ? "Color" : "اللون",description:language === 'en' ? "Please select a color" : "يرجى اختيار اللون"})
+      return;
+    }
+    console.log(customSizeData)
+    if (selectedSize!='custom') {
+ addToCart(product, quantity, selectedSize, selectedColor,null);
+    }
+    else {
+addToCart(product, quantity, selectedSize, selectedColor,customSizeData);
+    }
+    
+  };
+console.log(all_products)
+  const relatedProducts = all_products.filter(p => 
+    (language === 'en' ? p.category_english : p.category_arabic) === productCategory && p.id !== product.id
+  ).slice(0,4)
+console.log(relatedProducts)
+console.log(productCategory)
+  const nextImage = () => {
+    const newIndex = currentImageIndex === currentImages.length - 1 ? 0 : currentImageIndex+ 1;
+  setCurrentImageIndex(newIndex);
+  };
+
+  const prevImage = () => {
+    const newIndex = currentImageIndex === 0 ? currentImages.length - 1 : currentImageIndex - 1;
+    setCurrentImageIndex(newIndex);
+  };
+
+  const nextVertical = () => {
+    nextImage();
+  };
+
+  const prevVertical = () => {
+    prevImage();
+  };
+
   return (
 <div className={`min-h-screen relative bg-white ${!isMobile ? 'overflow-hidden' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>      {/*<Header />
       <HeroSection 
@@ -288,7 +293,7 @@ console.log(productCategory)
            <svg version="1.2" style={{width:"18px",height:"18px",color:"#d5d5d4"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 163 94" width="163" height="94"><path fill="#d1d1d0" d="m81.8-0.1l81.3 81.4-12.5 12.4-68.8-68.7-68.7 68.7-12.7-12.4z"></path></svg>
           </button>
 
-          {productImages.map((image, index) => (
+          {currentImages.map((image, index) => (
              <button
     key={index}
     onClick={() => setCurrentImageIndex(index)}
@@ -335,7 +340,7 @@ console.log(productCategory)
         <div className="relative max-w-lg w-full">
            <div className="aspect-[3/4] flex items-center justify-center rounded-lg overflow-hidden bg-gray-100">
           <img
-            src={productImages[currentImageIndex]}
+            src={currentImages[currentImageIndex]}
             alt="Product main view"
             className="lazyautosizes ls-is-cached lazyloaded w-full h-full object-cover transition-opacity duration-300"
             draggable={false}
@@ -372,7 +377,7 @@ console.log(productCategory)
           <div 
             className="h-full transition-all duration-300 ease-out"
             style={{
-              width: `${((currentImageIndex + 1) / productImages.length) * 100}%`,
+              width: `${((currentImageIndex + 1) / currentImages.length) * 100}%`,
               backgroundColor:"#100f0d",
              // lineHeight:"5"
             }}
@@ -396,36 +401,51 @@ console.log(productCategory)
                 </div>
             </div>
             {/* Color Selection */}
-            <div className="color-selector">
-             <div className={`form__label ${isRTL ? 'font-arabic':'font-english'}`}>
-         {language === 'en' ? 'Color' : 'اللون'}
-        <span className="form__label__value">{product.colors[0]}</span>
-        
-      </div>
-      <div className="variant_option">
-  <input 
-    type="radio" 
-    name="Color" 
-    value={product.colors[0]} 
-    defaultChecked 
-   // style={{backgroundColor:product.colors[0]}}
-  />
-  <label 
-    style={{
-    '--lineColor': `#100f0d`,
-//'--lineWidth': `30px`
-    } as React.CSSProperties}
-   
-   className="animation-underline"
-  // className="animation-underline"
-   
-  >
-    <span className="color_variant" 
-    style={{backgroundColor:product.colors[0]}}
-    >{product.colors[0]}</span>
-  </label>
-</div>
-            </div>
+            {product.colors && product.colors.length > 0 && (
+  <div className="color-selector">
+    <div className={`form__label ${isRTL ? 'font-arabic' : 'font-english'}`}>
+      {language === 'en' ? 'Color' : 'اللون'}
+      {/* This now shows the selected color's hex code */}
+      <span className="form__label__value ml-2 font-mono">{selectedColor?.colorDeg}</span>
+    </div>
+
+    <div className="variant_option flex items-center gap-3">
+      {product.colors.map((color) => (
+        <div key={color._id}>
+          {/* Hidden radio button to manage state */}
+          <input
+            type="radio"
+            id={`color-${color._id}`}
+            name="Color"
+            value={color.colorDeg}
+            checked={selectedColor?._id === color._id}
+            onChange={() => handleColorSelect(color)}
+            className="sr-only"
+          />
+
+          {/* The visible label the user clicks */}
+          <label
+            htmlFor={`color-${color._id}`}
+            className="animation-underline cursor-pointer"
+            style={{
+              // This CSS variable controls the underline animation for the selected item
+              '--lineColor': selectedColor?._id === color._id ? '#100f0d' : 'transparent',
+          // '--lineColor': `#100f0d`,
+            } as React.CSSProperties}
+          >
+            <span
+              className="color_variant"
+              style={{ backgroundColor: color.colorDeg }}
+              title={color.color} // The descriptive name is used as a tooltip
+            >
+              {/* This span is empty as requested, showing only the background color */}
+            </span>
+          </label>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
             <div className="size-selector">
          <div className={`form__label size_variant ${isRTL?'font-arabic':'font-english'}`}>
         {language === 'en' ? 'Size' : 'المقاس'}
@@ -614,7 +634,7 @@ console.log(productCategory)
            <svg version="1.2" style={{width:"18px",height:"18px",color:"#d5d5d4"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 163 94" width="163" height="94"><path fill="#d1d1d0" d="m81.8-0.1l81.3 81.4-12.5 12.4-68.8-68.7-68.7 68.7-12.7-12.4z"></path></svg>
           </button>
 
-          {productImages.map((image, index) => (
+          {currentImages.map((image, index) => (
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
@@ -657,7 +677,7 @@ console.log(productCategory)
         <div className="relative">
            <div className="aspect-[3/4] rounded-lg overflow-hidden bg-gray-100">
           <img
-            src={productImages[currentImageIndex]}
+            src={currentImages[currentImageIndex]}
             alt="Product main view"
             className="lazyautosizes ls-is-cached lazyloaded w-full h-full object-cover transition-opacity duration-300"
             draggable={false}
@@ -694,7 +714,7 @@ console.log(productCategory)
           <div 
             className="h-full transition-all duration-300 ease-out"
             style={{
-              width: `${((currentImageIndex + 1) / productImages.length) * 100}%`,
+              width: `${((currentImageIndex + 1) / currentImages.length) * 100}%`,
               backgroundColor:"#100f0d",
              // lineHeight:"5"
             }}
@@ -712,35 +732,50 @@ console.log(productCategory)
                 <span className="price">{formatPrice(product.price)}</span>
                 </div>
             </div>
-            {/* Color Selection */}
-            <div className="color-selector">
-             <div className={`form__label ${isRTL ? 'font-arabic':'font-english'}`}>
-         {language === 'en' ? 'Color' : 'اللون'}
-        <span className="form__label__value">{product.colors[0]}</span>
-      </div>
-      <div className="variant_option">
-  <input 
-    type="radio" 
-    name="Color" 
-    value={product.colors[0]} 
-    defaultChecked 
-   // style={{backgroundColor:product.colors[0]}}
-  />
-  <label 
-    style={{
-     '--lineColor': `${product.colors[0]}`,
-    } as React.CSSProperties}
-   
-   //className="animation-underline"
-   className="animation-underline"
-   
-  >
-    <span className="color_variant" 
-    style={{backgroundColor:product.colors[0]}}
-    >{product.colors[0]}</span>
-  </label>
-</div>
-            </div>
+            {product.colors && product.colors.length > 0 && (
+  <div className="color-selector">
+    <div className={`form__label ${isRTL ? 'font-arabic' : 'font-english'}`}>
+      {language === 'en' ? 'Color' : 'اللون'}
+      {/* This now shows the selected color's hex code */}
+      <span className="form__label__value ml-2 font-mono">{selectedColor?.colorDeg}</span>
+    </div>
+
+    <div className="variant_option flex items-center gap-3">
+      {product.colors.map((color) => (
+        <div key={color._id}>
+          {/* Hidden radio button to manage state */}
+          <input
+            type="radio"
+            id={`color-${color._id}`}
+            name="Color"
+            value={color.colorDeg}
+            checked={selectedColor?._id === color._id}
+            onChange={() => handleColorSelect(color)}
+            className="sr-only"
+          />
+
+          {/* The visible label the user clicks */}
+          <label
+            htmlFor={`color-${color._id}`}
+            className="animation-underline cursor-pointer"
+            style={{
+              // This CSS variable controls the underline animation for the selected item
+              '--lineColor': selectedColor?._id === color._id ? '#100f0d' : 'transparent',
+            }as React.CSSProperties}
+          >
+            <span
+              className="color_variant"
+              style={{ backgroundColor: color.colorDeg }}
+              title={color.color} // The descriptive name is used as a tooltip
+            >
+              {/* This span is empty as requested, showing only the background color */}
+            </span>
+          </label>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
             <div className="size-selector">
          <div className={`form__label size_variant ${isRTL?'font-arabic':'font-english'}`}>
         {language === 'en' ? 'Size' : 'المقاس'}

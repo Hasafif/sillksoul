@@ -95,7 +95,7 @@ const Checkout = () => {
           selectedSize: item.selectedSize,
           customSizeData:item.customSizeData,
           selectedColor: item.selectedColor,
-          image: item.image, 
+          image:  item.selectedColor.images[0], 
         })),
         customerInfo: {
           email: customerInfo.email,
@@ -118,12 +118,12 @@ const Checkout = () => {
         successUrl: `${window.location.origin}?session_id={CHECKOUT_SESSION_ID}`,
         cancelUrl: `${window.location.origin}/checkout`
       });
-       
+        clearCart();
       // Redirect to Stripe Checkout
       const result = await stripe.redirectToCheckout({
         sessionId: data.sessionId
       });
-          clearCart();
+         
       if (result.error) {
         setError(result.error.message);
       }
@@ -461,7 +461,7 @@ const Checkout = () => {
               {items.map((item) => (
                 <div key={`${item.id}-${item.selectedSize}-${item.selectedColor}`} className={`flex items-center ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
                   <img
-                    src={item.image}
+                  src={item.selectedColor?.images?.[0] || item.image}
                     className="w-16 h-16 object-cover rounded-md"
                     draggable={false}
                     onContextMenu={(e) => e.preventDefault()}
@@ -471,6 +471,9 @@ const Checkout = () => {
                     <p className={`text-sm text-gray-600 ${fontClass}`}>{t('Qty')} {item.quantity}</p>
                     {item.selectedSize && (
                       <p className={`text-sm text-gray-600 ${fontClass}`}>{t('Size')} {item.selectedSize}</p>
+                    )}
+                       {item.selectedColor && (
+                      <p className={`text-sm text-gray-600 ${fontClass}`}>{t('cartcolor')} {item.selectedColor.color}</p>
                     )}
                   </div>
                   <span className={`font-medium ${fontClass}`}>{formatPrice(item.price * item.quantity)}</span>
