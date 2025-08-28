@@ -4,7 +4,9 @@ set -e
 echo "Deployment started..."
 
 # Pull the latest version of the app
-git pull origin master
+git fetch origin master
+git reset --hard origin/master
+git clean -fd
 echo "New changes copied to server !"
 
 echo "Installing Dependencies..."
