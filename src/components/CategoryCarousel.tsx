@@ -7,6 +7,7 @@ interface CategoryCarouselProps {
   categories: Category[];
 }
 
+
 const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerView = 4;
