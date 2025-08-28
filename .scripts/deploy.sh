@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Deployment started..."
+echo "Deployment started2..."
 
 # Pull the latest version of the app
 git fetch origin master
