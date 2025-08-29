@@ -297,7 +297,7 @@ export const translations = {
            SummerEscapade:"Summer Escapade",
            //Description
            Description:"Description",
-            DeliveryReturns:"Delivery &amp; Returns",
+            DeliveryReturns:"Delivery & Returns",
             ProductCare:"Product Care",
             // Shop Ready-To-Wear
             ShopReadyToWear:"Shop Ready-To-Wear",
