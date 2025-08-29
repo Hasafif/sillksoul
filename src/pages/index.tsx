@@ -459,35 +459,47 @@ const swiperConfig = {
     </div>
 
     <Swiper
-    key={`swiper-${language}-${isRTL}`} 
-      ref={swiperRef}
-      {...swiperConfig}
-      slidesPerView={2}
-      slidesPerGroup={1}
-      spaceBetween={10}
-      navigation={{
-        prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
-      }}
-      breakpoints={{
-        320: {
-          slidesPerView: 1,
-          slidesPerGroup: 1,
-          spaceBetween: 8,
-        },
-        768: {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-          spaceBetween: 16,
-        },
-         1500: {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-          spaceBetween: 10,
-        },
-      }}
-      className=""
-    >
+  key={`swiper-${language}-${isRTL}`} 
+  ref={swiperRef}
+  modules={[Navigation, Pagination, Autoplay]}
+  spaceBetween={10}
+  centeredSlides={false} 
+  autoplay={{
+    delay: 1500,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+  }}
+  dir={isRTL ? 'rtl' : 'ltr'}
+  observer={true}
+  observeParents={true}
+  watchSlidesProgress={true}
+  updateOnWindowResize={true}
+  navigation={{
+    prevEl: '.swiper-button-prev',
+    nextEl: '.swiper-button-next',
+  }}
+  loop={true}
+  speed={800}
+  slidesPerView={2}
+  slidesPerGroup={1}   // ✅ move one slide at a time (no blanks ever)
+  breakpoints={{
+    320: {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      spaceBetween: 8,
+    },
+    768: {
+      slidesPerView: 2,
+      slidesPerGroup: 1, // ✅ still one-by-one scroll
+      spaceBetween: 16,
+    },
+    1500: {
+      slidesPerView: 2,
+      slidesPerGroup: 1, // ✅ safe for all counts
+      spaceBetween: 10,
+    },
+  }}
+>
       {images.map((image) => (
         <SwiperSlide key={image.id}>
           <Link to={`/category/${image.category}`}
