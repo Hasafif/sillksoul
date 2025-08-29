@@ -37,10 +37,10 @@ const Cart = () => {
     return (
       <div className={`min-h-screen bg-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
         <Header />
-        <HeroSection 
+       {/*<HeroSection 
           onMenuToggle={() => setIsMenuOpen(true)}
           onSearchToggle={() => setIsSearchOpen(true)}
-        />
+        />*/}
         
         <section className="py-16 px-4 md:px-8">
           <div className={`max-w-3xl mx-auto text-center ${fontClass}`}>
@@ -70,10 +70,10 @@ const Cart = () => {
   return (
     <div className={`min-h-screen bg-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <Header />
-      <HeroSection 
+      {/*<HeroSection 
         onMenuToggle={() => setIsMenuOpen(true)}
         onSearchToggle={() => setIsSearchOpen(true)}
-      />
+      />*/}
       
       <section className="py-8 sm:py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
